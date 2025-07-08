@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Mattis Foundation</title>
+  <link rel="icon" href="assets/Mattis_Foundation_Favicon.png" type="image/png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Times New Roman', serif;
+      background-color: #ffffff;
+      color: #0c2c4c;
+      line-height: 1.6;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    header {
+      padding: 2rem 1rem;
+    }
+
+    header img {
+      max-width: 280px;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-size: 1.8rem;
+      margin: 1.5rem 0;
+      font-weight: bold;
+      color: #183c66;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #183c66;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .btn:hover {
+      background-color: #0c2c4c;
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 2rem 1rem;
+      color: #a9bbcb;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation Logo">
+    <p class="tagline">Creating opportunity through honor, resilience, and service.</p>
+    <a href="mailto:info@mattisfoundation.org" class="btn">Contact Us</a>
+  </header>
+
+  <main class="content">
+    <h2>Education. Community. Service.</h2>
+    <p>
+      The Mattis Foundation champions the power of education, the strength of community, and the lifelong impact of service. Our programs are rooted in these values—providing opportunity and support where it’s needed most.
+    </p>
+    <p>
+      Through academic scholarships for aspiring leaders and hands-on assistance for local families, our mission is clear: to create lasting change.
+    </p>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> The Mattis Foundation. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
