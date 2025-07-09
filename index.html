@@ -8,84 +8,65 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Times New Roman', serif;
-      background-color: #ffffff;
-      color: #0c2c4c;
-      line-height: 1.6;
+      background-color: #0c2c4c; /* Dark blue from your logo */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
-      font-size: 16px;
+      color: white;
+      font-family: 'Times New Roman', serif;
+      padding: 2rem;
     }
 
-    header {
-      padding: 2rem 1rem;
-    }
-
-    header img {
-      max-width: 280px;
-      margin-bottom: 1rem;
+    img {
+      max-width: 300px;
+      width: 80%;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
     }
 
     .tagline {
-      font-size: 1.8rem;
-      margin: 1.5rem 0;
-      font-weight: bold;
-      color: #183c66;
+      font-size: 1.5rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+      animation-delay: 1s;
     }
 
     .btn {
       display: inline-block;
-      background-color: #183c66;
-      color: white;
+      margin-top: 2rem;
+      background-color: white;
+      color: #0c2c4c;
       padding: 0.75rem 1.5rem;
       border-radius: 4px;
       text-decoration: none;
       font-weight: bold;
-      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+      animation-delay: 2s;
     }
 
     .btn:hover {
-      background-color: #0c2c4c;
+      background-color: #e0e0e0;
     }
 
-    .content {
-      max-width: 700px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
-
-    footer {
-      margin-top: 3rem;
-      padding: 2rem 1rem;
-      color: #a9bbcb;
-      font-size: 0.9rem;
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation Logo">
-    <p class="tagline">Creating opportunity through honor, resilience, and service.</p>
-    <a href="mailto:info@mattisfoundation.org" class="btn">Contact Us</a>
-  </header>
-
-  <main class="content">
-    <h2>Education. Community. Service.</h2>
-    <p>
-      The Mattis Foundation champions the power of education, the strength of community, and the lifelong impact of service. Our programs are rooted in these values—providing opportunity and support where it’s needed most.
-    </p>
-    <p>
-      Through academic scholarships for aspiring leaders and hands-on assistance for local families, our mission is clear: to create lasting change.
-    </p>
-  </main>
-
-  <footer>
-    &copy; <span id="year"></span> The Mattis Foundation. All rights reserved.
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <img src="assets/Mattis_Foundation_Logo.png" alt="The Mattis Foundation Logo">
+  <p class="tagline">Creating opportunity through honor, resilience, and service.</p>
+  <a href="contact.html" class="btn">Contact Us</a>
 </body>
 </html>
+
 
 
