@@ -2,14 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mattisfoundation.org/</loc>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mattisfoundation.org/about.html</loc>
   </url>
   <url>
     <loc>https://mattisfoundation.org/contact.html</loc>
-    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mattisfoundation.org/programs/community-fund.html</loc>
+  </url>
+  <url>
+    <loc>https://mattisfoundation.org/programs/kj-smith-scholarship.html</loc>
+  </url>
+  <url>
+    <loc>https://mattisfoundation.org/programs/evening-under-the-oaks.html</loc>
   </url>
   <url>
     <loc>https://mattisfoundation.org/thank-you.html</loc>
-    <priority>0.5</priority>
   </url>
 </urlset>
+
