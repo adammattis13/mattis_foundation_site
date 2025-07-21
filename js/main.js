@@ -8,6 +8,25 @@
     const mobileNav = document.getElementById('mobileNav');
     const body = document.body;
     
+    // Enhanced error checking for missing elements
+    if (!navbar) console.warn('Navbar element not found - some features may not work');
+    if (!hamburger) console.warn('Hamburger element not found - mobile menu may not work');
+    if (!mobileNav) console.warn('Mobile nav element not found - mobile menu may not work');
+    
+    // Check for modern browser features
+    if (!('IntersectionObserver' in window)) {
+        console.log('Intersection Observer not supported, using fallback');
+        // Fallback for older browsers
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            img.removeAttribute('loading');
+            img.style.opacity = '0';
+            img.onload = function() {
+                this.style.transition = 'opacity 0.3s';
+                this.style.opacity = '1';
+            };
+        });
+    }
+    
     // Throttle function for performance
     function throttle(func, limit) {
         let inThrottle;
@@ -37,9 +56,9 @@
 
     // Navbar scroll effect - throttled for performance
     const handleScroll = throttle(function() {
-        if (window.scrollY > 50) {
+        if (navbar && window.scrollY > 50) {
             navbar.classList.add('scrolled');
-        } else {
+        } else if (navbar) {
             navbar.classList.remove('scrolled');
         }
     }, 16); // ~60fps
@@ -48,6 +67,8 @@
 
     // Mobile Navigation Toggle
     function toggleMobileNav() {
+        if (!hamburger || !mobileNav) return;
+        
         const isActive = hamburger.classList.contains('active');
         
         hamburger.classList.toggle('active');
@@ -71,6 +92,8 @@
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function() {
+            if (!hamburger || !mobileNav) return;
+            
             hamburger.classList.remove('active');
             mobileNav.classList.remove('active');
             body.style.overflow = '';
@@ -81,7 +104,7 @@
 
     // Close mobile nav when clicking the overlay background
     mobileNav?.addEventListener('click', function(e) {
-        if (e.target === mobileNav) {
+        if (e.target === mobileNav && hamburger) {
             hamburger.classList.remove('active');
             mobileNav.classList.remove('active');
             body.style.overflow = '';
@@ -92,7 +115,7 @@
 
     // Close mobile nav on escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active') && hamburger) {
             hamburger.classList.remove('active');
             mobileNav.classList.remove('active');
             body.style.overflow = '';
@@ -148,6 +171,8 @@
             
             // Show loading state
             const submitBtn = this.querySelector('.submit-btn');
+            if (!submitBtn) return;
+            
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
@@ -278,82 +303,90 @@
     }
 
     // Improved Intersection Observer for animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '20px',
-        threshold: 0.3
-    };
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '20px',
+            threshold: 0.3
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('impact')) {
-                    animateStats();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('impact')) {
+                        animateStats();
+                    }
+                    
+                    // Add fade-in animation to other elements
+                    if (!entry.target.classList.contains('animated')) {
+                        entry.target.classList.add('fade-in', 'animated');
+                    }
+                    
+                    // Unobserve after animation to improve performance
+                    observer.unobserve(entry.target);
                 }
-                
-                // Add fade-in animation to other elements
-                if (!entry.target.classList.contains('animated')) {
-                    entry.target.classList.add('fade-in', 'animated');
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        const elementsToObserve = document.querySelectorAll('.impact, .section');
+        elementsToObserve.forEach(el => observer.observe(el));
+
+        // Lazy loading images with Intersection Observer
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    img.classList.add('fade-in');
+                    imageObserver.unobserve(img);
                 }
-                
-                // Unobserve after animation to improve performance
-                observer.unobserve(entry.target);
-            }
+            });
+        }, {
+            rootMargin: '50px'
         });
-    }, observerOptions);
 
-    // Observe elements for animation
-    const elementsToObserve = document.querySelectorAll('.impact, .section');
-    elementsToObserve.forEach(el => observer.observe(el));
-
-    // Lazy loading images with Intersection Observer
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                }
-                img.classList.add('fade-in');
-                imageObserver.unobserve(img);
-            }
+        // Observe lazy images
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            imageObserver.observe(img);
         });
-    }, {
-        rootMargin: '50px'
-    });
-
-    // Observe lazy images
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        imageObserver.observe(img);
-    });
+    }
 
     // Performance monitoring
     if ('performance' in window) {
         window.addEventListener('load', () => {
             setTimeout(() => {
-                const perfData = performance.getEntriesByType('navigation')[0];
-                console.log('Page Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-                
-                // Web Vitals monitoring (simplified)
-                if ('PerformanceObserver' in window) {
-                    try {
-                        const observer = new PerformanceObserver((entryList) => {
-                            for (const entry of entryList.getEntries()) {
-                                if (entry.entryType === 'largest-contentful-paint') {
-                                    console.log('LCP:', entry.startTime, 'ms');
-                                }
-                                if (entry.entryType === 'first-input') {
-                                    console.log('FID:', entry.processingStart - entry.startTime, 'ms');
-                                }
-                            }
-                        });
-                        
-                        observer.observe({type: 'largest-contentful-paint', buffered: true});
-                        observer.observe({type: 'first-input', buffered: true});
-                    } catch (e) {
-                        console.log('Performance Observer not fully supported');
+                try {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    if (perfData) {
+                        console.log('Page Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
                     }
+                    
+                    // Web Vitals monitoring (simplified)
+                    if ('PerformanceObserver' in window) {
+                        try {
+                            const observer = new PerformanceObserver((entryList) => {
+                                for (const entry of entryList.getEntries()) {
+                                    if (entry.entryType === 'largest-contentful-paint') {
+                                        console.log('LCP:', entry.startTime, 'ms');
+                                    }
+                                    if (entry.entryType === 'first-input') {
+                                        console.log('FID:', entry.processingStart - entry.startTime, 'ms');
+                                    }
+                                }
+                            });
+                            
+                            observer.observe({type: 'largest-contentful-paint', buffered: true});
+                            observer.observe({type: 'first-input', buffered: true});
+                        } catch (e) {
+                            console.log('Performance Observer not fully supported');
+                        }
+                    }
+                } catch (e) {
+                    console.log('Performance monitoring error:', e);
                 }
             }, 0);
         });
@@ -381,8 +414,8 @@
     // Initialize accessibility improvements
     function initAccessibility() {
         // Set proper ARIA attributes
-        mobileNav?.setAttribute('aria-hidden', 'true');
-        hamburger?.setAttribute('aria-expanded', 'false');
+        if (mobileNav) mobileNav.setAttribute('aria-hidden', 'true');
+        if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
         
         // Add skip link for keyboard navigation
         const skipLink = document.createElement('a');
@@ -425,7 +458,7 @@
         initAccessibility();
     }
 
-    // Error handling for development
+    // Enhanced error handling for development
     window.addEventListener('error', function(e) {
         console.error('JavaScript Error:', e.error);
     });
