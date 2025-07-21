@@ -130,14 +130,19 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     
-    <!-- Preload Critical Resources -->
+    <!-- Critical Resource Preloads - Hero Images First with High Priority -->
+    <link rel="preload" href="assets/Adam&Jenelle1-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="assets/Adam&Jenelle1-mobile.jpg" as="image" type="image/jpeg" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="assets/Adam&Jenelle1.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" href="assets/Adam&Jenelle1.jpg" as="image" type="image/jpeg" media="(min-width: 769px)" fetchpriority="high">
+    
+    <!-- Critical CSS and Scripts -->
+    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- Secondary Preloads -->
     <link rel="preload" href="assets/Mattis_Foundation_Logo_Blue.webp" as="image" type="image/webp">
     <link rel="preload" href="assets/Mattis_Foundation_Logo_Blue.png" as="image" type="image/png">
-    <link rel="preload" href="assets/Adam&Jenelle1.webp" as="image" type="image/webp">
-    <link rel="preload" href="assets/Adam&Jenelle1-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)">
-    <link rel="preload" href="assets/Adam&Jenelle1-mobile.jpg" as="image" type="image/jpeg" media="(max-width: 768px)">
-    <link rel="preload" href="css/critical.css" as="style">
-    <link rel="preload" href="js/main.js" as="script">
     
     <!-- Critical CSS (Above the fold only) -->
     <link rel="stylesheet" href="css/critical.css">
