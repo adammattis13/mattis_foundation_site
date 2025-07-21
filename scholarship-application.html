@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <meta name="description" content="Apply for the KJ Smith Memorial Scholarship - $5,000 renewable scholarship for veterans, military families, and service-oriented students pursuing higher education.">
+    <meta name="keywords" content="KJ Smith Scholarship application, veteran scholarship, military family scholarship, college scholarship application, Mattis Foundation">
+    
+    <title>KJ Smith Memorial Scholarship Application - The Mattis Foundation</title>
+    
+    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
+    <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Critical Resource Preloads - Hero Images First with High Priority -->
+    <link rel="preload" href="assets/union3-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="assets/union3-mobile.jpg" as="image" type="image/jpeg" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="assets/union3.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" href="assets/union3.jpg" as="image" type="image/jpeg" media="(min-width: 769px)" fetchpriority="high">
+    
+    <!-- Critical CSS and Scripts -->
+    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- Critical CSS (Above the fold only) -->
+    <link rel="stylesheet" href="css/critical.css">
+    
+    <!-- Non-critical CSS (Deferred) -->
+    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+    
+    <!-- Secondary Preloads -->
+    <link rel="preload" href="assets/kjsmith.webp" as="image" type="image/webp">
+    <link rel="preload" href="assets/kjsmith.jpeg" as="image" type="image/jpeg">
+    
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .scholarship-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .scholarship-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.8) 0%, rgba(52, 73, 94, 0.8) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .scholarship-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .scholarship-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .legacy-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .legacy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .legacy-text h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .legacy-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .legacy-image {
+            text-align: center;
+        }
+
+        .legacy-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .application-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .essay-requirements {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .essay-requirements h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .essay-requirements .prompt {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        .essay-requirements .prompt h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .essay-requirements .prompt p {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirements-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .requirements-list li:before {
+            content: "•";
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .application-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .application-form h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            border-color: #e74c3c;
+            background: #fff;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            cursor: pointer;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .file-upload-label:hover {
+            color: #e74c3c;
+        }
+
+        .submit-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #e74c3c;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .university-suggestions {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            width: 100%;
+            z-index: 1000;
+            display: none;
+        }
+
+        .university-suggestion {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .university-suggestion:hover {
+            background: #f8f9fa;
+        }
+
+        .university-input-container {
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .scholarship-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .scholarship-hero p {
+                font-size: 1.1rem;
+            }
+
+            .legacy-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .legacy-text h2 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-form {
+                padding: 25px;
+            }
+
+            .essay-requirements {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"> 
+                <picture>
+                    <source srcset="assets/Mattis_Foundation_Logo_Blue.webp" type="image/webp">
+                    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="Mattis Foundation Logo" width="50" height="50">
+                </picture>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="index.html#impact">Impact</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="index.html#impact">Impact</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="scholarship-hero">
+        <picture class="hero-bg">
+            <source srcset="assets/union3-mobile.webp" media="(max-width: 768px)" type="image/webp">
+            <source srcset="assets/union3-mobile.jpg" media="(max-width: 768px)" type="image/jpeg">
+            <source srcset="assets/union3.webp" type="image/webp">
+            <img src="assets/union3.jpg" alt="KJ Smith Memorial Scholarship Application" class="hero-img" width="1200" height="800">
+        </picture>
+        <div class="hero-content">
+            <h1>KJ Smith Memorial Scholarship Application</h1>
+            <p>Honoring a legacy of service through educational excellence</p>
+        </div>
+    </section>
+
+    <!-- Legacy Section -->
+    <section class="legacy-section">
+        <div class="legacy-content">
+            <div class="legacy-text">
+                <h2>A Legacy of Service and Leadership</h2>
+                <p>Named in honor of CPT Kevin "KJ" Smith — a beloved son, soldier, athlete, and scholar — whose life embodied the values of service, leadership, and resilience. KJ was killed in action while saving the life of his teammate, Adam Mattis, during a combat operation in Baghdad, Iraq, in 2005.</p>
+                <p>This scholarship carries forward his legacy by investing in the next generation of community-minded leaders who demonstrate courage, character, and a commitment to service.</p>
+            </div>
+            <div class="legacy-image">
+                <picture>
+                    <source srcset="assets/kjsmith.webp" type="image/webp">
+                    <img src="assets/kjsmith.jpeg" alt="CPT Kevin 'KJ' Smith" width="400" height="300" loading="lazy">
+                </picture>
+            </div>
+        </div>
+    </section>
+
+    <div class="application-container">
+        <!-- Essay Requirements Section -->
+        <div class="essay-requirements">
+            <h2>Essay Requirements</h2>
+            
+            <div class="prompt">
+                <h3>Essay Prompt</h3>
+                <p>"Describe a moment when service or resilience shaped your perspective. How will you use these values to influence the future of your community or the global economy?"</p>
+            </div>
+
+            <h3>Requirements:</h3>
+            <ul class="requirements-list">
+                <li><strong>Length:</strong> 500–750 words</li>
+                <li><strong>Format:</strong> Must be handwritten</li>
+                <li><strong>Upload:</strong> Clear photo or PDF scan of your handwritten essay</li>
+                <li><strong>File Size:</strong> Maximum 10MB</li>
+                <li><strong>File Type:</strong> PDF format only</li>
+            </ul>
+
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                <strong>Important:</strong> Your essay must be handwritten. Typed essays will not be accepted. Please ensure your handwriting is legible and scan/photograph clearly.
+            </div>
+        </div>
+
+        <!-- Application Form -->
+        <form class="application-form" id="scholarshipForm" action="mailto:amm@mattisfoundation.org" method="post" enctype="text/plain">
+            <h2>Scholarship Application</h2>
+
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <div class="error-message">Please enter your first name.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <div class="error-message">Please enter your last name.</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error-message">Please enter a valid email address.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <div class="error-message">Please enter your phone number.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Home Address *</label>
+                    <textarea id="address" name="address" rows="3" required placeholder="Street Address, City, State, ZIP Code"></textarea>
+                    <div class="error-message">Please enter your complete address.</div>
+                </div>
+            </div>
+
+            <!-- Academic Information -->
+            <div class="form-section">
+                <h3>Academic Information</h3>
+
+                <div class="form-group">
+                    <label for="university">College or University You Plan to Attend *</label>
+                    <div class="university-input-container">
+                        <input type="text" id="university" name="university" required autocomplete="off" placeholder="Start typing university name...">
+                        <div class="university-suggestions" id="universitySuggestions"></div>
+                    </div>
+                    <div class="error-message">Please select a valid U.S. college or university.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="semester">Anticipated Freshman Semester *</label>
+                    <select id="semester" name="semester" required>
+                        <option value="">Select semester...</option>
+                    </select>
+                    <div class="error-message">Please select your anticipated freshman semester.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gpa">Current GPA *</label>
+                    <input type="number" id="gpa" name="gpa" min="0" max="4.0" step="0.01" required placeholder="3.5 minimum required">
+                    <div class="error-message">Please enter a valid GPA (minimum 3.5).</div>
+                </div>
+            </div>
+
+            <!-- Military Service -->
+            <div class="form-section">
+                <h3>Military Service Background</h3>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="isVeteran" name="isVeteran">
+                    <label for="isVeteran">I am a veteran or currently serving in the U.S. military</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="isChildOfVeteran" name="isChildOfVeteran">
+                    <label for="isChildOfVeteran">I am the child of a U.S. military service member (active duty, veteran, or fallen)</label>
+                </div>
+            </div>
+
+            <!-- Essay Upload -->
+            <div class="form-section">
+                <h3>Essay Submission</h3>
+                
+                <div class="form-group">
+                    <label>Upload Your Handwritten Essay (PDF) *</label>
+                    <div class="file-upload">
+                        <input type="file" id="essayFile" name="essayFile" accept=".pdf" required>
+                        <label for="essayFile" class="file-upload-label">
+                            <div>📄 Click to upload your essay PDF</div>
+                            <div style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                                Maximum file size: 10MB | PDF format only
+                            </div>
+                        </label>
+                        <div id="fileName" style="margin-top: 10px; color: #27ae60; font-weight: 600;"></div>
+                    </div>
+                    <div class="error-message">Please upload your handwritten essay as a PDF.</div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Application</button>
+
+            <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666;">
+                Application deadline: March 31 • Winners notified by May 15
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="programs.html">Programs</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                    <picture>
+                        <source srcset="assets/logo_instagram.webp" type="image/webp">
+                        <img src="assets/logo_instagram.png" alt="Instagram" width="40" height="40" loading="lazy">
+                    </picture>
+                </a>
+                <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
+                    <picture>
+                        <source srcset="assets/logo_linkedin.webp" type="image/webp">
+                        <img src="assets/logo_linkedin.png" alt="LinkedIn" width="40" height="40" loading="lazy">
+                    </picture>
+                </a>
+            </div>
+            <p>&copy; 2025 The Mattis Foundation. All rights reserved. | Supporting Veterans, Military Families & Communities</p>
+        </div>
+    </footer>
+
+    <script>
+        // Comprehensive list of US universities and colleges
+        const universities = [
+            "Harvard University", "Stanford University", "Massachusetts Institute of Technology", "California Institute of Technology",
+            "University of California, Berkeley", "University of California, Los Angeles", "Columbia University", "University of Chicago",
+            "Yale University", "Princeton University", "Cornell University", "University of Pennsylvania", "Duke University",
+            "Northwestern University", "Johns Hopkins University", "Dartmouth College", "Brown University", "Vanderbilt University",
+            "Rice University", "Washington University in St. Louis", "University of Notre Dame", "Emory University",
+            "Georgetown University", "Carnegie Mellon University", "University of Virginia", "University of Michigan",
+            "Wake Forest University", "University of North Carolina at Chapel Hill", "Tufts University", "Boston College",
+            "New York University", "University of Rochester", "Brandeis University", "Case Western Reserve University",
+            "Georgia Institute of Technology", "University of California, San Diego", "University of California, Davis",
+            "University of California, Irvine", "University of California, Santa Barbara", "University of Wisconsin-Madison",
+            "University of Illinois at Urbana-Champaign", "Ohio State University", "Pennsylvania State University",
+            "University of Florida", "University of Washington", "University of Texas at Austin", "Texas A&M University",
+            "Purdue University", "University of Georgia", "University of Maryland", "Virginia Tech", "Clemson University",
+            "Auburn University", "University of Alabama", "University of Tennessee", "University of Kentucky",
+            "University of South Carolina", "North Carolina State University", "Virginia Commonwealth University",
+            "George Mason University", "James Madison University", "Old Dominion University", "University of Richmond",
+            "Washington and Lee University", "Davidson College", "Furman University", "College of Charleston",
+            "The Citadel", "Wofford College", "Presbyterian College", "Converse College", "Coker College",
+            "Anderson University", "Bob Jones University", "Charleston Southern University", "Columbia College",
+            "Francis Marion University", "Lander University", "Limestone College", "Newberry College",
+            "South Carolina State University", "Southern Wesleyan University", "Spartanburg Methodist College",
+            "University of South Carolina Aiken", "University of South Carolina Beaufort", "University of South Carolina Upstate",
+            "Winthrop University", "Appalachian State University", "East Carolina University", "North Carolina A&T State University",
+            "University of North Carolina at Charlotte", "University of North Carolina at Greensboro", "Western Carolina University",
+            "North Carolina Central University", "Elizabeth City State University", "Fayetteville State University",
+            "Winston-Salem State University", "Bennett College", "Elon University", "High Point University",
+            "Lenoir-Rhyne University", "Mars Hill University", "Meredith College", "Methodist University",
+            "Pfeiffer University", "Queens University of Charlotte", "Saint Augustine's University", "Salem College",
+            "Shaw University", "University of Mount Olive", "Warren Wilson College", "Wingate University",
+            "Duke University", "Wake Forest University", "Davidson College", "University of North Carolina at Chapel Hill",
+            "North Carolina State University", "Campbell University", "Catawba College", "Chowan University",
+            "Gardner-Webb University", "Greensboro College", "Guilford College", "Johnson C. Smith University",
+            "Livingstone College", "Montreat College", "North Carolina Wesleyan College", "Barton College",
+            "Belmont Abbey College", "Brevard College", "Cabarrus College of Health Sciences", "Carolina Christian College",
+            "John Wesley University", "Laurel University", "Mid-Atlantic Christian University", "Miller-Motte College",
+            "Piedmont International University", "Roanoke-Chowan Community College", "Southeastern Baptist Theological Seminary",
+            "Apex School of Theology", "Heritage Bible College", "Hood Theological Seminary", "Kittrell College",
+            "United States Air Force Academy", "United States Military Academy", "United States Naval Academy",
+            "United States Coast Guard Academy", "United States Merchant Marine Academy"
+        ];
+
+        // Form validation and functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('scholarshipForm');
+            const universityInput = document.getElementById('university');
+            const universitySuggestions = document.getElementById('universitySuggestions');
+            const semesterSelect = document.getElementById('semester');
+            const essayFile = document.getElementById('essayFile');
+            const fileName = document.getElementById('fileName');
+
+            // Populate semester options - Fall semesters only, based on application deadline
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth(); // 0-based (March = 2)
+            const currentDay = currentDate.getDate();
+            
+            // Determine the application year (if we're past March 31, use current year, otherwise use previous year)
+            let applicationYear;
+            if (currentMonth > 2 || (currentMonth === 2 && currentDay > 31)) {
+                // We're past March 31, so this year's application cycle has passed
+                applicationYear = currentYear;
+            } else {
+                // We're before March 31, so we're still in the previous year's application cycle
+                applicationYear = currentYear - 1;
+            }
+            
+            // Show Fall semesters for +1 and +2 years from application year
+            const semesters = [
+                `Fall ${applicationYear + 1}`,
+                `Fall ${applicationYear + 2}`
+            ];
+
+            semesters.forEach(semester => {
+                const option = document.createElement('option');
+                option.value = semester;
+                option.textContent = semester;
+                semesterSelect.appendChild(option);
+            });
+
+            // University autocomplete
+            universityInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                
+                if (query.length < 2) {
+                    universitySuggestions.style.display = 'none';
+                    return;
+                }
+
+                const matches = universities.filter(uni => 
+                    uni.toLowerCase().includes(query)
+                ).slice(0, 10);
+
+                if (matches.length > 0) {
+                    universitySuggestions.innerHTML = matches.map(uni => 
+                        `<div class="university-suggestion" data-university="${uni}">${uni}</div>`
+                    ).join('');
+                    universitySuggestions.style.display = 'block';
+                } else {
+                    universitySuggestions.style.display = 'none';
+                }
+            });
+
+            // Handle university selection
+            universitySuggestions.addEventListener('click', function(e) {
+                if (e.target.classList.contains('university-suggestion')) {
+                    universityInput.value = e.target.dataset.university;
+                    universitySuggestions.style.display = 'none';
+                    clearError(universityInput.closest('.form-group'));
+                }
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.university-input-container')) {
+                    universitySuggestions.style.display = 'none';
+                }
+            });
+
+            // File upload handling
+            essayFile.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    if (file.type !== 'application/pdf') {
+                        showError(this.closest('.form-group'), 'Please upload a PDF file only.');
+                        this.value = '';
+                        fileName.textContent = '';
+                        return;
+                    }
+                    
+                    if (file.size > 10 * 1024 * 1024) { // 10MB
+                        showError(this.closest('.form-group'), 'File size must be less than 10MB.');
+                        this.value = '';
+                        fileName.textContent = '';
+                        return;
+                    }
+                    
+                    fileName.textContent = `Selected: ${file.name}`;
+                    clearError(this.closest('.form-group'));
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                if (!validateForm()) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Form is valid, allow normal submission to mailto
+                return true;
+            });
+
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate required text fields
+                const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'address', 'university', 'semester', 'gpa'];
+                
+                requiredFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    const group = field.closest('.form-group');
+                    
+                    if (!field.value.trim()) {
+                        showError(group, 'This field is required.');
+                        isValid = false;
+                    } else {
+                        clearError(group);
+                    }
+                });
+
+                // Validate email
+                const email = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email.value && !emailRegex.test(email.value)) {
+                    showError(email.closest('.form-group'), 'Please enter a valid email address.');
+                    isValid = false;
+                }
+
+                // Validate university
+                const university = document.getElementById('university');
+                if (university.value && !universities.includes(university.value)) {
+                    showError(university.closest('.form-group'), 'Please select a valid U.S. college or university from the suggestions.');
+                    isValid = false;
+                }
+
+                // Validate GPA
+                const gpa = document.getElementById('gpa');
+                const gpaValue = parseFloat(gpa.value);
+                if (gpaValue < 3.5 || gpaValue > 4.0) {
+                    showError(gpa.closest('.form-group'), 'GPA must be between 3.5 and 4.0.');
+                    isValid = false;
+                }
+
+                // Validate file upload
+                const file = essayFile.files[0];
+                if (!file) {
+                    showError(essayFile.closest('.form-group'), 'Please upload your handwritten essay as a PDF.');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            function showError(group, message) {
+                group.classList.add('error');
+                const errorDiv = group.querySelector('.error-message');
+                if (errorDiv) {
+                    errorDiv.textContent = message;
+                }
+            }
+
+            function clearError(group) {
+                group.classList.remove('error');
+            }
+        });
+    </script>
+
+    <!-- Deferred JavaScript -->
+    <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <meta name="description" content="Learn about The Mattis Foundation's programs: Community Fund disaster relief, Night Under the Oaks benefit dinner, and the KJ Smith Memorial Scholarship supporting veterans and communities.">
+    <meta name="keywords" content="Mattis Foundation programs, KJ Smith Scholarship, community disaster relief, Night Under the Oaks, veteran scholarships, North Carolina charity">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Our Programs - The Mattis Foundation">
+    <meta property="og:description" content="Discover our impactful programs: Community Fund, Night Under the Oaks benefit dinner, and KJ Smith Memorial Scholarship supporting veterans and communities.">
+    <meta property="og:image" content="https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png">
+    <meta property="og:url" content="https://mattisfoundation.org/programs.html">
+
+    <title>Our Programs - The Mattis Foundation</title>
+    
+    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
+    <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Critical CSS and Scripts -->
+    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- Critical CSS (Above the fold only) -->
+    <link rel="stylesheet" href="css/critical.css">
+    
+    <!-- Non-critical CSS (Deferred) -->
+    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+    
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .programs-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .programs-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .programs-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .program-detail {
+            padding: 80px 0;
+        }
+
+        .program-detail:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .program-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .program-header h2 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .program-header .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .program-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-text h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .program-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 1.1rem;
+        }
+
+        .program-features li:before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .program-image {
+            text-align: center;
+        }
+
+        .program-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #2c3e50;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .programs-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .program-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .program-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"> 
+                <picture>
+                    <source srcset="assets/Mattis_Foundation_Logo_Blue.webp" type="image/webp">
+                    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="Mattis Foundation Logo" width="50" height="50">
+                </picture>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="programs.html" class="active">Programs</a></li>
+                <li><a href="index.html#impact">Impact</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="index.html#impact">Impact</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="programs-hero">
+        <div class="container">
+            <h1>Our Programs</h1>
+            <p>Creating meaningful impact through honor, resilience, and service</p>
+        </div>
+    </section>
+
+    <!-- Community Fund Section -->
+    <section class="program-detail">
+        <div class="container">
+            <div class="program-header">
+                <h2>Community Fund</h2>
+                <p class="subtitle">Rapid Response. Lasting Recovery. Community Strength.</p>
+            </div>
+            <div class="program-content">
+                <div class="program-text">
+                    <h3>Supporting Communities in Crisis</h3>
+                    <p>The Community Fund provides rapid, needs-based support to individuals and families impacted by unexpected hardships, including natural disasters, medical emergencies, or financial crises. Rooted in honor, resilience, and service, the fund bridges the gap between crisis and recovery.</p>
+                    
+                    <p><strong>Who We Serve:</strong> Members of underserved or disaster-struck communities in North Carolina and beyond, with priority given to veterans, military families, and vulnerable populations.</p>
+
+                    <h3>How to Get Involved</h3>
+                    <ul class="program-features">
+                        <li><strong>Apply for Assistance:</strong> Complete a short application detailing the nature of the hardship</li>
+                        <li><strong>Donate:</strong> 100% of donations to this fund go directly to aid efforts</li>
+                        <li><strong>Volunteer:</strong> Join our disaster response and community outreach teams</li>
+                        <li><strong>Spread Awareness:</strong> Help us reach those who need support most</li>
+                    </ul>
+                </div>
+                <div class="program-image">
+                    <picture>
+                        <source srcset="assets/helene.webp" type="image/webp">
+                        <img src="assets/helene.jpg" alt="Community disaster relief efforts" width="500" height="350">
+                    </picture>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Night Under the Oaks Section -->
+    <section class="program-detail">
+        <div class="container">
+            <div class="program-header">
+                <h2>Night Under the Oaks Benefit Dinner</h2>
+                <p class="subtitle">An Evening of Connection, Celebration, and Community Support</p>
+            </div>
+            <div class="program-content">
+                <div class="program-image">
+                    <picture>
+                        <source srcset="assets/undertheoaks.webp" type="image/webp">
+                        <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks event" width="500" height="350">
+                    </picture>
+                </div>
+                <div class="program-text">
+                    <h3>Our Signature Annual Event</h3>
+                    <p>Held annually each fall in Holly Springs, North Carolina (typically October or November), under the majestic live oaks at The Mattis House. This elegant evening brings our community together to raise critical funds for the Community Fund and the KJ Smith Memorial Scholarship.</p>
+
+                    <p><strong>What to Expect:</strong> Live music, exceptional local cuisine, silent auctions, and powerful stories from those impacted by our programs. It's more than a fundraiser—it's a celebration of service, resilience, and community spirit.</p>
+
+                    <h3>Ways to Participate</h3>
+                    <ul class="program-features">
+                        <li><strong>Buy Tickets:</strong> Tickets go on sale each February - follow us for announcements</li>
+                        <li><strong>Sponsor the Event:</strong> Corporate and individual sponsorships available at multiple levels</li>
+                        <li><strong>Donate Auction Items:</strong> Showcase your business while supporting our cause</li>
+                        <li><strong>Volunteer:</strong> Help make the evening magical for our guests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KJ Smith Memorial Scholarship Section -->
+    <section class="program-detail">
+        <div class="container">
+            <div class="program-header">
+                <h2>KJ Smith Memorial Scholarship</h2>
+                <p class="subtitle">Honoring a Hero's Legacy Through Educational Excellence</p>
+            </div>
+            <div class="program-content">
+                <div class="program-text">
+                    <h3>A Legacy of Service and Leadership</h3>
+                    <p>Named in honor of CPT Kevin "KJ" Smith — a beloved son, soldier, athlete, and scholar — whose life embodied the values of service, leadership, and resilience. KJ was killed in action while saving the life of his teammate, Adam Mattis, during a combat operation in Baghdad, Iraq, in 2005.</p>
+
+                    <p>This scholarship carries forward his legacy by investing in the next generation of community-minded leaders who demonstrate courage, character, and a commitment to service.</p>
+
+                    <h3>Scholarship Details</h3>
+                    <ul class="program-features">
+                        <li><strong>Award Amount:</strong> $5,000 per year, renewable for up to 4 years ($20,000 total)</li>
+                        <li><strong>Eligibility:</strong> U.S. high school seniors or current college students (ages 17-24)</li>
+                        <li><strong>Minimum GPA:</strong> 3.5 or higher</li>
+                        <li><strong>Priority Given To:</strong> Veterans, children of veterans, and service-oriented careers</li>
+                        <li><strong>Application Deadline:</strong> March 31 annually</li>
+                        <li><strong>Winners Notified:</strong> By May 15</li>
+                    </ul>
+
+                    <div style="margin-top: 30px;">
+                        <a href="scholarship-application.html" class="cta-button">Apply for Scholarship</a>
+                    </div>
+                </div>
+                <div class="program-image">
+                    <picture>
+                        <source srcset="assets/kjsmith.webp" type="image/webp">
+                        <img src="assets/kjsmith.jpeg" alt="KJ Smith Memorial" width="500" height="350">
+                    </picture>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Join us in creating meaningful opportunities through honor, resilience, and service.</p>
+            <div class="cta-buttons">
+                <a href="scholarship-application.html" class="cta-button">Apply for Scholarship</a>
+                <a href="index.html#contact" class="cta-button secondary">Get Involved</a>
+                <a href="index.html#contact" class="cta-button secondary">Donate Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="programs.html">Programs</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                    <picture>
+                        <source srcset="assets/logo_instagram.webp" type="image/webp">
+                        <img src="assets/logo_instagram.png" alt="Instagram" width="40" height="40" loading="lazy">
+                    </picture>
+                </a>
+                <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
+                    <picture>
+                        <source srcset="assets/logo_linkedin.webp" type="image/webp">
+                        <img src="assets/logo_linkedin.png" alt="LinkedIn" width="40" height="40" loading="lazy">
+                    </picture>
+                </a>
+            </div>
+            <p>&copy; 2025 The Mattis Foundation. All rights reserved. | Supporting Veterans, Military Families & Communities</p>
+        </div>
+    </footer>
+
+    <!-- Deferred JavaScript -->
+    <script src="js/main.js" defer></script>
+</body>
+</html>
