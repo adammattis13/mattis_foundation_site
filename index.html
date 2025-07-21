@@ -372,40 +372,74 @@
 
     <!-- Load Navigation and Footer -->
     <script>
+        // Track when navigation is loaded
+        let navigationLoaded = false;
+        let navigationInitialized = false;
+        
+        // Function to initialize navigation - works regardless of timing
+        function tryInitializeNavigation() {
+            if (navigationInitialized) return; // Already done
+            
+            console.log('Attempting navigation initialization...');
+            
+            // Check if elements exist
+            const navbar = document.getElementById('navbar');
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            if (navbar && hamburger && mobileNav) {
+                console.log('Navigation elements found, initializing...');
+                
+                // Call the main.js function if available
+                if (typeof window.onNavigationLoaded === 'function') {
+                    window.onNavigationLoaded();
+                    navigationInitialized = true;
+                    console.log('Navigation initialized via onNavigationLoaded');
+                } else if (typeof window.initNavigation === 'function') {
+                    window.initNavigation();
+                    navigationInitialized = true;
+                    console.log('Navigation initialized via initNavigation');
+                } else {
+                    console.log('Navigation functions not available, will retry...');
+                    // Retry in a moment
+                    setTimeout(tryInitializeNavigation, 200);
+                }
+            } else {
+                console.log('Navigation elements not found yet, will retry...');
+                setTimeout(tryInitializeNavigation, 200);
+            }
+        }
+        
         // Load navigation
         fetch('nav.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navigation').innerHTML = data;
+                navigationLoaded = true;
+                console.log('Navigation HTML loaded, attempting initialization...');
                 
-                // Call initialization function after navigation is loaded
-                console.log('Navigation HTML loaded, calling initialization...');
-                if (typeof window.onNavigationLoaded === 'function') {
-                    window.onNavigationLoaded();
-                } else {
-                    // Fallback: wait a bit then try to initialize directly
-                    setTimeout(() => {
-                        if (window.initNavigation && typeof window.initNavigation === 'function') {
-                            window.initNavigation();
-                        } else {
-                            console.log('Navigation functions not available yet, will rely on auto-detection');
-                        }
-                    }, 100);
-                }
+                // Try to initialize immediately
+                tryInitializeNavigation();
             })
             .catch(error => {
                 console.error('Error loading navigation:', error);
-                // Fallback: try to find any existing navigation elements
-                setTimeout(() => {
-                    const existingNav = document.querySelector('#navbar, .hamburger, .mobile-nav');
-                    if (existingNav) {
-                        console.log('Found existing navigation elements, attempting initialization...');
-                        if (window.onNavigationLoaded && typeof window.onNavigationLoaded === 'function') {
-                            window.onNavigationLoaded();
-                        }
-                    }
-                }, 500);
             });
+
+        // Also try initialization when main.js loads (backup)
+        window.addEventListener('load', () => {
+            if (navigationLoaded && !navigationInitialized) {
+                console.log('Window loaded, trying navigation initialization again...');
+                setTimeout(tryInitializeNavigation, 100);
+            }
+        });
+
+        // Global function that main.js can call when it's ready
+        window.navigationReadyCheck = function() {
+            if (navigationLoaded && !navigationInitialized) {
+                console.log('Main.js is ready, trying navigation initialization...');
+                tryInitializeNavigation();
+            }
+        };
 
         // Load footer
         fetch('footer.html')

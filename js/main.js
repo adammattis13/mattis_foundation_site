@@ -674,6 +674,11 @@
                 console.log('Initial auto-initialize failed, starting retry mechanism...');
                 retryInitialization();
             }
+            
+            // Signal that main.js is ready
+            if (typeof window.navigationReadyCheck === 'function') {
+                window.navigationReadyCheck();
+            }
         });
     } else {
         console.log('DOM already loaded');
@@ -683,6 +688,11 @@
         if (!autoInitialize()) {
             console.log('Initial auto-initialize failed, starting retry mechanism...');
             retryInitialization();
+        }
+        
+        // Signal that main.js is ready
+        if (typeof window.navigationReadyCheck === 'function') {
+            window.navigationReadyCheck();
         }
     }
 
