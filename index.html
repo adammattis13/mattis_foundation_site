@@ -14,7 +14,7 @@
     <meta name="description" content="The Mattis Foundation creates meaningful opportunities through scholarships, community disaster relief, and the KJ Smith Scholarship. Supporting veterans and communities with honor, resilience, and service since 2024.">
 
     <!-- Enhanced Keywords -->
-    <meta name="keywords" content="Mattis Foundation, KJ Smith Scholarship, veteran scholarships, community disaster relief, nonprofit foundation, Evening Under the Oaks, military family support, North Carolina charity, disaster relief fund, education scholarships, community service, honor resilience service">
+    <meta name="keywords" content="Mattis Foundation, KJ Smith Scholarship, scholarships, community disaster relief, nonprofit foundation, Evening Under the Oaks, military family support, North Carolina charity, disaster relief fund, education scholarships, community service, honor resilience service">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://mattisfoundation.org/">
@@ -118,7 +118,7 @@
     }
     </script>
 
-    <title>The Mattis Foundation - Veteran Scholarships & Community Relief | KJ Smith Scholarship</title>
+    <title>The Mattis Foundation - Scholarships & Community Relief | KJ Smith Scholarship</title>
     
     <!-- Optimized Favicon -->
     <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
@@ -372,41 +372,20 @@
 
     <!-- Load Navigation and Footer -->
     <script>
-        // Track when navigation is loaded
-        let navigationLoaded = false;
-        let navigationInitialized = false;
-        
-        // Function to initialize navigation - works regardless of timing
-        function tryInitializeNavigation() {
-            if (navigationInitialized) return; // Already done
+        // Wait for main.js to load before trying navigation
+        function waitForMainJS(callback, attempts = 0) {
+            const maxAttempts = 50; // 5 seconds max wait
             
-            console.log('Attempting navigation initialization...');
-            
-            // Check if elements exist
-            const navbar = document.getElementById('navbar');
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            
-            if (navbar && hamburger && mobileNav) {
-                console.log('Navigation elements found, initializing...');
-                
-                // Call the main.js function if available
-                if (typeof window.onNavigationLoaded === 'function') {
-                    window.onNavigationLoaded();
-                    navigationInitialized = true;
-                    console.log('Navigation initialized via onNavigationLoaded');
-                } else if (typeof window.initNavigation === 'function') {
-                    window.initNavigation();
-                    navigationInitialized = true;
-                    console.log('Navigation initialized via initNavigation');
-                } else {
-                    console.log('Navigation functions not available, will retry...');
-                    // Retry in a moment
-                    setTimeout(tryInitializeNavigation, 200);
-                }
+            if (typeof window.onNavigationLoaded === 'function') {
+                console.log('Main.js functions found, executing callback');
+                callback();
+            } else if (attempts < maxAttempts) {
+                console.log(`Waiting for main.js... attempt ${attempts + 1}`);
+                setTimeout(() => waitForMainJS(callback, attempts + 1), 100);
             } else {
-                console.log('Navigation elements not found yet, will retry...');
-                setTimeout(tryInitializeNavigation, 200);
+                console.error('Timeout waiting for main.js functions');
+                // Fallback: try to initialize anyway
+                callback();
             }
         }
         
@@ -415,31 +394,24 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navigation').innerHTML = data;
-                navigationLoaded = true;
-                console.log('Navigation HTML loaded, attempting initialization...');
+                console.log('Navigation HTML loaded, waiting for main.js...');
                 
-                // Try to initialize immediately
-                tryInitializeNavigation();
+                // Wait for main.js to be ready, then initialize
+                waitForMainJS(() => {
+                    if (typeof window.onNavigationLoaded === 'function') {
+                        console.log('Calling window.onNavigationLoaded');
+                        window.onNavigationLoaded();
+                    } else if (typeof window.initNavigation === 'function') {
+                        console.log('Calling window.initNavigation');
+                        window.initNavigation();
+                    } else {
+                        console.error('Navigation functions still not available');
+                    }
+                });
             })
             .catch(error => {
                 console.error('Error loading navigation:', error);
             });
-
-        // Also try initialization when main.js loads (backup)
-        window.addEventListener('load', () => {
-            if (navigationLoaded && !navigationInitialized) {
-                console.log('Window loaded, trying navigation initialization again...');
-                setTimeout(tryInitializeNavigation, 100);
-            }
-        });
-
-        // Global function that main.js can call when it's ready
-        window.navigationReadyCheck = function() {
-            if (navigationLoaded && !navigationInitialized) {
-                console.log('Main.js is ready, trying navigation initialization...');
-                tryInitializeNavigation();
-            }
-        };
 
         // Load footer
         fetch('footer.html')
