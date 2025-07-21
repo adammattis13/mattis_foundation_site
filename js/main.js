@@ -2,16 +2,40 @@
 (function() {
     'use strict';
 
-    // Performance optimization: Cache DOM elements
-    const navbar = document.getElementById('navbar');
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
+    // Performance optimization: Cache DOM elements (will be updated when nav loads)
+    let navbar, hamburger, mobileNav;
     const body = document.body;
     
-    // Enhanced error checking for missing elements
-    if (!navbar) console.warn('Navbar element not found - some features may not work');
-    if (!hamburger) console.warn('Hamburger element not found - mobile menu may not work');
-    if (!mobileNav) console.warn('Mobile nav element not found - mobile menu may not work');
+    // Function to initialize navigation elements after dynamic loading
+    function initNavigation() {
+        navbar = document.getElementById('navbar');
+        hamburger = document.getElementById('hamburger');
+        mobileNav = document.getElementById('mobileNav');
+        
+        console.log('Initializing navigation...', { navbar, hamburger, mobileNav });
+        
+        // Enhanced error checking for missing elements
+        if (!navbar) console.warn('Navbar element not found - some features may not work');
+        if (!hamburger) console.warn('Hamburger element not found - mobile menu may not work');
+        if (!mobileNav) console.warn('Mobile nav element not found - mobile menu may not work');
+        
+        // Initialize hamburger functionality if elements exist
+        if (hamburger && mobileNav) {
+            initHamburgerMenu();
+            console.log('Hamburger menu initialized successfully');
+        } else {
+            console.error('Missing required elements for mobile menu');
+        }
+        
+        // Initialize accessibility improvements
+        initAccessibility();
+        
+        // Re-attach smooth scrolling to new navigation links
+        initSmoothScrolling();
+        
+        // Initialize navigation preloading
+        initNavPreloading();
+    }
     
     // Check for modern browser features
     if (!('IntersectionObserver' in window)) {
@@ -65,11 +89,17 @@
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Mobile Navigation Toggle
-    function toggleMobileNav() {
-        if (!hamburger || !mobileNav) return;
+    // Mobile Navigation Toggle - Updated for dynamic loading
+    function toggleMobileNav(e) {
+        if (e) e.preventDefault();
+        
+        if (!hamburger || !mobileNav) {
+            console.error('Toggle called but elements not found:', { hamburger, mobileNav });
+            return;
+        }
         
         const isActive = hamburger.classList.contains('active');
+        console.log('Toggling mobile nav, currently active:', isActive);
         
         hamburger.classList.toggle('active');
         mobileNav.classList.toggle('active');
@@ -79,48 +109,74 @@
             body.style.overflow = 'hidden';
             mobileNav.setAttribute('aria-hidden', 'false');
             hamburger.setAttribute('aria-expanded', 'true');
+            console.log('Mobile nav opened');
         } else {
             body.style.overflow = '';
             mobileNav.setAttribute('aria-hidden', 'true');
             hamburger.setAttribute('aria-expanded', 'false');
+            console.log('Mobile nav closed');
         }
     }
     
-    hamburger?.addEventListener('click', toggleMobileNav);
-
-    // Close mobile nav when clicking on a link
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (!hamburger || !mobileNav) return;
-            
-            hamburger.classList.remove('active');
-            mobileNav.classList.remove('active');
-            body.style.overflow = '';
-            mobileNav.setAttribute('aria-hidden', 'true');
-            hamburger.setAttribute('aria-expanded', 'false');
-        });
-    });
-
-    // Close mobile nav when clicking the overlay background
-    mobileNav?.addEventListener('click', function(e) {
-        if (e.target === mobileNav && hamburger) {
-            hamburger.classList.remove('active');
-            mobileNav.classList.remove('active');
-            body.style.overflow = '';
-            mobileNav.setAttribute('aria-hidden', 'true');
-            hamburger.setAttribute('aria-expanded', 'false');
+    // Close mobile navigation
+    function closeMobileNav() {
+        if (!hamburger || !mobileNav) return;
+        
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        body.style.overflow = '';
+        mobileNav.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        console.log('Mobile nav closed via helper function');
+    }
+    
+    // Initialize hamburger menu functionality
+    function initHamburgerMenu() {
+        if (!hamburger || !mobileNav) {
+            console.error('Cannot initialize hamburger menu - elements missing');
+            return;
         }
-    });
+        
+        console.log('Setting up hamburger menu event listeners');
+        
+        // Remove any existing listeners to prevent duplicates
+        hamburger.removeEventListener('click', toggleMobileNav);
+        hamburger.addEventListener('click', toggleMobileNav);
+        
+        // Also handle touch events for mobile
+        hamburger.removeEventListener('touchend', toggleMobileNav);
+        hamburger.addEventListener('touchend', toggleMobileNav);
+
+        // Close mobile nav when clicking on a link
+        const mobileNavLinks = mobileNav.querySelectorAll('.mobile-nav-links a');
+        console.log('Found mobile nav links:', mobileNavLinks.length);
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                console.log('Mobile nav link clicked');
+                closeMobileNav();
+            });
+        });
+
+        // Close mobile nav when clicking the overlay background
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target === mobileNav) {
+                console.log('Mobile nav overlay clicked');
+                closeMobileNav();
+            }
+        });
+        
+        // Set initial ARIA attributes
+        mobileNav.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    }
 
     // Close mobile nav on escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active') && hamburger) {
-            hamburger.classList.remove('active');
-            mobileNav.classList.remove('active');
-            body.style.overflow = '';
-            mobileNav.setAttribute('aria-hidden', 'true');
-            hamburger.setAttribute('aria-expanded', 'false');
+        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+            console.log('Escape key pressed, closing mobile nav');
+            closeMobileNav();
         }
     });
 
@@ -152,16 +208,22 @@
         requestAnimationFrame(animation);
     }
 
-    // Enhanced smooth scrolling for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = this.getAttribute('href');
-            if (target && target !== '#') {
-                smoothScroll(target);
-            }
+    // Initialize smooth scrolling for all anchor links
+    function initSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Remove existing listeners to prevent duplicates
+            anchor.removeEventListener('click', handleSmoothScroll);
+            anchor.addEventListener('click', handleSmoothScroll);
         });
-    });
+    }
+    
+    function handleSmoothScroll(e) {
+        e.preventDefault();
+        const target = this.getAttribute('href');
+        if (target && target !== '#') {
+            smoothScroll(target);
+        }
+    }
 
     // Optimized form submission
     const contactForm = document.querySelector('.contact-form');
@@ -393,56 +455,63 @@
     }
 
     // Preload critical resources when hovering over navigation links
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            const target = this.getAttribute('href');
-            const section = document.querySelector(target);
-            if (section) {
-                // Preload images in the section
-                const images = section.querySelectorAll('img[loading="lazy"]');
-                images.forEach(img => {
-                    if (!img.complete && img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                });
-            }
-        }, { once: true });
-    });
+    function initNavPreloading() {
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                const target = this.getAttribute('href');
+                const section = document.querySelector(target);
+                if (section) {
+                    // Preload images in the section
+                    const images = section.querySelectorAll('img[loading="lazy"]');
+                    images.forEach(img => {
+                        if (!img.complete && img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                    });
+                }
+            }, { once: true });
+        });
+    }
 
     // Initialize accessibility improvements
     function initAccessibility() {
-        // Set proper ARIA attributes
+        // Set proper ARIA attributes for mobile nav if it exists
         if (mobileNav) mobileNav.setAttribute('aria-hidden', 'true');
-        if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+        if (hamburger) {
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+        }
         
-        // Add skip link for keyboard navigation
-        const skipLink = document.createElement('a');
-        skipLink.href = '#main';
-        skipLink.textContent = 'Skip to main content';
-        skipLink.className = 'skip-link';
-        skipLink.style.cssText = `
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: #3498db;
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 10001;
-            border-radius: 4px;
-        `;
-        
-        skipLink.addEventListener('focus', function() {
-            this.style.top = '6px';
-        });
-        
-        skipLink.addEventListener('blur', function() {
-            this.style.top = '-40px';
-        });
-        
-        document.body.insertBefore(skipLink, document.body.firstChild);
+        // Add skip link for keyboard navigation (only once)
+        if (!document.querySelector('.skip-link')) {
+            const skipLink = document.createElement('a');
+            skipLink.href = '#main';
+            skipLink.textContent = 'Skip to main content';
+            skipLink.className = 'skip-link';
+            skipLink.style.cssText = `
+                position: absolute;
+                top: -40px;
+                left: 6px;
+                background: #3498db;
+                color: white;
+                padding: 8px;
+                text-decoration: none;
+                z-index: 10001;
+                border-radius: 4px;
+            `;
+            
+            skipLink.addEventListener('focus', function() {
+                this.style.top = '6px';
+            });
+            
+            skipLink.addEventListener('blur', function() {
+                this.style.top = '-40px';
+            });
+            
+            document.body.insertBefore(skipLink, document.body.firstChild);
+        }
         
         // Add main landmark if not present
         const hero = document.querySelector('.hero');
@@ -451,11 +520,57 @@
         }
     }
 
+    // Auto-initialize if navigation is already in DOM
+    function autoInitialize() {
+        if (document.getElementById('navbar') && document.getElementById('hamburger') && document.getElementById('mobileNav')) {
+            console.log('Navigation found in DOM, auto-initializing...');
+            initNavigation();
+        } else {
+            console.log('Navigation not found, waiting for dynamic load...');
+        }
+    }
+
+    // Global function to be called when navigation is loaded
+    window.onNavigationLoaded = function() {
+        console.log('onNavigationLoaded called');
+        initNavigation();
+    };
+
+    // MutationObserver to detect when navigation is added to DOM
+    if ('MutationObserver' in window) {
+        const navObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1) { // Element node
+                            if (node.id === 'navbar' || node.querySelector && node.querySelector('#navbar')) {
+                                console.log('Navigation detected via MutationObserver');
+                                setTimeout(initNavigation, 100); // Small delay to ensure DOM is ready
+                                navObserver.disconnect(); // Stop observing once found
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        navObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
     // Initialize everything when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAccessibility);
+        document.addEventListener('DOMContentLoaded', () => {
+            initAccessibility();
+            initSmoothScrolling();
+            autoInitialize();
+        });
     } else {
         initAccessibility();
+        initSmoothScrolling();
+        autoInitialize();
     }
 
     // Enhanced error handling for development
