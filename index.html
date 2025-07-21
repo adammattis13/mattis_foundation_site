@@ -377,8 +377,35 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navigation').innerHTML = data;
+                
+                // Call initialization function after navigation is loaded
+                console.log('Navigation HTML loaded, calling initialization...');
+                if (typeof window.onNavigationLoaded === 'function') {
+                    window.onNavigationLoaded();
+                } else {
+                    // Fallback: wait a bit then try to initialize directly
+                    setTimeout(() => {
+                        if (window.initNavigation && typeof window.initNavigation === 'function') {
+                            window.initNavigation();
+                        } else {
+                            console.log('Navigation functions not available yet, will rely on auto-detection');
+                        }
+                    }, 100);
+                }
             })
-            .catch(error => console.log('Error loading navigation:', error));
+            .catch(error => {
+                console.error('Error loading navigation:', error);
+                // Fallback: try to find any existing navigation elements
+                setTimeout(() => {
+                    const existingNav = document.querySelector('#navbar, .hamburger, .mobile-nav');
+                    if (existingNav) {
+                        console.log('Found existing navigation elements, attempting initialization...');
+                        if (window.onNavigationLoaded && typeof window.onNavigationLoaded === 'function') {
+                            window.onNavigationLoaded();
+                        }
+                    }
+                }, 500);
+            });
 
         // Load footer
         fetch('footer.html')

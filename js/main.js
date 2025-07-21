@@ -8,11 +8,17 @@
     
     // Function to initialize navigation elements after dynamic loading
     function initNavigation() {
+        console.log('=== NAVIGATION INITIALIZATION START ===');
+        
         navbar = document.getElementById('navbar');
         hamburger = document.getElementById('hamburger');
         mobileNav = document.getElementById('mobileNav');
         
-        console.log('Initializing navigation...', { navbar, hamburger, mobileNav });
+        console.log('Elements found:', { 
+            navbar: navbar ? 'YES' : 'NO', 
+            hamburger: hamburger ? 'YES' : 'NO', 
+            mobileNav: mobileNav ? 'YES' : 'NO' 
+        });
         
         // Enhanced error checking for missing elements
         if (!navbar) console.warn('Navbar element not found - some features may not work');
@@ -24,7 +30,10 @@
             initHamburgerMenu();
             console.log('Hamburger menu initialized successfully');
         } else {
-            console.error('Missing required elements for mobile menu');
+            console.error('Missing required elements for mobile menu:', {
+                hamburger: !!hamburger,
+                mobileNav: !!mobileNav
+            });
         }
         
         // Initialize accessibility improvements
@@ -35,6 +44,8 @@
         
         // Initialize navigation preloading
         initNavPreloading();
+        
+        console.log('=== NAVIGATION INITIALIZATION COMPLETE ===');
     }
     
     // Check for modern browser features
@@ -590,6 +601,9 @@
         }
     }
 
+    // Expose initialization function globally
+    window.initNavigation = initNavigation;
+    
     // Global function to be called when navigation is loaded
     window.onNavigationLoaded = function() {
         console.log('onNavigationLoaded called');
@@ -599,8 +613,17 @@
     // Enhanced MutationObserver to detect when navigation is added to DOM
     if ('MutationObserver' in window) {
         const navObserver = new MutationObserver((mutations) => {
+            let navigationFound = false;
+            
             mutations.forEach((mutation) => {
                 if (mutation.type === 'childList') {
+                    // Check if the navigation div got content added
+                    if (mutation.target.id === 'navigation' && mutation.target.innerHTML.trim() !== '') {
+                        console.log('Navigation content added to #navigation div');
+                        navigationFound = true;
+                    }
+                    
+                    // Also check for direct element additions
                     mutation.addedNodes.forEach((node) => {
                         if (node.nodeType === 1) { // Element node
                             if (node.id === 'navbar' || 
@@ -611,17 +634,21 @@
                                     node.querySelector('.hamburger') ||
                                     node.querySelector('.mobile-nav')
                                 ))) {
-                                console.log('Navigation detected via MutationObserver');
-                                setTimeout(() => {
-                                    if (autoInitialize()) {
-                                        navObserver.disconnect(); // Stop observing once successfully initialized
-                                    }
-                                }, 100);
+                                console.log('Navigation detected via MutationObserver on added nodes');
+                                navigationFound = true;
                             }
                         }
                     });
                 }
             });
+            
+            if (navigationFound) {
+                setTimeout(() => {
+                    if (autoInitialize()) {
+                        navObserver.disconnect(); // Stop observing once successfully initialized
+                    }
+                }, 100);
+            }
         });
 
         navObserver.observe(document.body, {
