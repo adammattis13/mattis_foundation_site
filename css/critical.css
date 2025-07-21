@@ -240,11 +240,50 @@ nav.scrolled {
         display: flex;
     }
     
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .logo img {
+        height: 45px;
+    }
+    
+    .hero {
+        min-height: 100vh;
+        padding: 0 1rem;
+    }
+    
     .hero h1 {
         font-size: 2.5rem;
+        line-height: 1.2;
     }
     
     .hero .tagline {
         font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+        max-width: 100%;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero .tagline {
+        font-size: 1rem;
+    }
+    
+    .nav-container {
+        padding: 0 0.5rem;
     }
 }

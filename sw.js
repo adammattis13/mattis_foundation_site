@@ -1,7 +1,7 @@
 // Service Worker for The Mattis Foundation
-const CACHE_NAME = 'mattis-foundation-v1.0.0';
-const STATIC_CACHE = 'mattis-static-v1.0.0';
-const DYNAMIC_CACHE = 'mattis-dynamic-v1.0.0';
+const CACHE_NAME = 'mattis-foundation-v1.0.1';
+const STATIC_CACHE = 'mattis-static-v1.0.1';
+const DYNAMIC_CACHE = 'mattis-dynamic-v1.0.1';
 
 // Critical resources to cache immediately
 const CRITICAL_RESOURCES = [
