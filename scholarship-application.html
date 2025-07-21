@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -403,39 +403,8 @@
 </head>
 
 <body>
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo"> 
-                <picture>
-                    <source srcset="assets/Mattis_Foundation_Logo_Blue.webp" type="image/webp">
-                    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="Mattis Foundation Logo" width="50" height="50">
-                </picture>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="programs.html">Programs</a></li>
-                <li><a href="index.html#impact">Impact</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav" id="mobileNav">
-        <ul class="mobile-nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="programs.html">Programs</a></li>
-            <li><a href="index.html#impact">Impact</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-    </div>
+    <!-- Navigation will be loaded here -->
+    <div id="navigation"></div>
 
     <!-- Hero Section -->
     <section class="scholarship-hero">
@@ -603,31 +572,27 @@
         </form>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="index.html#about">About</a>
-                <a href="programs.html">Programs</a>
-                <a href="index.html#contact">Contact</a>
-            </div>
-            <div class="social-links">
-                <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
-                    <picture>
-                        <source srcset="assets/logo_instagram.webp" type="image/webp">
-                        <img src="assets/logo_instagram.png" alt="Instagram" width="40" height="40" loading="lazy">
-                    </picture>
-                </a>
-                <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
-                    <picture>
-                        <source srcset="assets/logo_linkedin.webp" type="image/webp">
-                        <img src="assets/logo_linkedin.png" alt="LinkedIn" width="40" height="40" loading="lazy">
-                    </picture>
-                </a>
-            </div>
-            <p>&copy; 2025 The Mattis Foundation. All rights reserved. | Supporting Veterans, Military Families & Communities</p>
-        </div>
-    </footer>
+    <!-- Footer will be loaded here -->
+    <div id="footer"></div>
+
+    <!-- Load Navigation and Footer -->
+    <script>
+        // Load navigation
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navigation').innerHTML = data;
+            })
+            .catch(error => console.log('Error loading navigation:', error));
+
+        // Load footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.log('Error loading footer:', error));
+    </script>
 
     <script>
         // Comprehensive list of US universities and colleges

@@ -1,17 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <meta name="description" content="Page not found - The Mattis Foundation. Return to our homepage to learn about our programs supporting veterans and communities.">
+    <meta name="keywords" content="Mattis Foundation, 404, page not found">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Page Not Found - The Mattis Foundation">
+    <meta property="og:description" content="The page you're looking for doesn't exist. Return to our homepage to learn about our programs supporting veterans and communities.">
+    <meta property="og:image" content="https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png">
+    <meta property="og:url" content="https://mattisfoundation.org/404.html">
+
     <title>Page Not Found - The Mattis Foundation</title>
+    
+    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
+    <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Critical CSS and Scripts -->
+    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- Critical CSS (Above the fold only) -->
     <link rel="stylesheet" href="css/critical.css">
+    
+    <!-- Non-critical CSS (Deferred) -->
+    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+    
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .error-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0.9;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .error-button {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .error-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .error-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .error-button.secondary:hover {
+            background: white;
+            color: #2c3e50;
+        }
+
+        .helpful-links {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .helpful-links h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .link-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .link-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .link-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .link-card a {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .link-card a:hover {
+            background: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <div style="text-align: center; padding: 4rem 2rem; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
-        <h1 style="font-size: 3rem; color: #2c3e50; margin-bottom: 1rem;">404</h1>
-        <h2 style="color: #666; margin-bottom: 2rem;">Page Not Found</h2>
-        <p style="margin-bottom: 2rem;">The page you're looking for doesn't exist.</p>
-        <a href="/" style="background: #3498db; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px;">Return Home</a>
-    </div>
+    <!-- Navigation will be loaded here -->
+    <div id="navigation"></div>
+
+    <!-- Error Hero Section -->
+    <section class="error-hero">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-message">We're sorry, but the page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the wrong URL.</p>
+            <div class="error-actions">
+                <a href="index.html#top" class="error-button">Return Home</a>
+                <a href="programs.html" class="error-button secondary">View Our Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Helpful Links Section -->
+    <section class="helpful-links">
+        <div class="container">
+            <h2>What You're Looking For Might Be Here</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <h3>KJ Smith Scholarship</h3>
+                    <p>Apply for our scholarship program supporting veterans and military families pursuing higher education.</p>
+                    <a href="scholarship-application.html">Apply Now</a>
+                </div>
+                <div class="link-card">
+                    <h3>Our Programs</h3>
+                    <p>Learn about our Community Fund, scholarship program, and Night Under the Oaks benefit dinner.</p>
+                    <a href="programs.html">View Programs</a>
+                </div>
+                <div class="link-card">
+                    <h3>Get Involved</h3>
+                    <p>Connect with us to volunteer, donate, or learn more about supporting our mission.</p>
+                    <a href="index.html#contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer"></div>
+
+    <!-- Load Navigation and Footer -->
+    <script>
+        // Load navigation
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navigation').innerHTML = data;
+            })
+            .catch(error => console.log('Error loading navigation:', error));
+
+        // Load footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.log('Error loading footer:', error));
+    </script>
+
+    <!-- Deferred JavaScript -->
+    <script src="js/main.js" defer></script>
 </body>
 </html>
