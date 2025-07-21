@@ -522,11 +522,71 @@
 
     // Auto-initialize if navigation is already in DOM
     function autoInitialize() {
-        if (document.getElementById('navbar') && document.getElementById('hamburger') && document.getElementById('mobileNav')) {
+        const navbar = document.getElementById('navbar');
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        console.log('Auto-initialize check:', { navbar: !!navbar, hamburger: !!hamburger, mobileNav: !!mobileNav });
+        
+        if (navbar && hamburger && mobileNav) {
             console.log('Navigation found in DOM, auto-initializing...');
             initNavigation();
+            return true;
         } else {
-            console.log('Navigation not found, waiting for dynamic load...');
+            console.log('Navigation not found, elements present:', {
+                navbar: !!navbar,
+                hamburger: !!hamburger, 
+                mobileNav: !!mobileNav
+            });
+            return false;
+        }
+    }
+
+    // Retry mechanism for production environments
+    function retryInitialization(attempts = 0, maxAttempts = 10) {
+        console.log(`Retry attempt ${attempts + 1}/${maxAttempts}`);
+        
+        if (autoInitialize()) {
+            console.log('Navigation initialized successfully on retry', attempts + 1);
+            return;
+        }
+        
+        if (attempts < maxAttempts) {
+            setTimeout(() => {
+                retryInitialization(attempts + 1, maxAttempts);
+            }, 500); // Wait 500ms between attempts
+        } else {
+            console.error('Failed to initialize navigation after', maxAttempts, 'attempts');
+            // Last resort: try to find elements manually
+            manualElementSearch();
+        }
+    }
+
+    // Manual search for navigation elements
+    function manualElementSearch() {
+        console.log('Performing manual search for navigation elements...');
+        
+        // Search for hamburger button by class
+        const hamburgerByClass = document.querySelector('.hamburger');
+        const mobileNavByClass = document.querySelector('.mobile-nav');
+        const navbarByTag = document.querySelector('nav');
+        
+        console.log('Manual search results:', {
+            hamburgerByClass: !!hamburgerByClass,
+            mobileNavByClass: !!mobileNavByClass,
+            navbarByTag: !!navbarByTag
+        });
+        
+        if (hamburgerByClass && mobileNavByClass) {
+            console.log('Found elements by class, attempting manual initialization...');
+            
+            // Set IDs if missing
+            if (!hamburgerByClass.id) hamburgerByClass.id = 'hamburger';
+            if (!mobileNavByClass.id) mobileNavByClass.id = 'mobileNav';
+            if (navbarByTag && !navbarByTag.id) navbarByTag.id = 'navbar';
+            
+            // Try initialization again
+            setTimeout(initNavigation, 100);
         }
     }
 
@@ -536,17 +596,27 @@
         initNavigation();
     };
 
-    // MutationObserver to detect when navigation is added to DOM
+    // Enhanced MutationObserver to detect when navigation is added to DOM
     if ('MutationObserver' in window) {
         const navObserver = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 if (mutation.type === 'childList') {
                     mutation.addedNodes.forEach((node) => {
                         if (node.nodeType === 1) { // Element node
-                            if (node.id === 'navbar' || node.querySelector && node.querySelector('#navbar')) {
+                            if (node.id === 'navbar' || 
+                                node.classList?.contains('hamburger') ||
+                                node.classList?.contains('mobile-nav') ||
+                                (node.querySelector && (
+                                    node.querySelector('#navbar') || 
+                                    node.querySelector('.hamburger') ||
+                                    node.querySelector('.mobile-nav')
+                                ))) {
                                 console.log('Navigation detected via MutationObserver');
-                                setTimeout(initNavigation, 100); // Small delay to ensure DOM is ready
-                                navObserver.disconnect(); // Stop observing once found
+                                setTimeout(() => {
+                                    if (autoInitialize()) {
+                                        navObserver.disconnect(); // Stop observing once successfully initialized
+                                    }
+                                }, 100);
                             }
                         }
                     });
@@ -558,20 +628,47 @@
             childList: true,
             subtree: true
         });
+        
+        // Disconnect observer after 30 seconds to prevent memory leaks
+        setTimeout(() => {
+            navObserver.disconnect();
+            console.log('Navigation observer disconnected after 30 seconds');
+        }, 30000);
     }
 
     // Initialize everything when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
             initAccessibility();
             initSmoothScrolling();
-            autoInitialize();
+            
+            if (!autoInitialize()) {
+                console.log('Initial auto-initialize failed, starting retry mechanism...');
+                retryInitialization();
+            }
         });
     } else {
+        console.log('DOM already loaded');
         initAccessibility();
         initSmoothScrolling();
-        autoInitialize();
+        
+        if (!autoInitialize()) {
+            console.log('Initial auto-initialize failed, starting retry mechanism...');
+            retryInitialization();
+        }
     }
+
+    // Additional window load event for production environments
+    window.addEventListener('load', () => {
+        console.log('Window loaded, checking navigation one more time...');
+        setTimeout(() => {
+            if (!navbar || !hamburger || !mobileNav) {
+                console.log('Navigation still not found after window load, trying manual search...');
+                manualElementSearch();
+            }
+        }, 1000);
+    });
 
     // Enhanced error handling for development
     window.addEventListener('error', function(e) {
