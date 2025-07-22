@@ -104,11 +104,20 @@
             display: flex;
             align-items: center;
             text-decoration: none;
+            /* Reserve space to prevent shifts - wider for logo aspect ratio */
+            min-width: 50px;
+            height: 50px;
+            flex-shrink: 0; /* Prevent shrinking */
         }
 
         .logo img {
             height: 50px;
-            width: 50px; /* Explicit width to prevent shifts */
+            width: auto; /* Preserve aspect ratio */
+            max-width: 80px; /* Prevent logo from getting too wide */
+            /* Prevent image layout shifts */
+            object-fit: contain;
+            /* GPU acceleration */
+            transform: translateZ(0);
         }
 
         .nav-links {
@@ -283,9 +292,15 @@
                 padding: 0 1rem;
             }
             
+            .logo {
+                min-width: 42px;
+                height: 42px;
+            }
+            
             .logo img {
                 height: 42px;
-                width: 42px;
+                width: auto;
+                max-width: 65px;
             }
             
             .hero h1 {
@@ -466,6 +481,7 @@
                     <div class="program-card-content">
                         <h3>Community Fund</h3>
                         <p>Supporting communities in times of need through disaster relief, emergency assistance, and rebuilding efforts. We stand ready to help when crisis strikes, providing immediate aid and long-term recovery support.</p>
+                        <a href="community-fund.html" class="scholarship-button">Learn More</a>
                     </div>
                 </article>
                 <article class="program-card scholarship-card">
@@ -501,6 +517,7 @@
                     <div class="program-card-content">
                         <h3>Evening Under the Oaks</h3>
                         <p>Our signature annual fundraising event bringing together community members for an elegant evening of connection, celebration, and support for our mission. Join us in making a difference.</p>
+                        <a href="evening-under-the-oaks.html" class="scholarship-button">Learn More</a>
                     </div>
                 </article>
             </div>
