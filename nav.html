@@ -5,9 +5,9 @@
                 <source srcset="assets/Mattis_Foundation_Logo_Blue.webp" type="image/webp">
                 <img src="assets/Mattis_Foundation_Logo_Blue.png" 
                      alt="Mattis Foundation Logo" 
-                     width="50" 
-                     height="50"
-                     style="height: 50px !important; width: auto !important; max-width: 80px !important; object-fit: contain !important;">
+                     width="70" 
+                     height="70"
+                     style="height: 70px !important; width: auto !important; min-width: 200px !important; object-fit: contain !important;">
             </picture>
         </a>
         <ul class="nav-links">
@@ -141,40 +141,81 @@
 
 /* Logo fix - inline to override any other CSS */
 .logo {
-    min-width: 50px !important;
-    height: 50px !important;
+    min-width: 200px !important;
+    height: 70px !important;
     width: auto !important;
 }
 
 .logo img {
-    height: 50px !important;
+    height: 70px !important;
     width: auto !important;
-    max-width: 80px !important;
+    min-width: 200px !important;
     object-fit: contain !important;
+}
+
+/* Navigation height adjustments for larger logo */
+#navigation {
+    height: 90px !important;
+    min-height: 90px !important;
+}
+
+nav {
+    height: 90px !important;
+    padding: 0.5rem 0 !important;
+}
+
+.nav-container {
+    height: 90px !important;
 }
 
 /* Mobile responsive logo */
 @media (max-width: 768px) {
     .logo {
-        min-width: 42px !important;
-        height: 42px !important;
+        min-width: 160px !important;
+        height: 60px !important;
     }
     
     .logo img {
-        height: 42px !important;
-        max-width: 65px !important;
+        height: 60px !important;
+        min-width: 160px !important;
+    }
+    
+    #navigation {
+        height: 80px !important;
+        min-height: 80px !important;
+    }
+    
+    nav {
+        height: 80px !important;
+    }
+    
+    .nav-container {
+        height: 80px !important;
     }
 }
 
 @media (max-width: 480px) {
     .logo {
-        min-width: 36px !important;
-        height: 36px !important;
+        min-width: 130px !important;
+        height: 50px !important;
     }
     
     .logo img {
-        height: 36px !important;
-        max-width: 55px !important;
+        height: 50px !important;
+        min-width: 130px !important;
+    }
+    
+    #navigation {
+        height: 70px !important;
+        min-height: 70px !important;
+    }
+    
+    nav {
+        height: 70px !important;
+    }
+    
+    .nav-container {
+        height: 70px !important;
     }
 }
 </style>
