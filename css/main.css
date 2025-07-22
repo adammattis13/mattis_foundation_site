@@ -91,12 +91,13 @@
     line-height: 1.8;
 }
 
-/* Programs Section */
+/* Programs Section - UPDATED FOR BUTTON ALIGNMENT */
 .programs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
+    align-items: stretch; /* Make all cards same height */
 }
 
 .program-card {
@@ -107,6 +108,10 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    /* UPDATED: Flexbox for equal heights */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Full height of grid cell */
 }
 
 .program-card-image {
@@ -114,6 +119,7 @@
     height: 200px;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0; /* Don't shrink image */
 }
 
 .program-card-image img {
@@ -129,6 +135,19 @@
 
 .program-card-content {
     padding: 2rem;
+    text-align: center;
+    /* UPDATED: Flex properties for button alignment */
+    flex-grow: 1; /* Take up remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space content evenly */
+}
+
+.program-card-content .text-content {
+    flex-grow: 1; /* Push button to bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .program-card::before {
@@ -146,15 +165,42 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
-.program-card h3 {
+.program-card h3,
+.program-card-content h3 {
     color: #2c3e50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1.3rem;
+    text-align: center;
 }
 
-.program-card p {
+.program-card p,
+.program-card-content p {
     color: #666;
     line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Scholarship/Learn More Button Styling - NEW */
+.scholarship-button {
+    background: #e74c3c;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: auto; /* Push to bottom */
+    align-self: center; /* Center the button */
+    white-space: nowrap; /* Prevent text wrapping */
+    min-width: 120px; /* Ensure consistent button width */
+}
+
+.scholarship-button:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
 }
 
 /* Gallery Section */
@@ -423,6 +469,16 @@ html {
     
     .programs-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .program-card-content {
+        padding: 1.5rem;
+    }
+    
+    .scholarship-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
     
     .impact-stats {
@@ -450,6 +506,16 @@ html {
     
     .hero .tagline {
         font-size: 1rem;
+    }
+    
+    .program-card-content {
+        padding: 1.25rem;
+    }
+    
+    .scholarship-button {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        min-width: 100px;
     }
     
     .impact-stats {

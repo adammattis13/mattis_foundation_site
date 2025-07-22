@@ -339,7 +339,43 @@
             }
         }
 
-        /* Scholarship button styles */
+        /* BUTTON ALIGNMENT FIX */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: stretch; /* Make all cards same height */
+        }
+
+        .program-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Full height of grid cell */
+        }
+
+        .program-card-content {
+            text-align: center;
+            padding: 2rem;
+            flex-grow: 1; /* Take up remaining space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space content evenly */
+        }
+
+        .program-card-content .text-content {
+            flex-grow: 1; /* Push button to bottom */
+        }
+
+        .program-card-content h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-card-content p {
+            margin-bottom: 1.5rem;
+        }
+
         .scholarship-button {
             background: #e74c3c;
             color: white;
@@ -349,22 +385,14 @@
             font-weight: 600;
             transition: all 0.3s ease;
             display: inline-block;
-            margin-top: 20px;
+            margin-top: auto; /* Push to bottom */
+            align-self: center; /* Center the button */
         }
 
         .scholarship-button:hover {
             background: #c0392b;
             transform: translateY(-2px);
             color: white;
-        }
-
-        .program-card-content {
-            text-align: center;
-        }
-
-        .program-card-content h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
         }
     </style>
     
@@ -479,8 +507,10 @@
                         </picture>
                     </div>
                     <div class="program-card-content">
-                        <h3>Community Fund</h3>
-                        <p>Supporting communities in times of need through disaster relief, emergency assistance, and rebuilding efforts. We stand ready to help when crisis strikes, providing immediate aid and long-term recovery support.</p>
+                        <div class="text-content">
+                            <h3>Community Fund</h3>
+                            <p>Supporting communities in times of need through disaster relief, emergency assistance, and rebuilding efforts. We stand ready to help when crisis strikes, providing immediate aid and long-term recovery support.</p>
+                        </div>
                         <a href="community-fund.html" class="scholarship-button">Learn More</a>
                     </div>
                 </article>
@@ -497,8 +527,10 @@
                         </picture>
                     </div>
                     <div class="program-card-content">
-                        <h3>KJ Smith Scholarship</h3>
-                        <p>Honoring military families and veterans by providing educational opportunities to deserving students who demonstrate exceptional character and commitment to service. Supporting the next generation of leaders.</p>
+                        <div class="text-content">
+                            <h3>KJ Smith Scholarship</h3>
+                            <p>Honoring military families and veterans by providing educational opportunities to deserving students who demonstrate exceptional character and commitment to service. Supporting the next generation of leaders.</p>
+                        </div>
                         <a href="scholarship-application.html" class="scholarship-button">Apply Now</a>
                     </div>
                 </article>
@@ -515,8 +547,10 @@
                         </picture>
                     </div>
                     <div class="program-card-content">
-                        <h3>Evening Under the Oaks</h3>
-                        <p>Our signature annual fundraising event bringing together community members for an elegant evening of connection, celebration, and support for our mission. Join us in making a difference.</p>
+                        <div class="text-content">
+                            <h3>Evening Under the Oaks</h3>
+                            <p>Our signature annual fundraising event bringing together community members for an elegant evening of connection, celebration, and support for our mission. Join us in making a difference.</p>
+                        </div>
                         <a href="evening-under-the-oaks.html" class="scholarship-button">Learn More</a>
                     </div>
                 </article>
