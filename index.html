@@ -9,11 +9,8 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;">
     
     <meta name="description" content="The Mattis Foundation creates meaningful opportunities through scholarships, community disaster relief, and the KJ Smith Scholarship. Supporting veterans and communities with honor, resilience, and service since 2024.">
-
-    <!-- Enhanced Keywords -->
     <meta name="keywords" content="Mattis Foundation, KJ Smith Scholarship, scholarships, community disaster relief, nonprofit foundation, Evening Under the Oaks, military family support, North Carolina charity, disaster relief fund, education scholarships, community service, honor resilience service">
 
     <!-- Canonical URL -->
@@ -33,15 +30,341 @@
     <meta name="twitter:title" content="The Mattis Foundation - Supporting Veterans & Communities">
     <meta name="twitter:description" content="Creating opportunity through honor, resilience, and service. KJ Smith Scholarship, disaster relief, and community programs.">
     <meta property="twitter:image" content="https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png">
-    <meta name="twitter:site" content="@mattisfoundation">
 
     <!-- Additional SEO Meta Tags -->
     <meta name="robots" content="index, follow">
     <meta name="author" content="The Mattis Foundation">
     <meta name="theme-color" content="#2c3e50">
-    <meta name="msapplication-TileColor" content="#2c3e50">
 
-    <!-- Structured Data - Organization -->
+    <title>The Mattis Foundation - Scholarships & Community Relief | KJ Smith Scholarship</title>
+    
+    <!-- Optimized Favicon -->
+    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
+    <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
+    
+    <!-- CRITICAL PERFORMANCE OPTIMIZATIONS -->
+    
+    <!-- 1. FONT OPTIMIZATION - Eliminate render blocking -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Critical font preload -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/georgia/v3/9Bt33CxNwt7aOtW_uoQ.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 2. CRITICAL RESOURCE PRELOADS - Hero content with reserved space -->
+    <link rel="preload" href="assets/Adam&Jenelle1-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="assets/Adam&Jenelle1.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+    
+    <!-- 3. CRITICAL CSS with layout shift prevention -->
+    <style>
+        /* CRITICAL CSS - Inline for fastest render */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* LAYOUT SHIFT PREVENTION - Reserve space for dynamic content */
+        #navigation {
+            height: 78px; /* Reserve exact space for nav */
+            position: relative;
+        }
+
+        /* Navigation - Critical since it's fixed */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            height: 78px; /* Fixed height to prevent shifts */
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+            width: 50px; /* Explicit width to prevent shifts */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #2c3e50;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* HERO SECTION - LAYOUT SHIFT PREVENTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            /* Reserve space for content to prevent shifts */
+            min-height: 600px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+            /* Explicit dimensions to prevent layout shifts */
+            aspect-ratio: 3/2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 62, 80, 0.1);
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 3;
+            position: relative;
+            /* Reserve space to prevent CLS */
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            /* Prevent font swap CLS */
+            font-display: swap;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            /* Explicit dimensions to prevent layout shifts */
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(44, 62, 80, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+            transition: all 0.4s ease;
+        }
+
+        .mobile-nav.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .mobile-nav-links a {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+        }
+
+        /* MOBILE RESPONSIVE - Critical viewport optimizations */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .logo img {
+                height: 42px;
+                width: 42px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+                line-height: 1.2;
+            }
+            
+            .hero .tagline {
+                font-size: 1.05rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+                min-height: 250px;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            #navigation {
+                height: 66px; /* Smaller on mobile */
+            }
+
+            nav {
+                height: 66px;
+            }
+        }
+
+        /* Reduce motion for accessibility and performance */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Scholarship button styles */
+        .scholarship-button {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .scholarship-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .program-card-content {
+            text-align: center;
+        }
+
+        .program-card-content h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+    
+    <!-- 4. DNS PREFETCH - Only essential -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    
+    <!-- 5. NON-CRITICAL CSS - Deferred loading -->
+    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+    
+    <!-- 6. FONT LOADING - Optimized with display swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Structured Data - Optimized -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -68,139 +391,30 @@
     }
     </script>
 
-    <!-- Structured Data - Programs -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "The Mattis Foundation",
-        "url": "https://mattisfoundation.org",
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Foundation Programs",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "name": "KJ Smith Scholarship",
-                    "description": "Educational scholarships for military families and veterans demonstrating exceptional character and commitment to service"
-                },
-                {
-                    "@type": "Offer",
-                    "name": "Community Fund",
-                    "description": "Disaster relief, emergency assistance, and rebuilding efforts for communities in need"
-                },
-                {
-                    "@type": "Offer",
-                    "name": "Evening Under the Oaks",
-                    "description": "Signature fundraising event bringing together community members for connection and support"
-                }
-            ]
-        }
-    }
-    </script>
-
-    <!-- Structured Data - Event -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Event",
-        "name": "Evening Under the Oaks",
-        "description": "The Mattis Foundation's signature fundraising event bringing together community members for an elegant evening of connection, celebration, and support for our mission.",
-        "organizer": {
-            "@type": "Organization",
-            "name": "The Mattis Foundation",
-            "url": "https://mattisfoundation.org"
-        },
-        "location": {
-            "@type": "Place",
-            "name": "North Carolina"
-        }
-    }
-    </script>
-
-    <title>The Mattis Foundation - Scholarships & Community Relief | KJ Smith Scholarship</title>
-    
-    <!-- Optimized Favicon -->
-    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
-    <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
-    
-    <!-- Performance Optimizations -->
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    <link rel="dns-prefetch" href="//www.google-analytics.com">
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    
-    <!-- Critical Resource Preloads - Hero Images First with High Priority -->
-    <link rel="preload" href="assets/Adam&Jenelle1-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
-    <link rel="preload" href="assets/Adam&Jenelle1-mobile.jpg" as="image" type="image/jpeg" media="(max-width: 768px)" fetchpriority="high">
-    <link rel="preload" href="assets/Adam&Jenelle1.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
-    <link rel="preload" href="assets/Adam&Jenelle1.jpg" as="image" type="image/jpeg" media="(min-width: 769px)" fetchpriority="high">
-    
-    <!-- Critical CSS and Scripts -->
-    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
-    <link rel="preload" href="js/main.js" as="script">
-    
-    <!-- Secondary Preloads -->
-    <link rel="preload" href="assets/Mattis_Foundation_Logo_Blue.webp" as="image" type="image/webp">
-    <link rel="preload" href="assets/Mattis_Foundation_Logo_Blue.png" as="image" type="image/png">
-    
-    <!-- Critical CSS (Above the fold only) -->
-    <link rel="stylesheet" href="css/critical.css">
-    
-    <!-- Non-critical CSS (Deferred) -->
-    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
-    
-    <!-- Font Optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Styles for centered headers and scholarship button -->
-    <style>
-        .program-card-content {
-            text-align: center;
-        }
-
-        .program-card-content h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .scholarship-button {
-            background: #e74c3c;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        .scholarship-button:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-            color: white;
-        }
-    </style>
-
-    <!-- Google tag (gtag.js) - Optimized loading -->
+    <!-- 7. ANALYTICS - Deferred loading to prevent blocking -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-K7W9R2DZQ5', {
-        page_load_time: true,
-        anonymize_ip: true
+      // Defer Google Analytics loading
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K7W9R2DZQ5', {
+            page_load_time: true,
+            anonymize_ip: true
+          });
+          
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-K7W9R2DZQ5';
+          document.head.appendChild(script);
+        }, 1000); // Load after 1 second
       });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7W9R2DZQ5"></script>
 </head>
 
 <body>
-    <!-- Navigation will be loaded here -->
+    <!-- Navigation will be loaded here - Reserved space prevents CLS -->
     <div id="navigation"></div>
 
     <section id="home" class="hero">
@@ -208,7 +422,13 @@
             <source srcset="assets/Adam&Jenelle1-mobile.webp" media="(max-width: 768px)" type="image/webp">
             <source srcset="assets/Adam&Jenelle1-mobile.jpg" media="(max-width: 768px)" type="image/jpeg">
             <source srcset="assets/Adam&Jenelle1.webp" type="image/webp">
-            <img src="assets/Adam&Jenelle1.jpg" alt="The Mattis Foundation founders Adam and Jenelle" class="hero-img" width="1200" height="800">
+            <img src="assets/Adam&Jenelle1.jpg" 
+                 alt="The Mattis Foundation founders Adam and Jenelle" 
+                 class="hero-img" 
+                 width="1200" 
+                 height="800"
+                 fetchpriority="high"
+                 decoding="sync">
         </picture>
         <div class="hero-content">
             <h1>The Mattis Foundation</h1>
@@ -235,7 +455,12 @@
                     <div class="program-card-image">
                         <picture>
                             <source srcset="assets/helene.webp" type="image/webp">
-                            <img src="assets/helene.jpg" alt="Community disaster relief efforts" loading="lazy" width="400" height="250">
+                            <img src="assets/helene.jpg" 
+                                 alt="Community disaster relief efforts" 
+                                 loading="lazy" 
+                                 width="400" 
+                                 height="250"
+                                 decoding="async">
                         </picture>
                     </div>
                     <div class="program-card-content">
@@ -247,7 +472,12 @@
                     <div class="program-card-image">
                         <picture>
                             <source srcset="assets/kjsmith.webp" type="image/webp">
-                            <img src="assets/kjsmith.jpeg" alt="KJ Smith Scholarship recipient" loading="lazy" width="400" height="250">
+                            <img src="assets/kjsmith.jpeg" 
+                                 alt="KJ Smith Scholarship recipient" 
+                                 loading="lazy" 
+                                 width="400" 
+                                 height="250"
+                                 decoding="async">
                         </picture>
                     </div>
                     <div class="program-card-content">
@@ -260,7 +490,12 @@
                     <div class="program-card-image">
                         <picture>
                             <source srcset="assets/undertheoaks.webp" type="image/webp">
-                            <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks event" loading="lazy" width="400" height="250">
+                            <img src="assets/undertheoaks.jpg" 
+                                 alt="Evening Under the Oaks event" 
+                                 loading="lazy" 
+                                 width="400" 
+                                 height="250"
+                                 decoding="async">
                         </picture>
                     </div>
                     <div class="program-card-content">
@@ -279,21 +514,36 @@
                 <div class="gallery-item venue-gallery">
                     <picture>
                         <source srcset="assets/westpoint.webp" type="image/webp">
-                        <img src="assets/westpoint.jpg" alt="Elegant venues and events" loading="lazy" width="300" height="250">
+                        <img src="assets/westpoint.jpg" 
+                             alt="Elegant venues and events" 
+                             loading="lazy" 
+                             width="300" 
+                             height="250"
+                             decoding="async">
                     </picture>
                     <div class="gallery-caption">Elegant Venues & Events</div>
                 </div>
                 <div class="gallery-item cityscape-gallery">
                     <picture>
                         <source srcset="assets/raleigh2.webp" type="image/webp">
-                        <img src="assets/raleigh2.jpg" alt="Serving North Carolina communities" loading="lazy" width="300" height="250">
+                        <img src="assets/raleigh2.jpg" 
+                             alt="Serving North Carolina communities" 
+                             loading="lazy" 
+                             width="300" 
+                             height="250"
+                             decoding="async">
                     </picture>
                     <div class="gallery-caption">Serving North Carolina</div>
                 </div>
                 <div class="gallery-item historic-gallery">
                     <picture>
                         <source srcset="assets/westpoint.webp" type="image/webp">
-                        <img src="assets/westpoint.jpg" alt="Historic partnerships" loading="lazy" width="300" height="250">
+                        <img src="assets/westpoint.jpg" 
+                             alt="Historic partnerships" 
+                             loading="lazy" 
+                             width="300" 
+                             height="250"
+                             decoding="async">
                     </picture>
                     <div class="gallery-caption">Historic Partnerships</div>
                 </div>
@@ -306,19 +556,19 @@
             <h2 class="section-title">Our Impact</h2>
             <div class="impact-stats">
                 <div class="stat-item">
-                    <div class="stat-number" data-target="250">1000+</div>
+                    <div class="stat-number">1000+</div>
                     <div class="stat-label">Lives Touched</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-target="50">2</div>
+                    <div class="stat-number">2</div>
                     <div class="stat-label">Scholarships Awarded</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-target="25">10+</div>
+                    <div class="stat-number">10+</div>
                     <div class="stat-label">Community Projects</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-target="100">$150K</div>
+                    <div class="stat-number">$150K</div>
                     <div class="stat-label">Funds Distributed</div>
                 </div>
             </div>
@@ -337,13 +587,13 @@
                         <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
                             <picture>
                                 <source srcset="assets/logo_instagram.webp" type="image/webp">
-                                <img src="assets/logo_instagram.png" alt="Instagram" width="40" height="40" loading="lazy">
+                                <img src="assets/logo_instagram.png" alt="Instagram" width="40" height="40" loading="lazy" decoding="async">
                             </picture>
                         </a>
                         <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
                             <picture>
                                 <source srcset="assets/logo_linkedin.webp" type="image/webp">
-                                <img src="assets/logo_linkedin.png" alt="LinkedIn" width="40" height="40" loading="lazy">
+                                <img src="assets/logo_linkedin.png" alt="LinkedIn" width="40" height="40" loading="lazy" decoding="async">
                             </picture>
                         </a>
                     </div>
@@ -370,66 +620,33 @@
     <!-- Footer will be loaded here -->
     <div id="footer"></div>
 
-    <!-- Load Navigation and Footer -->
+    <!-- OPTIMIZED SCRIPT LOADING -->
     <script>
-        // Load navigation
-        fetch('nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation').innerHTML = data;
-                console.log('Navigation HTML loaded successfully');
-                
-                // Multiple strategies to ensure initialization
-                setTimeout(() => {
-                    // Strategy 1: Try calling main.js functions directly
-                    if (typeof window.onNavigationLoaded === 'function') {
-                        console.log('Calling window.onNavigationLoaded');
-                        window.onNavigationLoaded();
-                    } else if (typeof window.initNavigation === 'function') {
-                        console.log('Calling window.initNavigation');
-                        window.initNavigation();
-                    } else {
-                        console.log('Main.js functions not ready yet - triggering manual detection');
-                        
-                        // Strategy 2: Manually trigger the detection systems
-                        setTimeout(() => {
-                            // Check if elements exist and trigger manually
-                            const navbar = document.getElementById('navbar');
-                            const hamburger = document.getElementById('hamburger');
-                            const mobileNav = document.getElementById('mobileNav');
-                            
-                            console.log('Manual check - elements found:', {
-                                navbar: !!navbar,
-                                hamburger: !!hamburger,
-                                mobileNav: !!mobileNav
-                            });
-                            
-                            if (navbar && hamburger && mobileNav) {
-                                console.log('Elements found, creating custom initialization...');
-                                initializeHamburgerMenuDirectly();
-                            } else {
-                                console.error('Navigation elements still not found after manual check');
-                            }
-                        }, 500);
-                    }
-                }, 100);
-            })
-            .catch(error => {
-                console.error('Error loading navigation:', error);
-            });
+        // PERFORMANCE: Fast navigation loading with CLS prevention
+        function loadNavigation() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    const navContainer = document.getElementById('navigation');
+                    navContainer.innerHTML = data;
+                    
+                    // Initialize immediately to prevent delays
+                    setTimeout(initializeNavigation, 50);
+                })
+                .catch(error => {
+                    console.error('Error loading navigation:', error);
+                });
+        }
 
-        // Direct hamburger menu initialization as fallback
-        function initializeHamburgerMenuDirectly() {
+        function initializeNavigation() {
             const hamburger = document.getElementById('hamburger');
             const mobileNav = document.getElementById('mobileNav');
             const body = document.body;
             
             if (!hamburger || !mobileNav) {
-                console.error('Cannot initialize - elements missing');
+                console.warn('Navigation elements not found');
                 return;
             }
-            
-            console.log('Initializing hamburger menu directly...');
             
             function toggleMobileNav(e) {
                 if (e) e.preventDefault();
@@ -442,12 +659,10 @@
                     body.style.overflow = 'hidden';
                     mobileNav.setAttribute('aria-hidden', 'false');
                     hamburger.setAttribute('aria-expanded', 'true');
-                    console.log('Mobile nav opened');
                 } else {
                     body.style.overflow = '';
                     mobileNav.setAttribute('aria-hidden', 'true');
                     hamburger.setAttribute('aria-expanded', 'false');
-                    console.log('Mobile nav closed');
                 }
             }
             
@@ -459,23 +674,20 @@
                 hamburger.setAttribute('aria-expanded', 'false');
             }
             
-            // Add event listeners
+            // Event listeners
             hamburger.addEventListener('click', toggleMobileNav);
             
-            // Close on escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
                     closeMobileNav();
                 }
             });
             
-            // Close when clicking nav links
             const mobileNavLinks = mobileNav.querySelectorAll('.mobile-nav-links a');
             mobileNavLinks.forEach(link => {
                 link.addEventListener('click', closeMobileNav);
             });
             
-            // Close when clicking overlay
             mobileNav.addEventListener('click', function(e) {
                 if (e.target === mobileNav) {
                     closeMobileNav();
@@ -486,33 +698,33 @@
             mobileNav.setAttribute('aria-hidden', 'true');
             hamburger.setAttribute('aria-expanded', 'false');
             hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-            
-            console.log('Hamburger menu initialized successfully!');
         }
 
-        // Load footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            })
-            .catch(error => console.log('Error loading footer:', error));
+        // Load footer efficiently
+        function loadFooter() {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .catch(error => console.log('Error loading footer:', error));
+        }
+
+        // PERFORMANCE: Load critical content immediately
+        loadNavigation();
+        loadFooter();
     </script>
 
-    <!-- Deferred JavaScript -->
+    <!-- DEFERRED MAIN JS - Load after critical content -->
     <script src="js/main.js" defer></script>
     
-    <!-- Service Worker Registration - Enhanced -->
+    <!-- SERVICE WORKER - Enhanced caching -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
                     .then(registration => {
                         console.log('SW registered successfully');
-                        // Check for updates
-                        registration.addEventListener('updatefound', () => {
-                            console.log('SW update available');
-                        });
                     })
                     .catch(error => {
                         console.log('SW registration failed:', error);

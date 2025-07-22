@@ -1,240 +1,289 @@
-// Service Worker for The Mattis Foundation - Mobile Optimized
-const CACHE_NAME = 'mattis-foundation-v1.0.2';
-const STATIC_CACHE = 'mattis-static-v1.0.2';
-const DYNAMIC_CACHE = 'mattis-dynamic-v1.0.2';
+// Enhanced Service Worker for Mattis Foundation
+// Optimized for maximum performance and caching efficiency
 
-// Critical resources to cache immediately - Mobile prioritized
-const CRITICAL_RESOURCES = [
-    '/',
-    '/index.html',
-    '/css/critical.css',
-    '/css/main.css',
-    '/js/main.js',
-    '/assets/Mattis_Foundation_Logo_Blue.webp',
-    '/assets/Mattis_Foundation_Logo_Blue.png',
-    '/assets/Adam&Jenelle1-mobile.webp',
-    '/assets/Adam&Jenelle1-mobile.jpg',
-    'https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap'
+const CACHE_NAME = 'mattis-foundation-v2';
+const STATIC_CACHE = 'mattis-static-v2';
+const IMAGE_CACHE = 'mattis-images-v2';
+const API_CACHE = 'mattis-api-v2';
+
+// Critical resources to cache immediately
+const CRITICAL_ASSETS = [
+  '/',
+  '/index.html',
+  '/css/critical.css',
+  '/css/main.css',
+  '/js/main.js',
+  '/nav.html',
+  '/footer.html',
+  '/assets/Mattis_Foundation_Logo_Blue.webp',
+  '/assets/Mattis_Foundation_Logo_Blue.png',
+  '/assets/Adam&Jenelle1.webp',
+  '/assets/Adam&Jenelle1-mobile.webp',
+  '/assets/Mattis_Foundation_Favicon.webp'
 ];
 
-// Resources to cache on first access - Desktop images lower priority
-const CACHE_ON_ACCESS = [
-    '/assets/Adam&Jenelle1.webp',
-    '/assets/Adam&Jenelle1.jpg',
-    '/assets/Mattis_Foundation_Favicon.webp',
-    '/assets/Mattis_Foundation_Favicon.png',
-    '/assets/helene.webp',
-    '/assets/helene.jpg',
-    '/assets/kjsmith.webp',
-    '/assets/kjsmith.jpeg',
-    '/assets/undertheoaks.webp',
-    '/assets/undertheoaks.jpg',
-    '/assets/westpoint.webp',
-    '/assets/westpoint.jpg',
-    '/assets/raleigh2.webp',
-    '/assets/raleigh2.jpg',
-    '/assets/logo_instagram.webp',
-    '/assets/logo_instagram.png',
-    '/assets/logo_linkedin.webp',
-    '/assets/logo_linkedin.png'
+// Extended cache for better performance
+const EXTENDED_ASSETS = [
+  '/programs.html',
+  '/scholarship-application.html',
+  '/404.html',
+  '/assets/helene.webp',
+  '/assets/kjsmith.webp',
+  '/assets/undertheoaks.webp',
+  '/assets/westpoint.webp',
+  '/assets/raleigh2.webp',
+  '/assets/logo_instagram.webp',
+  '/assets/logo_linkedin.webp'
 ];
 
-// Network-first resources (always try network first)
-const NETWORK_FIRST = [
-    'https://www.googletagmanager.com',
-    'https://www.google-analytics.com'
-];
-
-// Install event - prioritize mobile resources
+// Install event - Cache critical resources
 self.addEventListener('install', event => {
-    console.log('Service Worker installing...');
-    
-    event.waitUntil(
-        caches.open(STATIC_CACHE).then(cache => {
-            console.log('Caching critical resources...');
-            // Cache mobile resources first
-            return cache.addAll(CRITICAL_RESOURCES);
-        }).then(() => {
-            return self.skipWaiting();
-        })
-    );
+  console.log('Service Worker installing...');
+  
+  event.waitUntil(
+    Promise.all([
+      // Cache critical assets immediately
+      caches.open(STATIC_CACHE).then(cache => {
+        console.log('Caching critical assets...');
+        return cache.addAll(CRITICAL_ASSETS);
+      }),
+      
+      // Cache extended assets
+      caches.open(IMAGE_CACHE).then(cache => {
+        console.log('Caching extended assets...');
+        return cache.addAll(EXTENDED_ASSETS);
+      })
+    ]).then(() => {
+      console.log('All critical assets cached successfully');
+      // Skip waiting to activate immediately
+      return self.skipWaiting();
+    }).catch(error => {
+      console.error('Failed to cache assets:', error);
+    })
+  );
 });
 
-// Activate event - clean up old caches
+// Activate event - Clean up old caches
 self.addEventListener('activate', event => {
-    console.log('Service Worker activating...');
+  console.log('Service Worker activating...');
+  
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== STATIC_CACHE && 
+              cacheName !== IMAGE_CACHE && 
+              cacheName !== API_CACHE) {
+            console.log('Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => {
+      console.log('Cache cleanup complete');
+      return self.clients.claim();
+    })
+  );
+});
+
+// Fetch event - Optimized caching strategy
+self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = new URL(request.url);
+  
+  // Skip non-GET requests
+  if (request.method !== 'GET') {
+    return;
+  }
+  
+  // Skip chrome extensions and analytics
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    return;
+  }
+  
+  // Skip Google Analytics and Tag Manager for better performance
+  if (url.hostname.includes('google-analytics.com') || 
+      url.hostname.includes('googletagmanager.com')) {
+    return;
+  }
+  
+  event.respondWith(handleRequest(request));
+});
+
+async function handleRequest(request) {
+  const url = new URL(request.url);
+  
+  try {
+    // Strategy 1: Critical HTML documents - Stale While Revalidate
+    if (request.destination === 'document') {
+      return await staleWhileRevalidate(request, STATIC_CACHE);
+    }
+    
+    // Strategy 2: Images - Cache First with fallback
+    if (request.destination === 'image') {
+      return await cacheFirst(request, IMAGE_CACHE);
+    }
+    
+    // Strategy 3: CSS/JS - Cache First for performance
+    if (request.destination === 'style' || 
+        request.destination === 'script') {
+      return await cacheFirst(request, STATIC_CACHE);
+    }
+    
+    // Strategy 4: Fonts - Cache First (long-term cache)
+    if (request.destination === 'font') {
+      return await cacheFirst(request, STATIC_CACHE, { 
+        maxAge: 365 * 24 * 60 * 60 // 1 year
+      });
+    }
+    
+    // Strategy 5: API calls - Network First
+    if (url.pathname.includes('/api/')) {
+      return await networkFirst(request, API_CACHE);
+    }
+    
+    // Strategy 6: Everything else - Network First with cache fallback
+    return await networkFirst(request, STATIC_CACHE);
+    
+  } catch (error) {
+    console.error('Request failed:', error);
+    
+    // Fallback for failed requests
+    if (request.destination === 'document') {
+      const cachedResponse = await caches.match('/index.html');
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+    }
+    
+    throw error;
+  }
+}
+
+// Cache First Strategy - Best for static assets
+async function cacheFirst(request, cacheName, options = {}) {
+  const cache = await caches.open(cacheName);
+  const cachedResponse = await cache.match(request);
+  
+  if (cachedResponse) {
+    // Check if cache is still fresh (optional)
+    if (options.maxAge) {
+      const cacheDate = new Date(cachedResponse.headers.get('date'));
+      const now = new Date();
+      const age = (now - cacheDate) / 1000; // age in seconds
+      
+      if (age > options.maxAge) {
+        // Cache is stale, fetch new version in background
+        fetch(request).then(response => {
+          if (response.status === 200) {
+            cache.put(request, response.clone());
+          }
+        }).catch(() => {}); // Ignore fetch errors
+      }
+    }
+    
+    return cachedResponse;
+  }
+  
+  // Not in cache, fetch from network
+  const networkResponse = await fetch(request);
+  
+  if (networkResponse.status === 200) {
+    cache.put(request, networkResponse.clone());
+  }
+  
+  return networkResponse;
+}
+
+// Stale While Revalidate Strategy - Best for HTML documents
+async function staleWhileRevalidate(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cachedResponse = await cache.match(request);
+  
+  // Always fetch from network to update cache
+  const networkPromise = fetch(request).then(response => {
+    if (response.status === 200) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  }).catch(() => null); // Don't throw on network errors
+  
+  // Return cached version immediately if available
+  if (cachedResponse) {
+    // Update cache in background
+    networkPromise.catch(() => {}); // Ignore errors
+    return cachedResponse;
+  }
+  
+  // No cache, wait for network
+  return await networkPromise || new Response('Network Error', { 
+    status: 408,
+    statusText: 'Request Timeout' 
+  });
+}
+
+// Network First Strategy - Best for dynamic content
+async function networkFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  
+  try {
+    const networkResponse = await fetch(request);
+    
+    if (networkResponse.status === 200) {
+      cache.put(request, networkResponse.clone());
+    }
+    
+    return networkResponse;
+  } catch (error) {
+    // Network failed, try cache
+    const cachedResponse = await cache.match(request);
+    
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    
+    throw error;
+  }
+}
+
+// Background sync for offline actions (optional enhancement)
+self.addEventListener('sync', event => {
+  if (event.tag === 'background-sync') {
+    event.waitUntil(doBackgroundSync());
+  }
+});
+
+async function doBackgroundSync() {
+  // Handle any offline actions when connection is restored
+  console.log('Background sync triggered');
+}
+
+// Push notifications support (future enhancement)
+self.addEventListener('push', event => {
+  if (event.data) {
+    const options = {
+      body: event.data.text(),
+      icon: '/assets/Mattis_Foundation_Logo_Blue.png',
+      badge: '/assets/Mattis_Foundation_Favicon.png',
+      vibrate: [200, 100, 200],
+      data: {
+        dateOfArrival: Date.now()
+      }
+    };
     
     event.waitUntil(
-        Promise.all([
-            // Clean up old caches
-            caches.keys().then(cacheNames => {
-                return Promise.all(
-                    cacheNames
-                        .filter(cacheName => 
-                            !cacheName.includes('v1.0.2')
-                        )
-                        .map(cacheName => {
-                            console.log('Deleting old cache:', cacheName);
-                            return caches.delete(cacheName);
-                        })
-                );
-            }),
-            // Take control of all clients
-            self.clients.claim()
-        ])
+      self.registration.showNotification('Mattis Foundation', options)
     );
+  }
 });
 
-// Fast fetch strategy for mobile
-self.addEventListener('fetch', event => {
-    const { request } = event;
-    const url = new URL(request.url);
-    
-    // Skip non-GET requests
-    if (request.method !== 'GET') {
-        return;
-    }
-    
-    // Skip cross-origin requests that aren't in our allow list
-    if (url.origin !== location.origin && !isAllowedOrigin(url.origin)) {
-        return;
-    }
-    
-    // Mobile-optimized caching strategies
-    if (isCriticalResource(request.url)) {
-        event.respondWith(cacheFirstFast(request));
-    } else if (isNetworkFirst(request.url)) {
-        event.respondWith(networkFirstFast(request));
-    } else if (isImageRequest(request)) {
-        event.respondWith(cacheFirstWithWebP(request));
-    } else {
-        event.respondWith(staleWhileRevalidateFast(request));
-    }
+// Enhanced error handling
+self.addEventListener('error', event => {
+  console.error('Service Worker error:', event.error);
 });
 
-// Ultra-fast cache-first strategy
-async function cacheFirstFast(request) {
-    try {
-        const cachedResponse = await caches.match(request);
-        if (cachedResponse) {
-            return cachedResponse;
-        }
-        
-        const networkResponse = await Promise.race([
-            fetch(request),
-            new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('timeout')), 3000)
-            )
-        ]);
-        
-        if (networkResponse.ok) {
-            const cache = await caches.open(STATIC_CACHE);
-            cache.put(request, networkResponse.clone());
-        }
-        
-        return networkResponse;
-    } catch (error) {
-        return new Response('Offline', { 
-            status: 503,
-            statusText: 'Service Unavailable' 
-        });
-    }
-}
+self.addEventListener('unhandledrejection', event => {
+  console.error('Service Worker unhandled rejection:', event.reason);
+});
 
-// Fast network-first with shorter timeout
-async function networkFirstFast(request) {
-    try {
-        const networkResponse = await Promise.race([
-            fetch(request),
-            new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('timeout')), 2000)
-            )
-        ]);
-        
-        if (networkResponse.ok) {
-            const cache = await caches.open(DYNAMIC_CACHE);
-            cache.put(request, networkResponse.clone());
-        }
-        
-        return networkResponse;
-    } catch (error) {
-        const cachedResponse = await caches.match(request);
-        return cachedResponse || new Response('Offline', { status: 503 });
-    }
-}
-
-// WebP-optimized image serving
-async function cacheFirstWithWebP(request) {
-    try {
-        const cachedResponse = await caches.match(request);
-        if (cachedResponse) {
-            return cachedResponse;
-        }
-        
-        const networkResponse = await fetch(request);
-        
-        if (networkResponse.ok) {
-            const cache = await caches.open(DYNAMIC_CACHE);
-            cache.put(request, networkResponse.clone());
-        }
-        
-        return networkResponse;
-    } catch (error) {
-        // Return optimized placeholder for failed images
-        return new Response(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="#f8f9fa"/><text x="150" y="100" text-anchor="middle" fill="#666" font-family="Arial" font-size="14">Image loading...</text></svg>',
-            {
-                headers: {
-                    'Content-Type': 'image/svg+xml',
-                    'Cache-Control': 'no-cache'
-                }
-            }
-        );
-    }
-}
-
-// Fast stale-while-revalidate
-async function staleWhileRevalidateFast(request) {
-    const cachedResponse = await caches.match(request);
-    
-    const networkResponsePromise = fetch(request).then(response => {
-        if (response.ok) {
-            const cache = caches.open(DYNAMIC_CACHE);
-            cache.then(c => c.put(request, response.clone()));
-        }
-        return response;
-    }).catch(() => null);
-    
-    return cachedResponse || await networkResponsePromise || 
-           new Response('Offline', { status: 503 });
-}
-
-// Helper functions
-function isCriticalResource(url) {
-    return CRITICAL_RESOURCES.some(resource => url.includes(resource.replace(/^\//, '')));
-}
-
-function isNetworkFirst(url) {
-    return NETWORK_FIRST.some(domain => url.includes(domain));
-}
-
-function isImageRequest(request) {
-    return request.destination === 'image' || 
-           request.url.includes('.jpg') ||
-           request.url.includes('.jpeg') ||
-           request.url.includes('.png') ||
-           request.url.includes('.webp') ||
-           request.url.includes('.svg');
-}
-
-function isAllowedOrigin(origin) {
-    const allowedOrigins = [
-        'https://fonts.googleapis.com',
-        'https://fonts.gstatic.com',
-        'https://www.googletagmanager.com',
-        'https://www.google-analytics.com'
-    ];
-    return allowedOrigins.includes(origin);
-}
-
-console.log('Service Worker loaded - Mobile optimized');
+console.log('Mattis Foundation Service Worker loaded successfully');
