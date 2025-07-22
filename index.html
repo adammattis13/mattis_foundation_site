@@ -372,32 +372,16 @@
 
     <!-- Load Navigation and Footer -->
     <script>
-        // Wait for main.js to load before trying navigation
-        function waitForMainJS(callback, attempts = 0) {
-            const maxAttempts = 50; // 5 seconds max wait
-            
-            if (typeof window.onNavigationLoaded === 'function') {
-                console.log('Main.js functions found, executing callback');
-                callback();
-            } else if (attempts < maxAttempts) {
-                console.log(`Waiting for main.js... attempt ${attempts + 1}`);
-                setTimeout(() => waitForMainJS(callback, attempts + 1), 100);
-            } else {
-                console.error('Timeout waiting for main.js functions');
-                // Fallback: try to initialize anyway
-                callback();
-            }
-        }
-        
         // Load navigation
         fetch('nav.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navigation').innerHTML = data;
-                console.log('Navigation HTML loaded, waiting for main.js...');
+                console.log('Navigation HTML loaded successfully');
                 
-                // Wait for main.js to be ready, then initialize
-                waitForMainJS(() => {
+                // Trigger the existing auto-detection in main.js
+                // Try calling the functions if they exist
+                setTimeout(() => {
                     if (typeof window.onNavigationLoaded === 'function') {
                         console.log('Calling window.onNavigationLoaded');
                         window.onNavigationLoaded();
@@ -405,9 +389,10 @@
                         console.log('Calling window.initNavigation');
                         window.initNavigation();
                     } else {
-                        console.error('Navigation functions still not available');
+                        console.log('Main.js functions not ready yet - relying on auto-detection');
+                        // The main.js MutationObserver and retry mechanisms will handle it
                     }
-                });
+                }, 100);
             })
             .catch(error => {
                 console.error('Error loading navigation:', error);
