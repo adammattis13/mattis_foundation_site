@@ -1,6 +1,6 @@
 /**
  * MATTIS FOUNDATION - Main JavaScript
- * Navigation, Animations, and Interactivity
+ * Clean, simple version for redesigned site
  */
 
 (function() {
@@ -15,67 +15,117 @@
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
     // ============================================
+    // Notification System
+    // ============================================
+    function showNotification(message, type) {
+        type = type || 'info';
+        
+        // Remove any existing notifications
+        var existing = document.querySelectorAll('.notification');
+        existing.forEach(function(n) { n.remove(); });
+        
+        var notification = document.createElement('div');
+        notification.className = 'notification notification-' + type;
+        notification.textContent = message;
+        
+        var bgColor = '#152238';
+        if (type === 'error') bgColor = '#c1292e';
+        if (type === 'success') bgColor = '#2d6a4f';
+        
+        notification.style.position = 'fixed';
+        notification.style.top = '20px';
+        notification.style.right = '20px';
+        notification.style.padding = '1rem 1.5rem';
+        notification.style.background = bgColor;
+        notification.style.color = 'white';
+        notification.style.borderRadius = '8px';
+        notification.style.boxShadow = '0 10px 40px rgba(0,0,0,0.2)';
+        notification.style.zIndex = '10000';
+        notification.style.maxWidth = '400px';
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(-20px)';
+        notification.style.transition = 'all 0.3s ease';
+        notification.style.fontSize = '0.95rem';
+        
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(function() {
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Remove after delay
+        setTimeout(function() {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateY(-20px)';
+            setTimeout(function() { 
+                if (notification.parentNode) {
+                    notification.remove(); 
+                }
+            }, 300);
+        }, 5000);
+    }
+
+    // ============================================
     // Navigation Scroll Effect
     // ============================================
     function handleNavScroll() {
         if (window.scrollY > 100) {
-            nav?.classList.add('scrolled');
+            if (nav) nav.classList.add('scrolled');
         } else {
-            nav?.classList.remove('scrolled');
+            if (nav) nav.classList.remove('scrolled');
         }
     }
 
-    // Throttle scroll events for performance
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        if (scrollTimeout) {
-            window.cancelAnimationFrame(scrollTimeout);
-        }
-        scrollTimeout = window.requestAnimationFrame(handleNavScroll);
-    }, { passive: true });
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
 
     // ============================================
     // Mobile Menu Toggle
     // ============================================
-    function toggleMobileMenu() {
-        navToggle?.classList.toggle('active');
-        mobileMenu?.classList.toggle('active');
-        document.body.style.overflow = mobileMenu?.classList.contains('active') ? 'hidden' : '';
+    if (navToggle && mobileMenu) {
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking a link
+        mobileMenuLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                navToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     }
 
-    function closeMobileMenu() {
-        navToggle?.classList.remove('active');
-        mobileMenu?.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    navToggle?.addEventListener('click', toggleMobileMenu);
-
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
-    });
-
-    // Close on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileMenu?.classList.contains('active')) {
-            closeMobileMenu();
-        }
-    });
-
     // ============================================
-    // Smooth Scrolling
+    // Smooth Scroll for Anchor Links
     // ============================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
+            var targetId = this.getAttribute('href');
+            if (targetId === '#') return;
             
-            const target = document.querySelector(href);
+            var target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
-                const offsetTop = target.offsetTop - 80;
+                var navHeight = nav ? nav.offsetHeight : 80;
+                var targetPosition = target.offsetTop - navHeight;
+                
                 window.scrollTo({
-                    top: offsetTop,
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
             }
@@ -83,86 +133,23 @@
     });
 
     // ============================================
-    // Intersection Observer for Animations
+    // Contact Form Handling
     // ============================================
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const animateOnScroll = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-visible');
-                
-                // Animate stat numbers
-                if (entry.target.classList.contains('impact-stat')) {
-                    animateNumber(entry.target.querySelector('.impact-stat-number'));
-                }
-                
-                animateOnScroll.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements
-    document.querySelectorAll('.card, .impact-stat, .section-header, .story-content, .story-image-wrapper').forEach(el => {
-        animateOnScroll.observe(el);
-    });
-
-    // ============================================
-    // Number Animation
-    // ============================================
-    function animateNumber(element) {
-        if (!element) return;
-        
-        const text = element.textContent;
-        const hasPlus = text.includes('+');
-        const hasDollar = text.includes('$');
-        const hasK = text.includes('K');
-        const number = parseInt(text.replace(/[^0-9]/g, ''));
-        
-        if (isNaN(number)) return;
-        
-        let current = 0;
-        const increment = number / 60;
-        const duration = 16;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= number) {
-                current = number;
-                clearInterval(timer);
-            }
-            
-            let display = Math.floor(current).toLocaleString();
-            if (hasDollar) display = '$' + display;
-            if (hasK) display += 'K';
-            if (hasPlus) display += '+';
-            
-            element.textContent = display;
-        }, duration);
-    }
-
-    // ============================================
-    // Form Handling
-    // ============================================
-    const contactForm = document.querySelector('.contact-form');
+    var contactForm = document.querySelector('.contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('.btn-submit');
-            const originalText = submitBtn?.textContent;
+            var form = this;
+            var submitBtn = form.querySelector('button[type="submit"], .btn-submit');
+            var originalText = submitBtn ? submitBtn.textContent : 'Send Message';
             
             // Basic validation
-            let isValid = true;
-            this.querySelectorAll('[required]').forEach(field => {
+            var isValid = true;
+            form.querySelectorAll('[required]').forEach(function(field) {
                 if (!field.value.trim()) {
                     isValid = false;
-                    field.style.borderColor = 'var(--color-error)';
+                    field.style.borderColor = '#c1292e';
                 } else {
                     field.style.borderColor = '';
                 }
@@ -180,181 +167,209 @@
             }
             
             // Submit to Formspree
-            try {
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
+            var formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(function(response) {
                 if (response.ok) {
                     showNotification('Thank you for your message! We\'ll be in touch soon.', 'success');
-                    this.reset();
+                    form.reset();
                 } else {
-                    const data = await response.json();
-                    throw new Error(data.error || 'Form submission failed');
+                    return response.json().then(function(data) {
+                        throw new Error(data.error || 'Form submission failed');
+                    });
                 }
-            } catch (error) {
+            })
+            .catch(function(error) {
                 console.error('Form error:', error);
                 showNotification('Sorry, there was a problem. Please email us directly at amm@mattisfoundation.org', 'error');
-            } finally {
+            })
+            .finally(function() {
                 if (submitBtn) {
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                 }
+            });
+        });
+    }
+
+    // ============================================
+    // Stats Counter Animation
+    // ============================================
+    var statNumbers = document.querySelectorAll('.stat-number');
+    
+    if (statNumbers.length > 0 && 'IntersectionObserver' in window) {
+        var statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(function(stat) { 
+            statsObserver.observe(stat); 
+        });
+    }
+
+    function animateCounter(element) {
+        var text = element.textContent;
+        var hasPlus = text.indexOf('+') > -1;
+        var hasDollar = text.indexOf('$') > -1;
+        var hasK = text.indexOf('K') > -1;
+        var number = parseInt(text.replace(/[^0-9]/g, ''));
+        
+        if (isNaN(number)) return;
+        
+        var current = 0;
+        var duration = 2000;
+        var increment = number / (duration / 16);
+        
+        var timer = setInterval(function() {
+            current += increment;
+            if (current >= number) {
+                current = number;
+                clearInterval(timer);
             }
-        });
+            
+            var display = Math.floor(current);
+            if (hasDollar) display = '$' + display;
+            if (hasK) display += 'K';
+            if (hasPlus) display += '+';
+            
+            element.textContent = display;
+        }, 16);
     }
 
     // ============================================
-    // Notification System
+    // File Upload Handling (Scholarship Page)
     // ============================================
-    function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = 'notification notification-' + type;
-        notification.textContent = message;
-        
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            background: ${type === 'error' ? 'var(--color-error)' : type === 'success' ? 'var(--color-success)' : 'var(--color-navy-700)'};
-            color: white;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-lg);
-            z-index: 10000;
-            max-width: 400px;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Animate in
-        requestAnimationFrame(() => {
-            notification.style.opacity = '1';
-            notification.style.transform = 'translateY(0)';
-        });
-        
-        // Remove after delay
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateY(-20px)';
-            setTimeout(() => notification.remove(), 300);
-        }, 5000);
-    }
-
-    // ============================================
-    // File Upload Handling (for scholarship page)
-    // ============================================
-    const fileUpload = document.querySelector('.file-upload');
-    const fileInput = document.querySelector('.file-upload input[type="file"]');
-    const fileName = document.querySelector('.file-upload-name');
+    var fileUpload = document.querySelector('.file-upload');
+    var fileInput = document.getElementById('essayFile');
+    var fileNameDisplay = document.getElementById('fileName');
 
     if (fileUpload && fileInput) {
-        fileUpload.addEventListener('click', () => fileInput.click());
-        
-        fileUpload.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            fileUpload.classList.add('dragover');
-        });
-        
-        fileUpload.addEventListener('dragleave', () => {
-            fileUpload.classList.remove('dragover');
-        });
-        
-        fileUpload.addEventListener('drop', (e) => {
-            e.preventDefault();
-            fileUpload.classList.remove('dragover');
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
+        fileUpload.addEventListener('click', function(e) {
+            if (e.target !== fileInput) {
+                fileInput.click();
             }
         });
-        
-        fileInput.addEventListener('change', handleFileSelect);
-    }
 
-    function handleFileSelect() {
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
+        fileUpload.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        fileUpload.addEventListener('dragleave', function() {
+            this.classList.remove('dragover');
+        });
+
+        fileUpload.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
             
-            // Validate file type
+            var files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFileSelect(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                handleFileSelect(this.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
             if (file.type !== 'application/pdf') {
                 showNotification('Please upload a PDF file only.', 'error');
                 fileInput.value = '';
+                if (fileNameDisplay) {
+                    fileNameDisplay.textContent = '';
+                    fileNameDisplay.classList.remove('visible');
+                }
                 return;
             }
             
-            // Validate file size (10MB max)
             if (file.size > 10 * 1024 * 1024) {
                 showNotification('File size must be less than 10MB.', 'error');
                 fileInput.value = '';
+                if (fileNameDisplay) {
+                    fileNameDisplay.textContent = '';
+                    fileNameDisplay.classList.remove('visible');
+                }
                 return;
             }
             
-            if (fileName) {
-                fileName.textContent = '✓ ' + file.name;
-                fileName.classList.add('visible');
+            if (fileNameDisplay) {
+                fileNameDisplay.textContent = '✓ ' + file.name;
+                fileNameDisplay.classList.add('visible');
             }
         }
     }
 
     // ============================================
-    // University Autocomplete (for scholarship page)
+    // University Autocomplete (Scholarship Page)
     // ============================================
-    const universityInput = document.getElementById('university');
-    const universitySuggestions = document.getElementById('universitySuggestions');
-    
+    var universityInput = document.getElementById('university');
+    var universitySuggestions = document.getElementById('universitySuggestions');
+
     if (universityInput && universitySuggestions) {
-        const universities = [
-            "Harvard University", "Stanford University", "MIT", "Yale University",
-            "Princeton University", "Columbia University", "University of Pennsylvania",
-            "Duke University", "Northwestern University", "Johns Hopkins University",
-            "University of North Carolina at Chapel Hill", "NC State University",
-            "Wake Forest University", "Davidson College", "Elon University",
-            "Appalachian State University", "East Carolina University", "UNC Charlotte",
-            "Campbell University", "High Point University", "Meredith College",
-            "United States Military Academy", "United States Naval Academy",
-            "United States Air Force Academy", "Virginia Tech", "University of Virginia",
-            "Clemson University", "University of South Carolina", "Georgia Tech"
-            // Add more as needed
+        var universities = [
+            "Harvard University", "Stanford University", "MIT", "Yale University", "Princeton University",
+            "Columbia University", "University of Pennsylvania", "Duke University", "Northwestern University",
+            "Johns Hopkins University", "Cornell University", "Brown University", "Vanderbilt University",
+            "Rice University", "University of Notre Dame", "Georgetown University", "Emory University",
+            "Carnegie Mellon University", "University of Virginia", "University of Michigan",
+            "University of North Carolina at Chapel Hill", "Wake Forest University", "Tufts University",
+            "Boston College", "New York University", "University of Rochester", "Georgia Tech",
+            "University of California, Berkeley", "UCLA", "USC", "University of Florida",
+            "University of Texas at Austin", "Texas A&M University", "Penn State", "Ohio State University",
+            "University of Wisconsin-Madison", "University of Illinois", "Purdue University",
+            "North Carolina State University", "Clemson University", "Virginia Tech", "Auburn University",
+            "University of Georgia", "University of Alabama", "University of Tennessee",
+            "Appalachian State University", "East Carolina University", "UNC Charlotte", "UNC Greensboro",
+            "Davidson College", "Elon University", "High Point University", "Campbell University",
+            "United States Military Academy", "United States Naval Academy", "United States Air Force Academy"
         ];
-        
+
         universityInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
+            var query = this.value.toLowerCase();
             
             if (query.length < 2) {
                 universitySuggestions.style.display = 'none';
                 return;
             }
-            
-            const matches = universities.filter(uni => 
-                uni.toLowerCase().includes(query)
-            ).slice(0, 8);
-            
+
+            var matches = universities.filter(function(uni) {
+                return uni.toLowerCase().indexOf(query) > -1;
+            }).slice(0, 8);
+
             if (matches.length > 0) {
-                universitySuggestions.innerHTML = matches.map(uni => 
-                    `<div class="university-suggestion">${uni}</div>`
-                ).join('');
+                universitySuggestions.innerHTML = matches.map(function(uni) {
+                    return '<div class="university-suggestion">' + uni + '</div>';
+                }).join('');
                 universitySuggestions.style.display = 'block';
             } else {
                 universitySuggestions.style.display = 'none';
             }
         });
-        
+
         universitySuggestions.addEventListener('click', function(e) {
             if (e.target.classList.contains('university-suggestion')) {
                 universityInput.value = e.target.textContent;
                 universitySuggestions.style.display = 'none';
             }
         });
-        
+
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.university-input-wrapper')) {
                 universitySuggestions.style.display = 'none';
@@ -362,27 +377,6 @@
         });
     }
 
-    // ============================================
-    // Initialize on Load
-    // ============================================
-    handleNavScroll();
-
-    // Add CSS custom property for animation visibility
-    const style = document.createElement('style');
-    style.textContent = `
-        .card, .impact-stat, .section-header, .story-content, .story-image-wrapper {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .animate-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-        .notification {
-            font-family: var(--font-body);
-        }
-    `;
-    document.head.appendChild(style);
+    console.log('Mattis Foundation JS loaded');
 
 })();
