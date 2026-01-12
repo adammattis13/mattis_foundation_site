@@ -17,29 +17,8 @@
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation">
-            </a>
-            <div class="nav-menu">
-                <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="index.html#about" class="nav-link">About</a></li>
-                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
-                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <a href="scholarship.html" class="nav-cta">Apply Now</a>
-            </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+    <!-- Header (loaded dynamically) -->
+    <div id="header"></div>
 
     <!-- 404 Content -->
     <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--color-navy-900) 0%, var(--color-navy-600) 100%); text-align: center; padding: var(--space-20) var(--space-6);">
@@ -86,16 +65,46 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom" style="border: none; padding: var(--space-8) 0;">
-                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
-                <p>Holly Springs, North Carolina</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer (loaded dynamically) -->
+    <div id="footer"></div>
 
     <script src="js/main.js"></script>
+    <script>
+        function loadComponent(id, file) {
+            fetch('components/' + file)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById(id).innerHTML = html;
+                    if (id === 'header') initNav();
+                })
+                .catch(err => console.error('Error loading ' + file + ':', err));
+        }
+
+        function initNav() {
+            const nav = document.querySelector('.nav');
+            const navToggle = document.querySelector('.nav-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            nav?.classList.add('scrolled');
+
+            if (navToggle && mobileMenu) {
+                navToggle.addEventListener('click', function() {
+                    navToggle.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                });
+
+                mobileMenuLinks.forEach(link => link.addEventListener('click', function() {
+                    navToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }));
+            }
+        }
+
+        loadComponent('header', 'header.html');
+        loadComponent('footer', 'footer.html');
+    </script>
 </body>
 </html>
