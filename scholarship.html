@@ -301,7 +301,7 @@
     <script src="js/main.js"></script>
     <script>
         // Form submission handler
-        document.getElementById('scholarshipForm').addEventListener('submit', function(e) {
+        document.getElementById('scholarshipForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Validate GPA
@@ -318,10 +318,38 @@
                 return;
             }
             
-            // Show success
-            this.style.display = 'none';
-            document.getElementById('formSuccess').classList.add('visible');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Submit to Formspree
+            try {
+                const formData = new FormData(this);
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success
+                    this.style.display = 'none';
+                    document.getElementById('formSuccess').classList.add('visible');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Form submission failed');
+                }
+            } catch (error) {
+                console.error('Form error:', error);
+                alert('Sorry, there was a problem submitting your application. Please email us directly at amm@mattisfoundation.org');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         });
     </script>
 </body>

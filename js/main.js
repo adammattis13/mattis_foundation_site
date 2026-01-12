@@ -150,7 +150,7 @@
     // ============================================
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -179,15 +179,32 @@
                 submitBtn.disabled = true;
             }
             
-            // Simulate form submission (replace with actual endpoint)
-            setTimeout(() => {
-                showNotification('Thank you for your message! We\'ll be in touch soon.', 'success');
-                this.reset();
+            // Submit to Formspree
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showNotification('Thank you for your message! We\'ll be in touch soon.', 'success');
+                    this.reset();
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Form submission failed');
+                }
+            } catch (error) {
+                console.error('Form error:', error);
+                showNotification('Sorry, there was a problem. Please email us directly at amm@mattisfoundation.org', 'error');
+            } finally {
                 if (submitBtn) {
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                 }
-            }, 1500);
+            }
         });
     }
 
