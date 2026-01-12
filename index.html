@@ -1,787 +1,422 @@
 <!DOCTYPE html>
-<html lang="en" id="top">
+<html lang="en">
 <head>
-    <!-- Meta Description -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Security Headers via Meta (Server headers are preferred) -->
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>The Mattis Foundation | Honor. Resilience. Service.</title>
+    <meta name="description" content="The Mattis Foundation creates meaningful opportunities through scholarships, community disaster relief, and service. Born from sacrifice, driven by purpose.">
+    <meta name="keywords" content="Mattis Foundation, KJ Smith Scholarship, veterans, military families, disaster relief, North Carolina charity">
     
-    <meta name="description" content="The Mattis Foundation creates meaningful opportunities through scholarships, community disaster relief, and the KJ Smith Scholarship. Supporting veterans and communities with honor, resilience, and service since 2024.">
-    <meta name="keywords" content="Mattis Foundation, KJ Smith Scholarship, scholarships, community disaster relief, nonprofit foundation, Evening Under the Oaks, military family support, North Carolina charity, disaster relief fund, education scholarships, community service, honor resilience service">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mattisfoundation.org/">
-
-    <!-- Open Graph (for social media sharing) -->
-    <meta property="og:title" content="The Mattis Foundation - Creating Opportunity Through Honor, Resilience, and Service">
-    <meta property="og:description" content="Supporting veterans, military families, and communities through the KJ Smith Scholarship, disaster relief, and community programs. Join us in making a difference.">
+    <!-- Open Graph -->
+    <meta property="og:title" content="The Mattis Foundation | Honor. Resilience. Service.">
+    <meta property="og:description" content="Born from sacrifice, driven by purpose. Creating opportunities for veterans, military families, and communities in need.">
     <meta property="og:image" content="https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png">
     <meta property="og:url" content="https://mattisfoundation.org">
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="The Mattis Foundation">
-
-    <!-- Twitter Card -->
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="The Mattis Foundation - Supporting Veterans & Communities">
-    <meta name="twitter:description" content="Creating opportunity through honor, resilience, and service. KJ Smith Scholarship, disaster relief, and community programs.">
-    <meta property="twitter:image" content="https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png">
-
-    <!-- Additional SEO Meta Tags -->
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="The Mattis Foundation">
-    <meta name="theme-color" content="#2c3e50">
-
-    <title>The Mattis Foundation - Scholarships & Community Relief | KJ Smith Scholarship</title>
+    <meta name="twitter:title" content="The Mattis Foundation | Honor. Resilience. Service.">
+    <meta name="twitter:description" content="Creating opportunity through honor, resilience, and service.">
     
-    <!-- Optimized Favicon -->
-    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
+    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
     
-    <!-- CRITICAL PERFORMANCE OPTIMIZATIONS -->
-    
-    <!-- 1. FONT OPTIMIZATION - Eliminate render blocking -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Critical font preload -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/georgia/v3/9Bt33CxNwt7aOtW_uoQ.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- 2. CRITICAL RESOURCE PRELOADS - Hero content with reserved space -->
-    <link rel="preload" href="assets/Adam&Jenelle1-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
-    <link rel="preload" href="assets/Adam&Jenelle1.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
-    
-    <!-- 3. CRITICAL CSS with layout shift prevention -->
-    <style>
-        /* CRITICAL CSS - Inline for fastest render */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Georgia, serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* LAYOUT SHIFT PREVENTION - Reserve space for dynamic content */
-        #navigation {
-            height: 78px; /* Reserve exact space for nav */
-            position: relative;
-        }
-
-        /* Navigation - Critical since it's fixed */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-            height: 78px; /* Fixed height to prevent shifts */
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-            height: 100%;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            /* Reserve space to prevent shifts - wider for logo aspect ratio */
-            min-width: 50px;
-            height: 50px;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-
-        .logo img {
-            height: 50px;
-            width: auto; /* Preserve aspect ratio */
-            max-width: 80px; /* Prevent logo from getting too wide */
-            /* Prevent image layout shifts */
-            object-fit: contain;
-            /* GPU acceleration */
-            transform: translateZ(0);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 8px;
-            background: none;
-            border: none;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #2c3e50;
-            margin: 3px 0;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        /* HERO SECTION - LAYOUT SHIFT PREVENTION */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            /* Reserve space for content to prevent shifts */
-            min-height: 600px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.6);
-            /* Explicit dimensions to prevent layout shifts */
-            aspect-ratio: 3/2;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 62, 80, 0.1);
-            z-index: 2;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-            z-index: 3;
-            position: relative;
-            /* Reserve space to prevent CLS */
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            /* Prevent font swap CLS */
-            font-display: swap;
-        }
-
-        .hero .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #e74c3c;
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            /* Explicit dimensions to prevent layout shifts */
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(44, 62, 80, 0.98);
-            backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-100%);
-            transition: all 0.4s ease;
-        }
-
-        .mobile-nav.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .mobile-nav-links a {
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-        }
-
-        /* MOBILE RESPONSIVE - Critical viewport optimizations */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hamburger {
-                display: flex;
-            }
-            
-            .nav-container {
-                padding: 0 1rem;
-            }
-            
-            .logo {
-                min-width: 42px;
-                height: 42px;
-            }
-            
-            .logo img {
-                height: 42px;
-                width: auto;
-                max-width: 65px;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-                line-height: 1.2;
-            }
-            
-            .hero .tagline {
-                font-size: 1.05rem;
-            }
-            
-            .hero-content {
-                padding: 1rem;
-                min-height: 250px;
-            }
-            
-            .cta-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            #navigation {
-                height: 66px; /* Smaller on mobile */
-            }
-
-            nav {
-                height: 66px;
-            }
-        }
-
-        /* Reduce motion for accessibility and performance */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-                animation: none !important;
-            }
-        }
-
-        /* BUTTON ALIGNMENT FIX */
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            align-items: stretch; /* Make all cards same height */
-        }
-
-        .program-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%; /* Full height of grid cell */
-        }
-
-        .program-card-content {
-            text-align: center;
-            padding: 2rem;
-            flex-grow: 1; /* Take up remaining space */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Space content evenly */
-        }
-
-        .program-card-content .text-content {
-            flex-grow: 1; /* Push button to bottom */
-        }
-
-        .program-card-content h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .program-card-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .scholarship-button {
-            background: #e74c3c;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: auto; /* Push to bottom */
-            align-self: center; /* Center the button */
-        }
-
-        .scholarship-button:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-            color: white;
-        }
-    </style>
-    
-    <!-- 4. DNS PREFETCH - Only essential -->
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    
-    <!-- 5. NON-CRITICAL CSS - Deferred loading -->
-    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
-    
-    <!-- 6. FONT LOADING - Optimized with display swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
-
-    <!-- Structured Data - Optimized -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "The Mattis Foundation",
-        "url": "https://mattisfoundation.org",
-        "logo": "https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png",
-        "description": "The Mattis Foundation creates meaningful opportunities through scholarships, community disaster relief, and events, emphasizing honor, resilience, and service.",
-        "foundingDate": "2024",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "amm@mattisfoundation.org",
-            "contactType": "General Inquiry"
-        },
-        "sameAs": [
-            "https://www.instagram.com/themattisfoundation/",
-            "https://www.linkedin.com/company/the-mattis-foundation/"
-        ],
-        "address": {
-            "@type": "PostalAddress",
-            "addressRegion": "North Carolina",
-            "addressCountry": "US"
-        }
-    }
-    </script>
-
-    <!-- 7. ANALYTICS - Deferred loading to prevent blocking -->
-    <script>
-      // Defer Google Analytics loading
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-K7W9R2DZQ5', {
-            page_load_time: true,
-            anonymize_ip: true
-          });
-          
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-K7W9R2DZQ5';
-          document.head.appendChild(script);
-        }, 1000); // Load after 1 second
-      });
-    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
-
 <body>
-    <!-- Navigation will be loaded here - Reserved space prevents CLS -->
-    <div id="navigation"></div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#programs" class="nav-link">Programs</a></li>
+                    <li><a href="#story" class="nav-link">Our Story</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mobile-menu-link">Home</a></li>
+            <li><a href="#about" class="mobile-menu-link">About</a></li>
+            <li><a href="#programs" class="mobile-menu-link">Programs</a></li>
+            <li><a href="#story" class="mobile-menu-link">Our Story</a></li>
+            <li><a href="#contact" class="mobile-menu-link">Contact</a></li>
+            <li class="mobile-menu-cta">
+                <a href="scholarship.html" class="btn btn-primary btn-lg">Apply for Scholarship</a>
+            </li>
+        </ul>
+    </div>
 
-    <section id="home" class="hero">
-        <picture class="hero-bg">
-            <source srcset="assets/Adam&Jenelle1-mobile.webp" media="(max-width: 768px)" type="image/webp">
-            <source srcset="assets/Adam&Jenelle1-mobile.jpg" media="(max-width: 768px)" type="image/jpeg">
-            <source srcset="assets/Adam&Jenelle1.webp" type="image/webp">
-            <img src="assets/Adam&Jenelle1.jpg" 
-                 alt="The Mattis Foundation founders Adam and Jenelle" 
-                 class="hero-img" 
-                 width="1200" 
-                 height="800"
-                 fetchpriority="high"
-                 decoding="sync">
-        </picture>
-        <div class="hero-content">
-            <h1>The Mattis Foundation</h1>
-            <p class="tagline">Creating opportunity through honor, resilience, and service</p>
-            <a href="#programs" class="cta-button">Explore Our Programs</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <picture>
+                <source srcset="assets/Adam&Jenelle1.webp" type="image/webp">
+                <img src="assets/Adam&Jenelle1.jpg" alt="The Mattis Foundation founders">
+            </picture>
+        </div>
+        <div class="hero-overlay"></div>
+        
+        <div class="container hero-content">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-badge animate-fade-in-up">
+                        Now Accepting Applications
+                    </div>
+                    <h1 class="hero-title animate-fade-in-up animate-delay-1">
+                        Forging Futures Through
+                        <span class="hero-title-accent">Honor, Resilience & Service</span>
+                    </h1>
+                    <p class="hero-subtitle animate-fade-in-up animate-delay-2">
+                        Born from sacrifice on the battlefield, The Mattis Foundation creates meaningful opportunities for veterans, military families, and communities in need.
+                    </p>
+                    <div class="hero-actions animate-fade-in-up animate-delay-3">
+                        <a href="scholarship.html" class="btn btn-primary btn-lg">
+                            Apply for Scholarship
+                            <svg class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 10h12M12 4l6 6-6 6"/>
+                            </svg>
+                        </a>
+                        <a href="#story" class="btn btn-outline btn-lg">Read Our Story</a>
+                    </div>
+                </div>
+                
+                <div class="hero-story animate-fade-in-up animate-delay-4">
+                    <div class="hero-story-label">The Foundation Story</div>
+                    <h2 class="hero-story-title">A Legacy of Sacrifice & Purpose</h2>
+                    <p class="hero-story-text">
+                        In 2005, CPT Kevin "KJ" Smith gave his life to save his teammate during a combat operation in Baghdad. That act of selfless courage became the seed from which The Mattis Foundation grew.
+                    </p>
+                    <p class="hero-story-quote">
+                        "His sacrifice guides everything we do—honoring those who serve by creating opportunities for those who follow."
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
         </div>
     </section>
 
-    <section id="about" class="section about">
+    <!-- Impact Ribbon -->
+    <section class="impact-ribbon">
         <div class="container">
-            <h2 class="section-title">About Our Mission</h2>
-            <div class="about-content">
-                <p>The Mattis Foundation is dedicated to creating meaningful opportunities for individuals and communities through the core values of honor, resilience, and service. We believe that by fostering these principles, we can build stronger communities and empower people to reach their full potential.</p>
-                <p>Our foundation works tirelessly to provide educational opportunities through the KJ Smith Scholarship, community disaster relief support, and transformative experiences that make a lasting impact on the lives of veterans, military families, and communities we serve.</p>
+            <div class="impact-ribbon-grid">
+                <div class="impact-stat">
+                    <div class="impact-stat-number">1000+</div>
+                    <div class="impact-stat-label">Lives Touched</div>
+                </div>
+                <div class="impact-stat">
+                    <div class="impact-stat-number">$150K+</div>
+                    <div class="impact-stat-label">Funds Distributed</div>
+                </div>
+                <div class="impact-stat">
+                    <div class="impact-stat-number">10+</div>
+                    <div class="impact-stat-label">Community Projects</div>
+                </div>
+                <div class="impact-stat">
+                    <div class="impact-stat-number">2026</div>
+                    <div class="impact-stat-label">First Scholarship Award</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="programs" class="section">
+    <!-- About/Mission Section -->
+    <section id="about" class="section bg-cream">
+        <div class="container container-lg">
+            <div class="section-header">
+                <div class="section-label">Our Mission</div>
+                <h2 class="section-title">Creating Opportunity Through Service</h2>
+            </div>
+            <p style="font-size: var(--text-lg); line-height: var(--leading-loose); color: var(--color-gray-600); text-align: center; max-width: 900px; margin: 0 auto var(--space-12);">
+                The Mattis Foundation exists to transform sacrifice into opportunity. We support veterans and military families through educational scholarships, provide rapid disaster relief to communities in crisis, and invest in the revitalization of overlooked American towns. Every dollar, every program, every initiative carries forward the legacy of those who gave everything.
+            </p>
+            <div style="display: flex; justify-content: center; gap: var(--space-16); flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--color-navy-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem;">🎖️</div>
+                    <div style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-navy-700);">Honor</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--color-navy-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem;">💪</div>
+                    <div style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-navy-700);">Resilience</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--color-navy-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem;">🤝</div>
+                    <div style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-navy-700);">Service</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="section bg-white">
         <div class="container">
-            <h2 class="section-title">Our Programs</h2>
+            <div class="section-header">
+                <div class="section-label">What We Do</div>
+                <h2 class="section-title">Our Programs</h2>
+                <p class="section-subtitle">Three pillars of impact, each rooted in service and designed to create lasting change.</p>
+            </div>
+            
             <div class="programs-grid">
-                <article class="program-card community-fund-card">
-                    <div class="program-card-image">
-                        <picture>
-                            <source srcset="assets/helene.webp" type="image/webp">
-                            <img src="assets/helene.jpg" 
-                                 alt="Community disaster relief efforts" 
-                                 loading="lazy" 
-                                 width="400" 
-                                 height="250"
-                                 decoding="async">
-                        </picture>
-                    </div>
-                    <div class="program-card-content">
-                        <div class="text-content">
-                            <h3>Community Fund</h3>
-                            <p>Supporting communities in times of need through disaster relief, emergency assistance, and rebuilding efforts. We stand ready to help when crisis strikes, providing immediate aid and long-term recovery support.</p>
-                        </div>
-                        <a href="community-fund.html" class="scholarship-button">Learn More</a>
-                    </div>
-                </article>
-                <article class="program-card scholarship-card">
-                    <div class="program-card-image">
+                <!-- KJ Smith Scholarship -->
+                <article class="card">
+                    <div class="card-image">
+                        <span class="card-badge">Now Accepting</span>
                         <picture>
                             <source srcset="assets/kjsmith.webp" type="image/webp">
-                            <img src="assets/kjsmith.jpeg" 
-                                 alt="KJ Smith Scholarship recipient" 
-                                 loading="lazy" 
-                                 width="400" 
-                                 height="250"
-                                 decoding="async">
+                            <img src="assets/kjsmith.jpeg" alt="KJ Smith Memorial Scholarship">
                         </picture>
                     </div>
-                    <div class="program-card-content">
-                        <div class="text-content">
-                            <h3>KJ Smith Scholarship</h3>
-                            <p>Honoring military families and veterans by providing educational opportunities to deserving students who demonstrate exceptional character and commitment to service. Supporting the next generation of leaders.</p>
-                        </div>
-                        <a href="scholarship-application.html" class="scholarship-button">Apply Now</a>
+                    <div class="card-content">
+                        <h3 class="card-title">KJ Smith Memorial Scholarship</h3>
+                        <p class="card-text">A $5,000 renewable scholarship honoring CPT Kevin Smith's legacy. Awarded to students who embody service, leadership, and resilience.</p>
+                        <a href="scholarship.html" class="card-link">
+                            Apply Now
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 10h12M12 4l6 6-6 6"/>
+                            </svg>
+                        </a>
                     </div>
                 </article>
-                <article class="program-card evening-oaks-card">
-                    <div class="program-card-image">
+                
+                <!-- Community Fund -->
+                <article class="card">
+                    <div class="card-image">
+                        <span class="card-badge">Active Relief</span>
+                        <picture>
+                            <source srcset="assets/helene.webp" type="image/webp">
+                            <img src="assets/helene.jpg" alt="Community disaster relief">
+                        </picture>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Community Fund</h3>
+                        <p class="card-text">Rapid response to communities in crisis. From Hurricane Helene relief in Western NC to rebuilding efforts across the region.</p>
+                        <a href="community-fund.html" class="card-link">
+                            Learn More
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 10h12M12 4l6 6-6 6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                
+                <!-- Evening Under the Oaks -->
+                <article class="card">
+                    <div class="card-image">
+                        <span class="card-badge">Annual Event</span>
                         <picture>
                             <source srcset="assets/undertheoaks.webp" type="image/webp">
-                            <img src="assets/undertheoaks.jpg" 
-                                 alt="Evening Under the Oaks event" 
-                                 loading="lazy" 
-                                 width="400" 
-                                 height="250"
-                                 decoding="async">
+                            <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks">
                         </picture>
                     </div>
-                    <div class="program-card-content">
-                        <div class="text-content">
-                            <h3>Evening Under the Oaks</h3>
-                            <p>Our signature annual fundraising event bringing together community members for an elegant evening of connection, celebration, and support for our mission. Join us in making a difference.</p>
-                        </div>
-                        <a href="evening-under-the-oaks.html" class="scholarship-button">Learn More</a>
+                    <div class="card-content">
+                        <h3 class="card-title">Evening Under the Oaks</h3>
+                        <p class="card-text">Our signature annual dinner held each fall at The Mattis House. An elegant evening of connection, celebration, and community.</p>
+                        <a href="evening-under-the-oaks.html" class="card-link">
+                            Learn More
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 10h12M12 4l6 6-6 6"/>
+                            </svg>
+                        </a>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="section gallery">
+    <!-- Story Section -->
+    <section id="story" class="section story-section">
         <div class="container">
-            <h2 class="section-title">Our Community Impact</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item venue-gallery">
+            <div class="story-grid">
+                <div class="story-image-wrapper">
+                    <div class="story-image-frame"></div>
                     <picture>
-                        <source srcset="assets/westpoint.webp" type="image/webp">
-                        <img src="assets/westpoint.jpg" 
-                             alt="Elegant venues and events" 
-                             loading="lazy" 
-                             width="300" 
-                             height="250"
-                             decoding="async">
+                        <source srcset="assets/kjsmith.webp" type="image/webp">
+                        <img src="assets/kjsmith.jpeg" alt="CPT Kevin 'KJ' Smith" class="story-image">
                     </picture>
-                    <div class="gallery-caption">Elegant Venues & Events</div>
                 </div>
-                <div class="gallery-item cityscape-gallery">
-                    <picture>
-                        <source srcset="assets/raleigh2.webp" type="image/webp">
-                        <img src="assets/raleigh2.jpg" 
-                             alt="Serving North Carolina communities" 
-                             loading="lazy" 
-                             width="300" 
-                             height="250"
-                             decoding="async">
-                    </picture>
-                    <div class="gallery-caption">Serving North Carolina</div>
-                </div>
-                <div class="gallery-item historic-gallery">
-                    <picture>
-                        <source srcset="assets/westpoint.webp" type="image/webp">
-                        <img src="assets/westpoint.jpg" 
-                             alt="Historic partnerships" 
-                             loading="lazy" 
-                             width="300" 
-                             height="250"
-                             decoding="async">
-                    </picture>
-                    <div class="gallery-caption">Historic Partnerships</div>
+                
+                <div class="story-content">
+                    <div class="story-label">The Story Behind Our Mission</div>
+                    <h2 class="story-title">
+                        In Memory of <span class="story-title-accent">CPT Kevin "KJ" Smith</span>
+                    </h2>
+                    <p class="story-text">
+                        In 2005, while serving in Baghdad, Iraq, Adam Mattis's platoon was targeted for assassination. When the bomb detonated, CPT Kevin "KJ" Smith made the ultimate sacrifice—giving his life to save Adam's.
+                    </p>
+                    <p class="story-text">
+                        That act of selfless courage didn't end on a battlefield. It became the foundation for everything we do today. Adam carries KJ's memory forward through this foundation, ensuring that his teammate's legacy of service, sacrifice, and love for others lives on.
+                    </p>
+                    <blockquote class="story-quote">
+                        "KJ didn't just save my life—he gave me a purpose. Every day, I work to honor that sacrifice by creating opportunities for others to serve."
+                        <span class="story-quote-author">— Adam Mattis, Founder</span>
+                    </blockquote>
+                    <a href="scholarship.html" class="btn btn-primary btn-lg" style="margin-top: var(--space-6);">
+                        Honor KJ's Legacy
+                        <svg class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 10h12M12 4l6 6-6 6"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="impact" class="section impact">
-        <div class="container">
-            <h2 class="section-title">Our Impact</h2>
-            <div class="impact-stats">
-                <div class="stat-item">
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Lives Touched</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">Scholarships Awarded</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Community Projects</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">$150K</div>
-                    <div class="stat-label">Funds Distributed</div>
-                </div>
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container container-md" style="text-align: center;">
+            <h2 class="cta-title">Ready to Make a Difference?</h2>
+            <p class="cta-text">Whether you're a student seeking a scholarship, a community in need, or someone who wants to support our mission—there's a place for you here.</p>
+            <div class="cta-buttons">
+                <a href="scholarship.html" class="btn btn-white btn-lg">Apply for Scholarship</a>
+                <a href="#contact" class="btn btn-outline-white btn-lg">Get Involved</a>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section contact">
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-cream">
         <div class="container">
-            <h2 class="section-title">Get Involved</h2>
-            <div class="contact-content">
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Connect With Us</h3>
-                    <p>Ready to make a difference? Whether you're interested in applying for the KJ Smith Scholarship, want to volunteer, or would like to make a donation, we'd love to hear from you.</p>
-                    <p><strong>Follow us:</strong></p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
-                            <picture>
-                                <source srcset="assets/logo_instagram.webp" type="image/webp">
-                                <img src="assets/logo_instagram.png" alt="Instagram" width="40" height="40" loading="lazy" decoding="async">
-                            </picture>
+                    <h2>Get in Touch</h2>
+                    <p>Whether you're interested in our scholarship program, need community support, or want to contribute to our mission—we'd love to hear from you.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">📍</div>
+                            <span>Holly Springs, North Carolina</span>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">✉️</div>
+                            <span>amm@mattisfoundation.org</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener" aria-label="Instagram">
+                            <img src="assets/logo_instagram.png" alt="Instagram">
                         </a>
-                        <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
-                            <picture>
-                                <source srcset="assets/logo_linkedin.webp" type="image/webp">
-                                <img src="assets/logo_linkedin.png" alt="LinkedIn" width="40" height="40" loading="lazy" decoding="async">
-                            </picture>
+                        <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <img src="assets/logo_linkedin.png" alt="LinkedIn">
                         </a>
                     </div>
                 </div>
-                <form class="contact-form" action="mailto:amm@mattisfoundation.org" method="post" enctype="text/plain">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your interest in our programs, scholarship applications, or how you'd like to get involved..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" action="https://formspree.io/f/xreegpav" method="POST">
+                        <!-- Formspree hidden fields -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission">
+                        <input type="hidden" name="_form" value="Contact Form">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">I'm Interested In</label>
+                            <select id="interest" name="interest">
+                                <option value="">Select an option...</option>
+                                <option value="scholarship">KJ Smith Scholarship</option>
+                                <option value="community-fund">Community Fund Support</option>
+                                <option value="donate">Making a Donation</option>
+                                <option value="volunteer">Volunteering</option>
+                                <option value="event">Evening Under the Oaks</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us how we can help..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer will be loaded here -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation">
+                    <p>Creating opportunity through honor, resilience, and service. Supporting veterans, military families, and communities in need.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="scholarship.html">KJ Smith Scholarship</a></li>
+                        <li><a href="community-fund.html">Community Fund</a></li>
+                        <li><a href="evening-under-the-oaks.html">Evening Under the Oaks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Foundation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#story">Our Story</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Get Involved</h4>
+                    <ul class="footer-links">
+                        <li><a href="scholarship.html">Apply Now</a></li>
+                        <li><a href="#contact">Donate</a></li>
+                        <li><a href="#contact">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <p>Holly Springs, North Carolina</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- OPTIMIZED SCRIPT LOADING -->
-    <script>
-        // PERFORMANCE: Fast navigation loading with CLS prevention
-        function loadNavigation() {
-            fetch('nav.html')
-                .then(response => response.text())
-                .then(data => {
-                    const navContainer = document.getElementById('navigation');
-                    navContainer.innerHTML = data;
-                    
-                    // Initialize immediately to prevent delays
-                    setTimeout(initializeNavigation, 50);
-                })
-                .catch(error => {
-                    console.error('Error loading navigation:', error);
-                });
-        }
-
-        function initializeNavigation() {
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const body = document.body;
-            
-            if (!hamburger || !mobileNav) {
-                console.warn('Navigation elements not found');
-                return;
-            }
-            
-            function toggleMobileNav(e) {
-                if (e) e.preventDefault();
-                
-                const isActive = hamburger.classList.contains('active');
-                hamburger.classList.toggle('active');
-                mobileNav.classList.toggle('active');
-                
-                if (!isActive) {
-                    body.style.overflow = 'hidden';
-                    mobileNav.setAttribute('aria-hidden', 'false');
-                    hamburger.setAttribute('aria-expanded', 'true');
-                } else {
-                    body.style.overflow = '';
-                    mobileNav.setAttribute('aria-hidden', 'true');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                }
-            }
-            
-            function closeMobileNav() {
-                hamburger.classList.remove('active');
-                mobileNav.classList.remove('active');
-                body.style.overflow = '';
-                mobileNav.setAttribute('aria-hidden', 'true');
-                hamburger.setAttribute('aria-expanded', 'false');
-            }
-            
-            // Event listeners
-            hamburger.addEventListener('click', toggleMobileNav);
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                    closeMobileNav();
-                }
-            });
-            
-            const mobileNavLinks = mobileNav.querySelectorAll('.mobile-nav-links a');
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', closeMobileNav);
-            });
-            
-            mobileNav.addEventListener('click', function(e) {
-                if (e.target === mobileNav) {
-                    closeMobileNav();
-                }
-            });
-            
-            // Set initial ARIA attributes
-            mobileNav.setAttribute('aria-hidden', 'true');
-            hamburger.setAttribute('aria-expanded', 'false');
-            hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-        }
-
-        // Load footer efficiently
-        function loadFooter() {
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer').innerHTML = data;
-                })
-                .catch(error => console.log('Error loading footer:', error));
-        }
-
-        // PERFORMANCE: Load critical content immediately
-        loadNavigation();
-        loadFooter();
-    </script>
-
-    <!-- DEFERRED MAIN JS - Load after critical content -->
-    <script src="js/main.js" defer></script>
-    
-    <!-- SERVICE WORKER - Enhanced caching -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(registration => {
-                        console.log('SW registered successfully');
-                    })
-                    .catch(error => {
-                        console.log('SW registration failed:', error);
-                    });
-            });
-        }
-    </script>
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,374 +1,101 @@
 <!DOCTYPE html>
-<html lang="en" id="top">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Security Headers -->
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>Page Not Found | The Mattis Foundation</title>
+    <meta name="description" content="Page not found - Return to The Mattis Foundation homepage.">
     
-    <meta name="description" content="Page not found - The Mattis Foundation. Return to our homepage to learn about our programs supporting veterans and communities.">
-    <meta name="keywords" content="Mattis Foundation, 404, page not found">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Page Not Found - The Mattis Foundation">
-    <meta property="og:description" content="The page you're looking for doesn't exist. Return to our homepage to learn about our programs supporting veterans and communities.">
-    <meta property="og:image" content="https://mattisfoundation.org/assets/Mattis_Foundation_Logo_Blue.png">
-    <meta property="og:url" content="https://mattisfoundation.org/404.html">
-
-    <title>Page Not Found - The Mattis Foundation</title>
-    
-    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
     <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
     
-    <!-- Performance Optimizations -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    
-    <!-- Critical CSS and Scripts -->
-    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
-    <link rel="preload" href="js/main.js" as="script">
-    
-    <!-- Critical CSS (Above the fold only) -->
-    <link rel="stylesheet" href="css/critical.css">
-    
-    <!-- Non-critical CSS (Deferred) -->
-    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
-    
-    <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <style>
-        .error-hero {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 120px 0;
-            text-align: center;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .error-content {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .error-code {
-            font-size: 8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            opacity: 0.9;
-        }
-
-        .error-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .error-message {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            line-height: 1.6;
-        }
-
-        .error-actions {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .error-button {
-            background: #e74c3c;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .error-button:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-            color: white;
-        }
-
-        .error-button.secondary {
-            background: transparent;
-            border: 2px solid white;
-        }
-
-        .error-button.secondary:hover {
-            background: white;
-            color: #2c3e50;
-        }
-
-        .helpful-links {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .helpful-links h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 3rem;
-            font-size: 2.2rem;
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .link-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .link-card h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .link-card p {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .link-card a {
-            background: #3498db;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-
-        .link-card a:hover {
-            background: #2980b9;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 5rem;
-            }
-
-            .error-title {
-                font-size: 2rem;
-            }
-
-            .error-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
-
 <body>
-    <!-- Navigation will be loaded here -->
-    <div id="navigation"></div>
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-    <!-- Error Hero Section -->
-    <section class="error-hero">
-        <div class="error-content">
-            <div class="error-code">404</div>
-            <h1 class="error-title">Page Not Found</h1>
-            <p class="error-message">We're sorry, but the page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the wrong URL.</p>
-            <div class="error-actions">
-                <a href="index.html#top" class="error-button">Return Home</a>
-                <a href="programs.html" class="error-button secondary">View Our Programs</a>
+    <!-- 404 Content -->
+    <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--color-navy-900) 0%, var(--color-navy-600) 100%); text-align: center; padding: var(--space-20) var(--space-6);">
+        <div style="max-width: 600px;">
+            <div style="font-family: var(--font-display); font-size: 8rem; font-weight: 700; color: var(--color-gold-500); line-height: 1; margin-bottom: var(--space-4);">404</div>
+            <h1 style="font-size: var(--text-3xl); color: var(--color-white); margin-bottom: var(--space-6);">Page Not Found</h1>
+            <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.8); margin-bottom: var(--space-10); line-height: var(--leading-relaxed);">
+                We're sorry, but the page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the wrong URL.
+            </p>
+            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn btn-primary btn-lg">Return Home</a>
+                <a href="index.html#programs" class="btn btn-outline btn-lg">View Programs</a>
             </div>
         </div>
     </section>
 
-    <!-- Helpful Links Section -->
-    <section class="helpful-links">
+    <!-- Helpful Links -->
+    <section class="section bg-cream">
         <div class="container">
-            <h2>What You're Looking For Might Be Here</h2>
-            <div class="links-grid">
-                <div class="link-card">
-                    <h3>KJ Smith Scholarship</h3>
-                    <p>Apply for our scholarship program supporting veterans and military families pursuing higher education.</p>
-                    <a href="scholarship-application.html">Apply Now</a>
+            <h2 style="text-align: center; margin-bottom: var(--space-12);">What You're Looking For Might Be Here</h2>
+            <div class="programs-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">KJ Smith Scholarship</h3>
+                        <p class="card-text">Apply for our scholarship program supporting veterans and military families pursuing higher education.</p>
+                        <a href="scholarship.html" class="card-link">Apply Now →</a>
+                    </div>
                 </div>
-                <div class="link-card">
-                    <h3>Our Programs</h3>
-                    <p>Learn about our Community Fund, scholarship program, and Night Under the Oaks benefit dinner.</p>
-                    <a href="programs.html">View Programs</a>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Our Programs</h3>
+                        <p class="card-text">Learn about our Community Fund, scholarship program, and Evening Under the Oaks benefit dinner.</p>
+                        <a href="index.html#programs" class="card-link">View Programs →</a>
+                    </div>
                 </div>
-                <div class="link-card">
-                    <h3>Get Involved</h3>
-                    <p>Connect with us to volunteer, donate, or learn more about supporting our mission.</p>
-                    <a href="index.html#contact">Contact Us</a>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Get Involved</h3>
+                        <p class="card-text">Connect with us to volunteer, donate, or learn more about supporting our mission.</p>
+                        <a href="index.html#contact" class="card-link">Contact Us →</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer will be loaded here -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none; padding: var(--space-8) 0;">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <p>Holly Springs, North Carolina</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Load Navigation and Footer -->
-    <script>
-        // Load navigation
-        fetch('nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation').innerHTML = data;
-                console.log('Navigation HTML loaded successfully');
-                
-                // Multiple strategies to ensure initialization
-                setTimeout(() => {
-                    // Strategy 1: Try calling main.js functions directly
-                    if (typeof window.onNavigationLoaded === 'function') {
-                        console.log('Calling window.onNavigationLoaded');
-                        window.onNavigationLoaded();
-                    } else if (typeof window.initNavigation === 'function') {
-                        console.log('Calling window.initNavigation');
-                        window.initNavigation();
-                    } else {
-                        console.log('Main.js functions not ready yet - triggering manual detection');
-                        
-                        // Strategy 2: Manually trigger the detection systems
-                        setTimeout(() => {
-                            // Check if elements exist and trigger manually
-                            const navbar = document.getElementById('navbar');
-                            const hamburger = document.getElementById('hamburger');
-                            const mobileNav = document.getElementById('mobileNav');
-                            
-                            console.log('Manual check - elements found:', {
-                                navbar: !!navbar,
-                                hamburger: !!hamburger,
-                                mobileNav: !!mobileNav
-                            });
-                            
-                            if (navbar && hamburger && mobileNav) {
-                                console.log('Elements found, creating custom initialization...');
-                                initializeHamburgerMenuDirectly();
-                            } else {
-                                console.error('Navigation elements still not found after manual check');
-                            }
-                        }, 500);
-                    }
-                }, 100);
-            })
-            .catch(error => {
-                console.error('Error loading navigation:', error);
-            });
-
-        // Direct hamburger menu initialization as fallback
-        function initializeHamburgerMenuDirectly() {
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const body = document.body;
-            
-            if (!hamburger || !mobileNav) {
-                console.error('Cannot initialize - elements missing');
-                return;
-            }
-            
-            console.log('Initializing hamburger menu directly...');
-            
-            function toggleMobileNav(e) {
-                if (e) e.preventDefault();
-                
-                const isActive = hamburger.classList.contains('active');
-                hamburger.classList.toggle('active');
-                mobileNav.classList.toggle('active');
-                
-                if (!isActive) {
-                    body.style.overflow = 'hidden';
-                    mobileNav.setAttribute('aria-hidden', 'false');
-                    hamburger.setAttribute('aria-expanded', 'true');
-                    console.log('Mobile nav opened');
-                } else {
-                    body.style.overflow = '';
-                    mobileNav.setAttribute('aria-hidden', 'true');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    console.log('Mobile nav closed');
-                }
-            }
-            
-            function closeMobileNav() {
-                hamburger.classList.remove('active');
-                mobileNav.classList.remove('active');
-                body.style.overflow = '';
-                mobileNav.setAttribute('aria-hidden', 'true');
-                hamburger.setAttribute('aria-expanded', 'false');
-            }
-            
-            // Add event listeners
-            hamburger.addEventListener('click', toggleMobileNav);
-            
-            // Close on escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                    closeMobileNav();
-                }
-            });
-            
-            // Close when clicking nav links
-            const mobileNavLinks = mobileNav.querySelectorAll('.mobile-nav-links a');
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', closeMobileNav);
-            });
-            
-            // Close when clicking overlay
-            mobileNav.addEventListener('click', function(e) {
-                if (e.target === mobileNav) {
-                    closeMobileNav();
-                }
-            });
-            
-            // Set initial ARIA attributes
-            mobileNav.setAttribute('aria-hidden', 'true');
-            hamburger.setAttribute('aria-expanded', 'false');
-            hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-            
-            console.log('Hamburger menu initialized successfully!');
-        }
-
-        // Load footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            })
-            .catch(error => console.log('Error loading footer:', error));
-    </script>
-
-    <!-- Deferred JavaScript -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,231 @@
+/* ============================================
+   SHARED PAGE STYLES
+   Community Fund, Evening Under the Oaks, etc.
+   ============================================ */
+
+/* Page Hero */
+.page-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
+    overflow: hidden;
+}
+
+.page-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.page-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(10, 22, 40, 0.88) 0%, rgba(21, 34, 56, 0.78) 100%);
+}
+
+.page-hero-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at 20% 80%, rgba(201, 162, 39, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(139, 38, 53, 0.08) 0%, transparent 50%);
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 900px;
+    padding: var(--space-20) var(--space-6);
+}
+
+.page-hero h1 {
+    font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
+    color: var(--color-white);
+    margin-bottom: var(--space-6);
+    line-height: var(--leading-tight);
+}
+
+.page-hero h1 span {
+    color: var(--color-gold-500);
+    font-style: italic;
+}
+
+.page-hero p {
+    font-size: var(--text-xl);
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: var(--leading-relaxed);
+}
+
+/* Impact Grid (Community Fund) */
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+}
+
+.impact-card {
+    background-color: var(--color-cream-100);
+    padding: var(--space-8);
+    border-radius: var(--radius-xl);
+    border-left: 4px solid var(--color-gold-500);
+    transition: all var(--transition-base);
+}
+
+.impact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.impact-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--color-navy-700) 0%, var(--color-navy-600) 100%);
+    color: var(--color-white);
+    border-left-color: var(--color-red-500);
+}
+
+.impact-card.featured h3 {
+    color: var(--color-white);
+}
+
+.impact-card.featured p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.impact-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-4);
+}
+
+.impact-card h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-navy-700);
+    margin-bottom: var(--space-3);
+}
+
+.impact-card p {
+    color: var(--color-gray-600);
+    line-height: var(--leading-relaxed);
+}
+
+/* Support Grid (Community Fund) */
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.support-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    background-color: var(--color-navy-700);
+    color: var(--color-white);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: all var(--transition-base);
+}
+
+.support-item:hover {
+    background-color: var(--color-navy-600);
+    transform: translateY(-3px);
+}
+
+.support-icon {
+    font-size: 1.5rem;
+}
+
+/* Experience Grid (Evening Under the Oaks) */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+}
+
+.experience-card {
+    background-color: var(--color-cream-100);
+    padding: var(--space-8);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    border-top: 4px solid var(--color-gold-500);
+    transition: all var(--transition-base);
+}
+
+.experience-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.experience-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-4);
+}
+
+.experience-card h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-navy-700);
+    margin-bottom: var(--space-3);
+}
+
+.experience-card p {
+    color: var(--color-gray-600);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .impact-card.featured {
+        grid-column: span 2;
+    }
+    
+    .experience-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero {
+        min-height: 60vh;
+    }
+    
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .impact-card.featured {
+        grid-column: span 1;
+    }
+    
+    .support-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+}

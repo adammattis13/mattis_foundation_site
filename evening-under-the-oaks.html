@@ -1,408 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" id="top">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Security Headers -->
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>Evening Under the Oaks | The Mattis Foundation</title>
+    <meta name="description" content="Evening Under the Oaks - An intimate garden dinner hosted by The Mattis Foundation. Join community leaders for an elegant evening supporting veterans and scholarship recipients.">
     
-    <meta name="description" content="Evening Under the Oaks - An intimate garden dinner hosted by The Mattis Foundation. Join community leaders and change-makers for an elegant evening supporting veterans and scholarship recipients.">
-    <meta name="keywords" content="Evening Under the Oaks, Mattis Foundation dinner, charity event, North Carolina fundraiser, intimate dinner, KJ Smith Scholarship fundraising">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Evening Under the Oaks - The Mattis Foundation">
-    <meta property="og:description" content="An intimate garden dinner in service of something greater. Join us for an elegant evening supporting veterans and scholarship recipients.">
-    <meta property="og:image" content="https://mattisfoundation.org/assets/undertheoaks.webp">
-    <meta property="og:url" content="https://mattisfoundation.org/evening-under-the-oaks.html">
-
-    <title>Evening Under the Oaks - The Mattis Foundation</title>
-    
-    <link rel="icon" type="image/webp" href="assets/Mattis_Foundation_Favicon.webp">
     <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
     
-    <!-- Performance Optimizations -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    
-    <!-- Critical Resource Preloads - Hero Image First -->
-    <link rel="preload" href="assets/undertheoaks.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="preload" href="assets/undertheoaks.jpg" as="image" type="image/jpeg" fetchpriority="high">
-    
-    <!-- Critical CSS and Scripts -->
-    <link rel="preload" href="css/critical.css" as="style" fetchpriority="high">
-    <link rel="preload" href="js/main.js" as="script">
-    
-    <!-- Critical CSS (Above the fold only) -->
-    <link rel="stylesheet" href="css/critical.css">
-    
-    <!-- Non-critical CSS (Deferred) -->
-    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
-    
-    <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <style>
-        .evening-hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .evening-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.7) 0%, rgba(52, 73, 94, 0.7) 100%);
-            z-index: -1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .evening-hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            line-height: 1.1;
-        }
-
-        .evening-hero .subtitle {
-            font-size: 1.6rem;
-            opacity: 0.95;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            font-style: italic;
-            margin-bottom: 2rem;
-            color: #f8f9fa;
-        }
-
-        .content-section {
-            padding: 80px 0;
-        }
-
-        .content-section:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .section-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .intro-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #555;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .highlight-text {
-            color: #e74c3c;
-            font-weight: 600;
-            font-style: italic;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .section-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .feature-item {
-            background: white;
-            padding: 30px 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            border-top: 4px solid #e74c3c;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #e74c3c;
-        }
-
-        .feature-item h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .feature-item p {
-            color: #666;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .elegant-section {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .elegant-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .elegant-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .elegant-text {
-            font-size: 1.3rem;
-            line-height: 1.7;
-            opacity: 0.95;
-            margin-bottom: 1.5rem;
-        }
-
-        .impact-highlight {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            margin: 40px 0;
-            border-left: 5px solid #e74c3c;
-        }
-
-        .impact-highlight h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #f8f9fa;
-        }
-
-        .impact-highlight p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        .invitation-section {
-            background: #f8f9fa;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .invitation-content {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .invitation-title {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .invitation-text {
-            font-size: 1.2rem;
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
-        }
-
-        .exclusive-note {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #e74c3c;
-            margin: 30px 0;
-            font-style: italic;
-            color: #666;
-        }
-
-        .cta-button {
-            background: #e74c3c;
-            color: white;
-            padding: 18px 40px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .cta-button:hover {
-            background: #c0392b;
-            transform: translateY(-3px);
-            color: white;
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .evening-hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .evening-hero .subtitle {
-                font-size: 1.3rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .elegant-title {
-                font-size: 2rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .intro-text {
-                font-size: 1.1rem;
-            }
-
-            .elegant-text {
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .evening-hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .evening-hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .content-section {
-                padding: 60px 0;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
 </head>
-
 <body>
-    <!-- Navigation will be loaded here -->
-    <div id="navigation"></div>
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mobile-menu-link">Home</a></li>
+            <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
+            <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
+            <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
+            <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
+        </ul>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="evening-hero">
-        <picture class="hero-bg">
-            <source srcset="assets/undertheoaks.webp" type="image/webp">
-            <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks dinner event" class="hero-img" width="1200" height="800" fetchpriority="high">
-        </picture>
-        <div class="hero-content">
-            <h1>Evening Under the Oaks</h1>
-            <p class="subtitle">An intimate garden dinner in service of something greater.</p>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg">
+            <picture>
+                <source srcset="assets/undertheoaks.webp" type="image/webp">
+                <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks">
+            </picture>
+        </div>
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content">
+            <div class="hero-badge">Annual Benefit Dinner</div>
+            <h1>Evening Under <span>the Oaks</span></h1>
+            <p class="hero-tagline" style="font-style: italic; font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4);">An intimate garden dinner in service of something greater.</p>
         </div>
     </section>
 
-    <!-- Introduction Section -->
-    <section class="content-section">
-        <div class="section-content">
-            <p class="intro-text">Each year, as the sun sets over the Carolina pines, friends and supporters of the Mattis Foundation gather beneath the oaks for an evening of connection, conversation, and purpose. Hosted at the Mattis home, <span class="highlight-text">Evening Under the Oaks</span> is a private four-course dinner that brings together community leaders, veterans, philanthropists, and change-makers in support of our mission.</p>
-            
-            <p class="intro-text">With hand-crafted seasonal cuisine, thoughtfully curated wines, and stories that remind us why we serve, this event is more than a dinner—it's a celebration of resilience, generosity, and the power of community.</p>
+    <!-- Introduction -->
+    <section class="section bg-cream">
+        <div class="container container-lg">
+            <p style="font-size: var(--text-xl); line-height: var(--leading-loose); color: var(--color-gray-700); text-align: center; max-width: 900px; margin: 0 auto var(--space-8);">
+                Each year, as the sun sets over the Carolina pines, friends and supporters of the Mattis Foundation gather beneath the oaks for an evening of connection, conversation, and purpose. Hosted at the Mattis home, <strong style="color: var(--color-red-600); font-style: italic;">Evening Under the Oaks</strong> is a private four-course dinner that brings together community leaders, veterans, philanthropists, and change-makers in support of our mission.
+            </p>
+            <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-gray-600); text-align: center; max-width: 800px; margin: 0 auto;">
+                With hand-crafted seasonal cuisine, thoughtfully curated wines, and stories that remind us why we serve, this event is more than a dinner—it's a celebration of resilience, generosity, and the power of community.
+            </p>
         </div>
     </section>
 
-    <!-- What to Expect Section -->
-    <section class="content-section">
-        <div class="section-content">
-            <h2 class="section-title">What to Expect</h2>
+    <!-- What to Expect -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">The Experience</div>
+                <h2 class="section-title">What to Expect</h2>
+            </div>
             
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">🍽️</div>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">🍽️</div>
                     <h3>Chef-Curated Four-Course Meal</h3>
                     <p>Seasonal ingredients transformed into an unforgettable culinary experience, crafted specifically for each gathering.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🍷</div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">🍷</div>
                     <h3>Wine Pairings & Craft Cocktails</h3>
                     <p>Thoughtfully selected wines and artisanal cocktails to complement each course and enhance conversation.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🎵</div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">🎵</div>
                     <h3>Live Acoustic Music</h3>
                     <p>Intimate musical performances that create the perfect backdrop for meaningful connection and reflection.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">💬</div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">💬</div>
                     <h3>Stories from Recipients</h3>
                     <p>Hear directly from scholarship recipients and community partners about the impact of your support.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🕯️</div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">🕯️</div>
                     <h3>Moments of Remembrance</h3>
                     <p>Quiet moments to honor and remember those who gave all in service to others.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🤝</div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">🤝</div>
                     <h3>Meaningful Conversation</h3>
                     <p>Connect with like-minded individuals committed to making a difference in their communities.</p>
                 </div>
@@ -410,168 +129,90 @@
         </div>
     </section>
 
-    <!-- Why It Matters Section -->
-    <section class="elegant-section">
-        <div class="elegant-content">
-            <h2 class="elegant-title">Why It Matters</h2>
-            <p class="elegant-text">Proceeds from Evening Under the Oaks directly support the Mattis Foundation's Community Fund and the KJ Smith Memorial Scholarship, empowering veterans, students, and families affected by hardship or disaster.</p>
-            
-            <div class="impact-highlight">
-                <h3>An Evening of Purpose</h3>
-                <p>This evening allows us to pause, reflect, and recommit to building a better world—one act of service at a time. Every conversation, every connection, and every contribution moves us closer to our mission of creating meaningful opportunities through honor, resilience, and service.</p>
+    <!-- Benefit -->
+    <section class="section bg-navy">
+        <div class="container container-lg">
+            <div class="section-header" style="margin-bottom: var(--space-12);">
+                <h2 class="section-title" style="color: var(--color-white);">Benefit</h2>
+            </div>
+            <p style="font-size: var(--text-xl); line-height: var(--leading-loose); color: rgba(255,255,255,0.9); text-align: center; max-width: 800px; margin: 0 auto var(--space-10);">
+                Proceeds from Evening Under the Oaks directly support the Mattis Foundation's Community Fund and the KJ Smith Memorial Scholarship, empowering veterans, students, and families affected by hardship or disaster.
+            </p>
+            <div style="background: rgba(255,255,255,0.08); padding: var(--space-8); border-radius: var(--radius-lg); border-left: 4px solid var(--color-gold-500); max-width: 700px; margin: 0 auto;">
+                <h3 style="font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-white); margin-bottom: var(--space-4);">An Evening of Purpose</h3>
+                <p style="color: rgba(255,255,255,0.85); line-height: var(--leading-relaxed);">
+                    This evening allows us to pause, reflect, and recommit to building a better world—one act of service at a time. Every conversation, every connection, and every contribution moves us closer to our mission of creating meaningful opportunities through honor, resilience, and service.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Attendance Section -->
-    <section class="invitation-section">
-        <div class="invitation-content">
-            <h2 class="invitation-title">Attendance</h2>
-            <p class="invitation-text">Evening Under the Oaks is an invitation-only event with extremely limited seating to preserve the intimacy and impact of the evening.</p>
-            
-            <div class="exclusive-note">
-                <p><strong>Exclusive & Intimate:</strong> Limited seating ensures meaningful connections and preserves the personal nature of this special gathering under the Carolina oaks.</p>
+    <!-- Attendance -->
+    <section class="section bg-cream">
+        <div class="container container-md" style="text-align: center;">
+            <div class="section-header">
+                <div class="section-label">Join Us</div>
+                <h2 class="section-title">Attendance</h2>
             </div>
             
-            <p class="invitation-text">If you'd like to learn more about this special evening or request an invitation, we'd love to hear from you.</p>
+            <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-gray-700); margin-bottom: var(--space-8);">
+                Evening Under the Oaks is an invitation-only event with extremely limited seating to preserve the intimacy and impact of the evening.
+            </p>
             
-            <a href="index.html#contact" class="cta-button">Request Information</a>
+            <div style="background: var(--color-white); padding: var(--space-6); border-radius: var(--radius-lg); border-left: 4px solid var(--color-red-500); margin-bottom: var(--space-8); text-align: left;">
+                <p style="font-style: italic; color: var(--color-gray-600);">
+                    <strong style="color: var(--color-navy-700);">Exclusive & Intimate:</strong> Limited seating ensures meaningful connections and preserves the personal nature of this special gathering under the Carolina oaks.
+                </p>
+            </div>
+            
+            <p style="font-size: var(--text-lg); color: var(--color-gray-600); margin-bottom: var(--space-8);">
+                If you'd like to learn more about this special evening or request an invitation, we'd love to hear from you.
+            </p>
+            
+            <a href="index.html#contact" class="btn btn-primary btn-lg">Request Information</a>
         </div>
     </section>
 
-    <!-- Footer will be loaded here -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/Mattis_Foundation_Logo_Blue.png" alt="The Mattis Foundation">
+                    <p>Creating opportunity through honor, resilience, and service.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="scholarship.html">KJ Smith Scholarship</a></li>
+                        <li><a href="community-fund.html">Community Fund</a></li>
+                        <li><a href="evening-under-the-oaks.html">Evening Under the Oaks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Foundation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#story">Our Story</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Get Involved</h4>
+                    <ul class="footer-links">
+                        <li><a href="scholarship.html">Apply Now</a></li>
+                        <li><a href="index.html#contact">Donate</a></li>
+                        <li><a href="index.html#contact">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <p>Holly Springs, North Carolina</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Load Navigation and Footer -->
-    <script>
-        // Load navigation
-        fetch('nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation').innerHTML = data;
-                console.log('Navigation HTML loaded successfully');
-                
-                // Multiple strategies to ensure initialization
-                setTimeout(() => {
-                    // Strategy 1: Try calling main.js functions directly
-                    if (typeof window.onNavigationLoaded === 'function') {
-                        console.log('Calling window.onNavigationLoaded');
-                        window.onNavigationLoaded();
-                    } else if (typeof window.initNavigation === 'function') {
-                        console.log('Calling window.initNavigation');
-                        window.initNavigation();
-                    } else {
-                        console.log('Main.js functions not ready yet - triggering manual detection');
-                        
-                        // Strategy 2: Manually trigger the detection systems
-                        setTimeout(() => {
-                            // Check if elements exist and trigger manually
-                            const navbar = document.getElementById('navbar');
-                            const hamburger = document.getElementById('hamburger');
-                            const mobileNav = document.getElementById('mobileNav');
-                            
-                            console.log('Manual check - elements found:', {
-                                navbar: !!navbar,
-                                hamburger: !!hamburger,
-                                mobileNav: !!mobileNav
-                            });
-                            
-                            if (navbar && hamburger && mobileNav) {
-                                console.log('Elements found, creating custom initialization...');
-                                initializeHamburgerMenuDirectly();
-                            } else {
-                                console.error('Navigation elements still not found after manual check');
-                            }
-                        }, 500);
-                    }
-                }, 100);
-            })
-            .catch(error => {
-                console.error('Error loading navigation:', error);
-            });
-
-        // Direct hamburger menu initialization as fallback
-        function initializeHamburgerMenuDirectly() {
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const body = document.body;
-            
-            if (!hamburger || !mobileNav) {
-                console.error('Cannot initialize - elements missing');
-                return;
-            }
-            
-            console.log('Initializing hamburger menu directly...');
-            
-            function toggleMobileNav(e) {
-                if (e) e.preventDefault();
-                
-                const isActive = hamburger.classList.contains('active');
-                hamburger.classList.toggle('active');
-                mobileNav.classList.toggle('active');
-                
-                if (!isActive) {
-                    body.style.overflow = 'hidden';
-                    mobileNav.setAttribute('aria-hidden', 'false');
-                    hamburger.setAttribute('aria-expanded', 'true');
-                    console.log('Mobile nav opened');
-                } else {
-                    body.style.overflow = '';
-                    mobileNav.setAttribute('aria-hidden', 'true');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    console.log('Mobile nav closed');
-                }
-            }
-            
-            function closeMobileNav() {
-                hamburger.classList.remove('active');
-                mobileNav.classList.remove('active');
-                body.style.overflow = '';
-                mobileNav.setAttribute('aria-hidden', 'true');
-                hamburger.setAttribute('aria-expanded', 'false');
-            }
-            
-            // Add event listeners
-            hamburger.addEventListener('click', toggleMobileNav);
-            
-            // Close on escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                    closeMobileNav();
-                }
-            });
-            
-            // Close when clicking nav links
-            const mobileNavLinks = mobileNav.querySelectorAll('.mobile-nav-links a');
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', closeMobileNav);
-            });
-            
-            // Close when clicking overlay
-            mobileNav.addEventListener('click', function(e) {
-                if (e.target === mobileNav) {
-                    closeMobileNav();
-                }
-            });
-            
-            // Set initial ARIA attributes
-            mobileNav.setAttribute('aria-hidden', 'true');
-            hamburger.setAttribute('aria-expanded', 'false');
-            hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-            
-            console.log('Hamburger menu initialized successfully!');
-        }
-
-        // Load footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            })
-            .catch(error => console.log('Error loading footer:', error));
-    </script>
-
-    <!-- Deferred JavaScript -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
