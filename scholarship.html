@@ -219,13 +219,12 @@
                             </div>
                             
                             <div class="form-group">
-                                <label>Upload Your Handwritten Essay (PDF) <span class="required">*</span></label>
-                                <div class="file-upload">
-                                    <input type="file" id="essayFile" name="essayFile" accept=".pdf" required>
-                                    <div class="file-upload-icon">📄</div>
-                                    <p class="file-upload-text">Click to upload or drag and drop</p>
-                                    <p class="file-upload-hint">PDF only • Maximum 10MB</p>
-                                    <div class="file-upload-name" id="fileName"></div>
+                                <label>Essay Submission Instructions</label>
+                                <div class="warning-box" style="background: #e8f4f8; border-color: #3498db;">
+                                    <strong>📧 Email Your Essay Separately:</strong><br>
+                                    After submitting this form, please email your handwritten essay (PDF) to:<br>
+                                    <a href="mailto:amm@mattisfoundation.org" style="color: #3498db; font-weight: 600;">amm@mattisfoundation.org</a><br>
+                                    <span style="font-size: 0.9rem; color: #666;">Include your full name in the subject line.</span>
                                 </div>
                             </div>
                             
@@ -250,7 +249,9 @@
                     <div class="form-success" id="formSuccess">
                         <div class="form-success-icon">✅</div>
                         <h3>Application Submitted!</h3>
-                        <p>Thank you for applying to the KJ Smith Memorial Scholarship. We've received your application and will review it carefully. Winners will be notified by May 15, 2026.</p>
+                        <p>Thank you for applying to the KJ Smith Memorial Scholarship. We've received your application and will review it carefully.</p>
+                        <p style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin: 1rem 0;"><strong>Don't forget:</strong> Please email your handwritten essay (PDF) to <a href="mailto:amm@mattisfoundation.org">amm@mattisfoundation.org</a> with your full name in the subject line.</p>
+                        <p>Winners will be notified by May 15, 2026.</p>
                         <a href="index.html" class="btn btn-secondary">Return Home</a>
                     </div>
                 </div>
@@ -308,13 +309,6 @@
             const gpa = parseFloat(document.getElementById('gpa').value);
             if (gpa < 3.5 || gpa > 4.0) {
                 alert('GPA must be between 3.5 and 4.0');
-                return;
-            }
-            
-            // Validate file
-            const fileInput = document.getElementById('essayFile');
-            if (!fileInput.files.length) {
-                alert('Please upload your essay');
                 return;
             }
             
