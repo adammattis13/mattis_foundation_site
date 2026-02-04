@@ -65,8 +65,41 @@
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <!-- Header (loaded dynamically) -->
-    <div id="header"></div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mobile-menu-link">Home</a></li>
+            <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
+            <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
+            <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
+            <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
+            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Apply Now</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -76,7 +109,7 @@
                 <img src="assets/Adam&Jenelle1.jpg" alt="The Mattis Foundation founders">
             </picture>
         </div>
-        <div class="hero-overlay"></div>
+        <div class="gradient-overlay"></div>
         
         <div class="container hero-content">
             <div class="hero-grid">
@@ -154,21 +187,21 @@
                 <div class="section-label">Our Mission</div>
                 <h2 class="section-title">Creating Opportunity Through Service</h2>
             </div>
-            <p style="font-size: var(--text-lg); line-height: var(--leading-loose); color: var(--color-gray-600); text-align: center; max-width: 900px; margin: 0 auto var(--space-12);">
+            <p class="text-lg leading-loose text-muted text-center max-w-900 mx-auto mb-12">
                 The Mattis Foundation exists to transform sacrifice into opportunity. We support students through educational scholarships, provide rapid disaster relief to communities in crisis, and invest in the revitalization of overlooked American towns. Every dollar, every program, every initiative carries forward a legacy of resilience and service.
             </p>
-            <div style="display: flex; justify-content: center; gap: var(--space-16); flex-wrap: wrap;">
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; background: var(--color-navy-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem;">🎖️</div>
-                    <div style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-navy-700);">Honor</div>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">🎖️</div>
+                    <div class="value-label">Honor</div>
                 </div>
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; background: var(--color-navy-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem;">💪</div>
-                    <div style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-navy-700);">Resilience</div>
+                <div class="value-item">
+                    <div class="value-icon">💪</div>
+                    <div class="value-label">Resilience</div>
                 </div>
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; background: var(--color-navy-700); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); font-size: 2rem;">🤝</div>
-                    <div style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-navy-700);">Service</div>
+                <div class="value-item">
+                    <div class="value-icon">🤝</div>
+                    <div class="value-label">Service</div>
                 </div>
             </div>
         </div>
@@ -190,7 +223,7 @@
                         <span class="card-badge">Now Accepting</span>
                         <picture>
                             <source srcset="assets/kjsmith.webp" type="image/webp">
-                            <img src="assets/kjsmith.jpeg" alt="KJ Smith Memorial Scholarship">
+                            <img src="assets/kjsmith.jpeg" alt="KJ Smith Memorial Scholarship" loading="lazy">
                         </picture>
                     </div>
                     <div class="card-content">
@@ -211,7 +244,7 @@
                         <span class="card-badge">Active Relief</span>
                         <picture>
                             <source srcset="assets/helene.webp" type="image/webp">
-                            <img src="assets/helene.jpg" alt="Community disaster relief">
+                            <img src="assets/helene.jpg" alt="Community disaster relief" loading="lazy">
                         </picture>
                     </div>
                     <div class="card-content">
@@ -232,7 +265,7 @@
                         <span class="card-badge">Annual Event</span>
                         <picture>
                             <source srcset="assets/undertheoaks.webp" type="image/webp">
-                            <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks">
+                            <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks" loading="lazy">
                         </picture>
                     </div>
                     <div class="card-content">
@@ -258,7 +291,7 @@
                     <div class="story-image-frame"></div>
                     <picture>
                         <source srcset="assets/kjsmith.webp" type="image/webp">
-                        <img src="assets/kjsmith.jpeg" alt="CPT Kevin 'KJ' Smith" class="story-image">
+                        <img src="assets/kjsmith.jpeg" alt="CPT Kevin 'KJ' Smith" class="story-image" loading="lazy">
                     </picture>
                 </div>
                 
@@ -277,7 +310,7 @@
                         "KJ didn't just save my life—he gave me a purpose. Every day, I work to honor that sacrifice by creating opportunities for others to serve."
                         <span class="story-quote-author">— Adam Mattis, Founder</span>
                     </blockquote>
-                    <a href="scholarship.html" class="btn btn-primary btn-lg" style="margin-top: var(--space-6);">
+                    <a href="scholarship.html" class="btn btn-primary btn-lg mt-6">
                         Honor KJ's Legacy
                         <svg class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 10h12M12 4l6 6-6 6"/>
@@ -290,7 +323,7 @@
 
     <!-- CTA Section -->
     <section class="section cta-section">
-        <div class="container container-md" style="text-align: center;">
+        <div class="container container-md text-center">
             <h2 class="cta-title">Ready to Make a Difference?</h2>
             <p class="cta-text">Whether you're a student seeking a scholarship, a community in need, or someone who wants to support our mission—there's a place for you here.</p>
             <div class="cta-buttons">
@@ -372,65 +405,55 @@
         </div>
     </section>
 
-    <!-- Footer (loaded dynamically) -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation" class="footer-logo">
+                    <p class="footer-tagline">Honor. Resilience. Service.</p>
+                    <p class="footer-description">Creating meaningful opportunities for students, communities in need, and those who embody resilience.</p>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="scholarship.html">KJ Smith Scholarship</a></li>
+                        <li><a href="community-fund.html">Community Fund</a></li>
+                        <li><a href="evening-under-the-oaks.html">Evening Under the Oaks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Foundation</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#story">Our Story</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Get Involved</h4>
+                    <ul>
+                        <li><a href="scholarship.html">Apply for Scholarship</a></li>
+                        <li><a href="index.html#contact">Donate</a></li>
+                        <li><a href="index.html#contact">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <img src="assets/logo_instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="assets/logo_linkedin.png" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
-    <script>
-        // Load header and footer components
-        function loadComponent(id, file) {
-            fetch('components/' + file)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById(id).innerHTML = html;
-                    // Re-initialize nav after loading
-                    if (id === 'header') {
-                        initNav();
-                    }
-                })
-                .catch(err => console.error('Error loading ' + file + ':', err));
-        }
-
-        // Initialize navigation functionality
-        function initNav() {
-            const nav = document.querySelector('.nav');
-            const navToggle = document.querySelector('.nav-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-            // Scroll effect
-            function handleNavScroll() {
-                if (window.scrollY > 100) {
-                    nav?.classList.add('scrolled');
-                } else {
-                    nav?.classList.remove('scrolled');
-                }
-            }
-            window.addEventListener('scroll', handleNavScroll, { passive: true });
-            handleNavScroll();
-
-            // Mobile menu toggle
-            if (navToggle && mobileMenu) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-                });
-
-                mobileMenuLinks.forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        navToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    });
-                });
-            }
-        }
-
-        // Load components on page load
-        loadComponent('header', 'header.html');
-        loadComponent('footer', 'footer.html');
-    </script>
 </body>
 </html>

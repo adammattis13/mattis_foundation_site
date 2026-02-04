@@ -3,36 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Evening Under the Oaks | The Mattis Foundation</title>
     <meta name="description" content="Evening Under the Oaks - An intimate garden dinner hosted by The Mattis Foundation. Join community leaders for an elegant evening supporting veterans and scholarship recipients.">
     <meta name="keywords" content="Evening Under the Oaks, Mattis Foundation dinner, charity event, North Carolina fundraiser, veteran scholarship fundraising">
-    
+
     <link rel="canonical" href="https://mattisfoundation.org/evening-under-the-oaks.html">
-    
+
     <meta property="og:title" content="Evening Under the Oaks | The Mattis Foundation">
     <meta property="og:description" content="An intimate garden dinner in service of something greater. Join us for an elegant evening supporting veterans and scholarship recipients.">
     <meta property="og:image" content="https://mattisfoundation.org/assets/undertheoaks.webp">
     <meta property="og:url" content="https://mattisfoundation.org/evening-under-the-oaks.html">
     <meta property="og:type" content="website">
-    
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Evening Under the Oaks | The Mattis Foundation">
     <meta name="twitter:description" content="An intimate garden dinner supporting veterans and scholarship recipients.">
-    
+
     <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-    <!-- Header (loaded dynamically) -->
-    <div id="header"></div>
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mobile-menu-link">Home</a></li>
+            <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
+            <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
+            <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
+            <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
+            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Apply Now</a></li>
+        </ul>
+    </div>
 
     <!-- Hero -->
     <section class="page-hero">
@@ -42,21 +75,21 @@
                 <img src="assets/undertheoaks.jpg" alt="Evening Under the Oaks">
             </picture>
         </div>
-        <div class="page-hero-overlay"></div>
+        <div class="gradient-overlay"></div>
         <div class="container page-hero-content">
             <div class="hero-badge">Annual Benefit Dinner</div>
             <h1>Evening Under <span>the Oaks</span></h1>
-            <p class="hero-tagline" style="font-style: italic; font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4);">An intimate garden dinner in service of something greater.</p>
+            <p class="hero-tagline">An intimate garden dinner in service of something greater.</p>
         </div>
     </section>
 
     <!-- Introduction -->
     <section class="section bg-cream">
         <div class="container container-lg">
-            <p style="font-size: var(--text-xl); line-height: var(--leading-loose); color: var(--color-gray-700); text-align: center; max-width: 900px; margin: 0 auto var(--space-8);">
-                Each year, as the sun sets over the Carolina pines, friends and supporters of the Mattis Foundation gather beneath the oaks for an evening of connection, conversation, and purpose. Hosted at the Mattis home, <strong style="color: var(--color-red-600); font-style: italic;">Evening Under the Oaks</strong> is a private four-course dinner that brings together community leaders, veterans, philanthropists, and change-makers in support of our mission.
+            <p class="text-xl leading-loose text-center max-w-900 mx-auto mb-8">
+                Each year, as the sun sets over the Carolina pines, friends and supporters of the Mattis Foundation gather beneath the oaks for an evening of connection, conversation, and purpose. Hosted at the Mattis home, <strong class="text-accent">Evening Under the Oaks</strong> is a private four-course dinner that brings together community leaders, veterans, philanthropists, and change-makers in support of our mission.
             </p>
-            <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-gray-600); text-align: center; max-width: 800px; margin: 0 auto;">
+            <p class="text-lg leading-relaxed text-muted text-center max-w-800 mx-auto">
                 With hand-crafted seasonal cuisine, thoughtfully curated wines, and stories that remind us why we serve, this event is more than a dinner—it's a celebration of resilience, generosity, and the power of community.
             </p>
         </div>
@@ -69,38 +102,38 @@
                 <div class="section-label">The Experience</div>
                 <h2 class="section-title">What to Expect</h2>
             </div>
-            
+
             <div class="experience-grid">
                 <div class="experience-card">
                     <div class="experience-icon">🍽️</div>
                     <h3>Chef-Curated Four-Course Meal</h3>
                     <p>Seasonal ingredients transformed into an unforgettable culinary experience, crafted specifically for each gathering.</p>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">🍷</div>
                     <h3>Wine Pairings & Craft Cocktails</h3>
                     <p>Thoughtfully selected wines and artisanal cocktails to complement each course and enhance conversation.</p>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">🎵</div>
                     <h3>Live Acoustic Music</h3>
                     <p>Intimate musical performances that create the perfect backdrop for meaningful connection and reflection.</p>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">💬</div>
                     <h3>Stories from Recipients</h3>
                     <p>Hear directly from scholarship recipients and community partners about the impact of your support.</p>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">🕯️</div>
                     <h3>Moments of Remembrance</h3>
                     <p>Quiet moments to honor and remember those who gave all in service to others.</p>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">🤝</div>
                     <h3>Meaningful Conversation</h3>
@@ -113,15 +146,15 @@
     <!-- Why It Matters -->
     <section class="section bg-navy">
         <div class="container container-lg">
-            <div class="section-header" style="margin-bottom: var(--space-12);">
-                <h2 class="section-title" style="color: var(--color-white);">Why It Matters</h2>
+            <div class="section-header mb-12">
+                <h2 class="section-title text-white">Why It Matters</h2>
             </div>
-            <p style="font-size: var(--text-xl); line-height: var(--leading-loose); color: rgba(255,255,255,0.9); text-align: center; max-width: 800px; margin: 0 auto var(--space-10);">
+            <p class="text-xl leading-loose text-center max-w-800 mx-auto mb-8 text-white-90">
                 Proceeds from Evening Under the Oaks directly support the Mattis Foundation's Community Fund and the KJ Smith Memorial Scholarship, empowering veterans, students, and families affected by hardship or disaster.
             </p>
-            <div style="background: rgba(255,255,255,0.08); padding: var(--space-8); border-radius: var(--radius-lg); border-left: 4px solid var(--color-gold-500); max-width: 700px; margin: 0 auto;">
-                <h3 style="font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-white); margin-bottom: var(--space-4);">An Evening of Purpose</h3>
-                <p style="color: rgba(255,255,255,0.85); line-height: var(--leading-relaxed);">
+            <div class="quote-box max-w-700 mx-auto">
+                <h3>An Evening of Purpose</h3>
+                <p>
                     This evening allows us to pause, reflect, and recommit to building a better world—one act of service at a time. Every conversation, every connection, and every contribution moves us closer to our mission of creating meaningful opportunities through honor, resilience, and service.
                 </p>
             </div>
@@ -130,70 +163,78 @@
 
     <!-- Attendance -->
     <section class="section bg-cream">
-        <div class="container container-md" style="text-align: center;">
+        <div class="container container-md text-center">
             <div class="section-header">
                 <div class="section-label">Join Us</div>
                 <h2 class="section-title">Attendance</h2>
             </div>
-            
-            <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-gray-700); margin-bottom: var(--space-8);">
+
+            <p class="text-lg leading-relaxed mb-8">
                 Evening Under the Oaks is an invitation-only event with extremely limited seating to preserve the intimacy and impact of the evening.
             </p>
-            
-            <div style="background: var(--color-white); padding: var(--space-6); border-radius: var(--radius-lg); border-left: 4px solid var(--color-red-500); margin-bottom: var(--space-8); text-align: left;">
-                <p style="font-style: italic; color: var(--color-gray-600);">
-                    <strong style="color: var(--color-navy-700);">Exclusive & Intimate:</strong> Limited seating ensures meaningful connections and preserves the personal nature of this special gathering under the Carolina oaks.
+
+            <div class="info-box mb-8">
+                <p>
+                    <strong>Exclusive & Intimate:</strong> Limited seating ensures meaningful connections and preserves the personal nature of this special gathering under the Carolina oaks.
                 </p>
             </div>
-            
-            <p style="font-size: var(--text-lg); color: var(--color-gray-600); margin-bottom: var(--space-8);">
+
+            <p class="text-lg text-muted mb-8">
                 If you'd like to learn more about this special evening or request an invitation, we'd love to hear from you.
             </p>
-            
+
             <a href="index.html#contact" class="btn btn-primary btn-lg">Request Information</a>
         </div>
     </section>
 
-    <!-- Footer (loaded dynamically) -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation" class="footer-logo">
+                    <p class="footer-tagline">Honor. Resilience. Service.</p>
+                    <p class="footer-description">Creating meaningful opportunities for students, communities in need, and those who embody resilience.</p>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="scholarship.html">KJ Smith Scholarship</a></li>
+                        <li><a href="community-fund.html">Community Fund</a></li>
+                        <li><a href="evening-under-the-oaks.html">Evening Under the Oaks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Foundation</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#story">Our Story</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Get Involved</h4>
+                    <ul>
+                        <li><a href="scholarship.html">Apply for Scholarship</a></li>
+                        <li><a href="index.html#contact">Donate</a></li>
+                        <li><a href="index.html#contact">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <img src="assets/logo_instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="assets/logo_linkedin.png" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/main.js"></script>
-    <script>
-        function loadComponent(id, file) {
-            fetch('components/' + file)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById(id).innerHTML = html;
-                    if (id === 'header') initNav();
-                })
-                .catch(err => console.error('Error loading ' + file + ':', err));
-        }
-
-        function initNav() {
-            const nav = document.querySelector('.nav');
-            const navToggle = document.querySelector('.nav-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-            nav?.classList.add('scrolled');
-
-            if (navToggle && mobileMenu) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-                });
-
-                mobileMenuLinks.forEach(link => link.addEventListener('click', function() {
-                    navToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                }));
-            }
-        }
-
-        loadComponent('header', 'header.html');
-        loadComponent('footer', 'footer.html');
-    </script>
 </body>
 </html>

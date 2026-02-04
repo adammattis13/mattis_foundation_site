@@ -27,21 +27,7 @@
     object-fit: cover;
 }
 
-.page-hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(135deg, rgba(10, 22, 40, 0.88) 0%, rgba(21, 34, 56, 0.78) 100%);
-}
-
-.page-hero-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(ellipse at 20% 80%, rgba(201, 162, 39, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(139, 38, 53, 0.08) 0%, transparent 50%);
-}
+/* .page-hero-overlay uses .gradient-overlay from base.css */
 
 .page-hero-content {
     position: relative;

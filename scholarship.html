@@ -31,8 +31,41 @@
     <link rel="stylesheet" href="css/scholarship.css">
 </head>
 <body>
-    <!-- Header (loaded dynamically) -->
-    <div id="header"></div>
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mobile-menu-link">Home</a></li>
+            <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
+            <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
+            <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
+            <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
+            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Apply Now</a></li>
+        </ul>
+    </div>
 
     <!-- Hero -->
     <section class="scholarship-hero">
@@ -240,68 +273,71 @@
         </div>
     </section>
 
-    <!-- Footer (loaded dynamically) -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation" class="footer-logo">
+                    <p class="footer-tagline">Honor. Resilience. Service.</p>
+                    <p class="footer-description">Creating meaningful opportunities for students, communities in need, and those who embody resilience.</p>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="scholarship.html">KJ Smith Scholarship</a></li>
+                        <li><a href="community-fund.html">Community Fund</a></li>
+                        <li><a href="evening-under-the-oaks.html">Evening Under the Oaks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Foundation</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#story">Our Story</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Get Involved</h4>
+                    <ul>
+                        <li><a href="scholarship.html">Apply for Scholarship</a></li>
+                        <li><a href="index.html#contact">Donate</a></li>
+                        <li><a href="index.html#contact">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <img src="assets/logo_instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="assets/logo_linkedin.png" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/main.js"></script>
     <script>
-        // Load header and footer components
-        function loadComponent(id, file) {
-            fetch('components/' + file)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById(id).innerHTML = html;
-                    if (id === 'header') {
-                        initNav();
-                    }
-                })
-                .catch(err => console.error('Error loading ' + file + ':', err));
-        }
-
-        function initNav() {
-            const nav = document.querySelector('.nav');
-            const navToggle = document.querySelector('.nav-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-            // Always add scrolled class on inner pages
-            nav?.classList.add('scrolled');
-
-            if (navToggle && mobileMenu) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-                });
-
-                mobileMenuLinks.forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        navToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    });
-                });
-            }
-        }
-
-        loadComponent('header', 'header.html');
-        loadComponent('footer', 'footer.html');
-
         // Form submission handler
         document.getElementById('scholarshipForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const gpa = parseFloat(document.getElementById('gpa').value);
             if (gpa < 3.5 || gpa > 4.0) {
                 alert('GPA must be between 3.5 and 4.0');
                 return;
             }
-            
+
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = 'Submitting...';
             submitBtn.disabled = true;
-            
+
             try {
                 const formData = new FormData(this);
                 const response = await fetch(this.action, {
@@ -309,7 +345,7 @@
                     body: formData,
                     headers: { 'Accept': 'application/json' }
                 });
-                
+
                 if (response.ok) {
                     this.style.display = 'none';
                     document.getElementById('formSuccess').classList.add('visible');

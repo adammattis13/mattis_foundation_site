@@ -23,6 +23,7 @@
     object-fit: cover;
 }
 
+/* .scholarship-hero-overlay uses .gradient-overlay from base.css with slightly darker opacity */
 .scholarship-hero-overlay {
     position: absolute;
     inset: 0;

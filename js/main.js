@@ -225,27 +225,34 @@
         var hasDollar = text.indexOf('$') > -1;
         var hasK = text.indexOf('K') > -1;
         var number = parseInt(text.replace(/[^0-9]/g, ''));
-        
+
         if (isNaN(number)) return;
-        
-        var current = 0;
+
         var duration = 2000;
-        var increment = number / (duration / 16);
-        
-        var timer = setInterval(function() {
-            current += increment;
-            if (current >= number) {
-                current = number;
-                clearInterval(timer);
-            }
-            
-            var display = Math.floor(current);
+        var startTime = null;
+
+        function animate(currentTime) {
+            if (!startTime) startTime = currentTime;
+            var elapsed = currentTime - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+
+            // Ease out cubic for smooth deceleration
+            var easeProgress = 1 - Math.pow(1 - progress, 3);
+            var current = Math.floor(easeProgress * number);
+
+            var display = current;
             if (hasDollar) display = '$' + display;
             if (hasK) display += 'K';
             if (hasPlus) display += '+';
-            
+
             element.textContent = display;
-        }, 16);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        requestAnimationFrame(animate);
     }
 
     // ============================================
