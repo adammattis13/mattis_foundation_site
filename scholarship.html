@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>KJ Smith Memorial Scholarship | The Mattis Foundation</title>
     <meta name="description" content="Apply for the KJ Smith Memorial Scholarship - a $5,000 renewable award honoring CPT Kevin Smith's legacy. Supporting students who embody resilience and service.">
     <meta name="keywords" content="KJ Smith Scholarship, student scholarship, college scholarship, Mattis Foundation, North Carolina scholarship, resilience">
-    
+
     <link rel="canonical" href="https://mattisfoundation.org/scholarship.html">
-    
+
     <meta property="og:title" content="KJ Smith Memorial Scholarship | The Mattis Foundation">
     <meta property="og:description" content="Apply for the $5,000 renewable scholarship honoring CPT Kevin Smith's legacy of service and sacrifice.">
     <meta property="og:image" content="https://mattisfoundation.org/assets/kjsmith.webp">
     <meta property="og:url" content="https://mattisfoundation.org/scholarship.html">
     <meta property="og:type" content="website">
-    
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="KJ Smith Memorial Scholarship">
     <meta name="twitter:description" content="Apply for the $5,000 renewable scholarship honoring CPT Kevin Smith's legacy.">
-    
+
     <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/scholarship.css">
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="nav scrolled">
         <div class="container nav-container">
@@ -47,7 +49,7 @@
                 </ul>
                 <a href="scholarship.html" class="nav-cta">Apply Now</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
+            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -67,6 +69,7 @@
         </ul>
     </div>
 
+    <main id="main">
     <!-- Hero -->
     <section class="scholarship-hero">
         <div class="scholarship-hero-bg">
@@ -90,7 +93,7 @@
                 <!-- Sidebar -->
                 <aside class="scholarship-sidebar">
                     <div class="sidebar-card">
-                        <h3 class="sidebar-card-title">Scholarship Details</h3>
+                        <h2 class="sidebar-card-title">Scholarship Details</h2>
                         <ul class="details-list">
                             <li><span>Award Amount</span><strong class="highlight">$5,000/year</strong></li>
                             <li><span>Renewable</span><strong>Up to 4 years</strong></li>
@@ -99,9 +102,9 @@
                             <li><span>Award Date</span><strong>May 15, 2026</strong></li>
                         </ul>
                     </div>
-                    
+
                     <div class="sidebar-card">
-                        <h3 class="sidebar-card-title">Eligibility</h3>
+                        <h2 class="sidebar-card-title">Eligibility</h2>
                         <ul class="eligibility-list">
                             <li>U.S. high school senior or current college student</li>
                             <li>Ages 17-24</li>
@@ -111,29 +114,40 @@
                         </ul>
                         <p class="priority-note"><strong>Priority given to:</strong> Veterans, children of veterans, and those pursuing service-oriented careers.</p>
                     </div>
-                    
+
                     <div class="story-card-sidebar">
                         <p class="story-quote">"KJ didn't just save my life—he gave me a purpose. Every scholarship we award honors his memory."</p>
                         <p class="story-author">— Adam Mattis, Founder</p>
                     </div>
                 </aside>
-                
+
                 <!-- Application Form -->
                 <div class="scholarship-form-area">
                     <div class="form-header">
                         <h2>Apply for the Scholarship</h2>
                         <p>Complete all sections below. Fields marked with <span class="required">*</span> are required.</p>
                     </div>
-                    
-                    <form id="scholarshipForm" class="scholarship-form" action="https://formspree.io/f/xreegpav" method="POST">
+
+                    <!-- Two-step notice, visible BEFORE the form -->
+                    <div class="essay-email-notice" role="note">
+                        <div class="essay-email-notice-icon" aria-hidden="true">📧</div>
+                        <div>
+                            <strong>This application has two parts.</strong>
+                            After you submit the form below, email your handwritten essay (PDF) to
+                            <a href="mailto:info@mattisfoundation.org?subject=KJ%20Smith%20Scholarship%20Essay">info@mattisfoundation.org</a>
+                            with your full name in the subject line. Both parts are required.
+                        </div>
+                    </div>
+
+                    <form id="scholarshipForm" class="scholarship-form" action="https://formspree.io/f/xreegpav" method="POST" novalidate>
                         <!-- Formspree hidden fields -->
                         <input type="hidden" name="_subject" value="New Scholarship Application">
                         <input type="hidden" name="_form" value="KJ Smith Scholarship Application">
-                        
+
                         <!-- Step 1: Personal Information -->
                         <div class="form-section">
-                            <h3 class="form-section-title"><span class="step-number">1</span> Personal Information</h3>
-                            
+                            <h3 class="form-section-title"><span class="step-number" aria-hidden="true">1</span> Personal Information</h3>
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="firstName">First Name <span class="required">*</span></label>
@@ -144,7 +158,7 @@
                                     <input type="text" id="lastName" name="lastName" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="email">Email Address <span class="required">*</span></label>
@@ -155,29 +169,29 @@
                                     <input type="tel" id="phone" name="phone" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="address">Home Address <span class="required">*</span></label>
                                 <textarea id="address" name="address" rows="2" placeholder="Street Address, City, State, ZIP" required></textarea>
                             </div>
                         </div>
-                        
+
                         <!-- Step 2: Academic Information -->
                         <div class="form-section">
-                            <h3 class="form-section-title"><span class="step-number">2</span> Academic Information</h3>
-                            
+                            <h3 class="form-section-title"><span class="step-number" aria-hidden="true">2</span> Academic Information</h3>
+
                             <div class="form-row">
                                 <div class="form-group university-input-wrapper">
                                     <label for="university">College/University <span class="required">*</span></label>
                                     <input type="text" id="university" name="university" placeholder="Start typing..." required autocomplete="off">
-                                    <div class="university-suggestions" id="universitySuggestions"></div>
+                                    <div class="university-suggestions" id="universitySuggestions" role="listbox"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="major">Intended Major</label>
                                     <input type="text" id="major" name="major" placeholder="Your field of study">
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="semester">Starting Semester <span class="required">*</span></label>
@@ -195,12 +209,12 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Step 3: Military Background -->
                         <div class="form-section">
-                            <h3 class="form-section-title"><span class="step-number">3</span> Military Background</h3>
+                            <h3 class="form-section-title"><span class="step-number" aria-hidden="true">3</span> Military Background</h3>
                             <p class="section-note">This section is optional but helps us prioritize applications from military families.</p>
-                            
+
                             <div class="checkbox-group">
                                 <label class="checkbox-item">
                                     <input type="checkbox" name="isVeteran">
@@ -211,17 +225,17 @@
                                     <span class="checkbox-label">I am the child of a U.S. military service member (active, veteran, or fallen)</span>
                                 </label>
                             </div>
-                            
-                            <div class="form-group" style="margin-top: var(--space-6);">
+
+                            <div class="form-group form-group-spaced">
                                 <label for="militaryDetails">Additional Details (Optional)</label>
                                 <textarea id="militaryDetails" name="militaryDetails" rows="3" placeholder="Branch of service, years served, relationship to service member, etc."></textarea>
                             </div>
                         </div>
-                        
+
                         <!-- Step 4: Essay -->
                         <div class="form-section">
-                            <h3 class="form-section-title"><span class="step-number">4</span> Essay Submission</h3>
-                            
+                            <h3 class="form-section-title"><span class="step-number" aria-hidden="true">4</span> Essay Submission</h3>
+
                             <div class="essay-prompt-box">
                                 <div class="essay-prompt-label">Essay Prompt</div>
                                 <p class="essay-prompt-text">"Describe a moment when service or resilience shaped your perspective. How will you use these values to influence the future of your community or the global economy?"</p>
@@ -231,22 +245,14 @@
                                     <span><strong>File:</strong> PDF only, max 10MB</span>
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label>Essay Submission Instructions</label>
-                                <div class="warning-box" style="background: #e8f4f8; border-color: #3498db;">
-                                    <strong>📧 Email Your Essay Separately:</strong><br>
-                                    After submitting this form, please email your handwritten essay (PDF) to:<br>
-                                    <a href="mailto:info@mattisfoundation.org" style="color: #3498db; font-weight: 600;">info@mattisfoundation.org</a><br>
-                                    <span style="font-size: 0.9rem; color: #666;">Include your full name in the subject line.</span>
-                                </div>
-                            </div>
-                            
+
                             <div class="warning-box">
-                                <strong>Important:</strong> Your essay must be handwritten. Typed essays will not be accepted. Please ensure your handwriting is legible.
+                                <strong>Important:</strong> Your essay must be handwritten. Typed essays will not be accepted. Please ensure your handwriting is legible, and email the PDF to
+                                <a href="mailto:info@mattisfoundation.org?subject=KJ%20Smith%20Scholarship%20Essay">info@mattisfoundation.org</a>
+                                after submitting this form.
                             </div>
                         </div>
-                        
+
                         <!-- Submit -->
                         <div class="form-submit">
                             <button type="submit" class="btn btn-primary btn-lg">
@@ -258,13 +264,17 @@
                             <p class="form-deadline"><strong>Deadline:</strong> March 31, 2026 • Winners notified by May 15</p>
                         </div>
                     </form>
-                    
+
                     <!-- Success Message -->
-                    <div class="form-success" id="formSuccess">
-                        <div class="form-success-icon">✅</div>
+                    <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+                        <div class="form-success-icon" aria-hidden="true">✅</div>
                         <h3>Application Submitted!</h3>
                         <p>Thank you for applying to the KJ Smith Memorial Scholarship. We've received your application and will review it carefully.</p>
-                        <p style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin: 1rem 0;"><strong>Don't forget:</strong> Please email your handwritten essay (PDF) to <a href="mailto:info@mattisfoundation.org">info@mattisfoundation.org</a> with your full name in the subject line.</p>
+                        <div class="form-success-reminder">
+                            <strong>Don't forget:</strong> Please email your handwritten essay (PDF) to
+                            <a href="mailto:info@mattisfoundation.org?subject=KJ%20Smith%20Scholarship%20Essay">info@mattisfoundation.org</a>
+                            with your full name in the subject line.
+                        </div>
                         <p>Winners will be notified by May 15, 2026.</p>
                         <a href="index.html" class="btn btn-secondary">Return Home</a>
                     </div>
@@ -272,6 +282,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -323,44 +334,91 @@
 
     <script src="js/main.js"></script>
     <script>
-        // Form submission handler
-        document.getElementById('scholarshipForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        (function() {
+            var form = document.getElementById('scholarshipForm');
+            if (!form) return;
 
-            const gpa = parseFloat(document.getElementById('gpa').value);
-            if (gpa < 3.5 || gpa > 4.0) {
-                alert('GPA must be between 3.5 and 4.0');
-                return;
+            var gpaField = document.getElementById('gpa');
+            var submitBtn = form.querySelector('button[type="submit"]');
+            var originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Submit Application';
+
+            // Clear red border as user edits invalid fields
+            if (typeof window.wireLiveClearOnInput === 'function') {
+                window.wireLiveClearOnInput(form);
             }
 
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Submitting...';
-            submitBtn.disabled = true;
+            function setFieldInvalid(field) {
+                if (field) field.style.borderColor = '#c1292e';
+            }
 
-            try {
-                const formData = new FormData(this);
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
+            function clearInvalid(field) {
+                if (field) field.style.borderColor = '';
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Required-field check (mirrors contact form UX)
+                var missingField = null;
+                form.querySelectorAll('[required]').forEach(function(field) {
+                    if (!field.value.trim()) {
+                        setFieldInvalid(field);
+                        if (!missingField) missingField = field;
+                    } else {
+                        clearInvalid(field);
+                    }
                 });
 
-                if (response.ok) {
-                    this.style.display = 'none';
-                    document.getElementById('formSuccess').classList.add('visible');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    const data = await response.json();
-                    throw new Error(data.error || 'Form submission failed');
+                if (missingField) {
+                    window.showNotification('Please fill in all required fields.', 'error');
+                    missingField.focus();
+                    return;
                 }
-            } catch (error) {
-                console.error('Form error:', error);
-                alert('Sorry, there was a problem submitting your application. Please email us directly at info@mattisfoundation.org');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-        });
+
+                // GPA range check (toast instead of alert)
+                var gpa = parseFloat(gpaField.value);
+                if (isNaN(gpa) || gpa < 3.5 || gpa > 4.0) {
+                    setFieldInvalid(gpaField);
+                    window.showNotification('GPA must be between 3.5 and 4.0 to be eligible.', 'error');
+                    gpaField.focus();
+                    return;
+                }
+
+                if (submitBtn) {
+                    submitBtn.innerHTML = 'Submitting...';
+                    submitBtn.disabled = true;
+                }
+
+                try {
+                    var formData = new FormData(form);
+                    var response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        var successEl = document.getElementById('formSuccess');
+                        successEl.classList.add('visible');
+                        successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        var data = await response.json();
+                        throw new Error(data.error || 'Form submission failed');
+                    }
+                } catch (error) {
+                    console.error('Form error:', error);
+                    window.showNotification(
+                        'Sorry, there was a problem submitting your application. Please email us directly at info@mattisfoundation.org',
+                        'error'
+                    );
+                    if (submitBtn) {
+                        submitBtn.innerHTML = originalBtnHtml;
+                        submitBtn.disabled = false;
+                    }
+                }
+            });
+        })();
     </script>
 </body>
 </html>

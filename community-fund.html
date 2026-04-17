@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="nav scrolled">
         <div class="container nav-container">
@@ -47,7 +49,7 @@
                 </ul>
                 <a href="scholarship.html" class="nav-cta">Apply Now</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
+            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -67,6 +69,7 @@
         </ul>
     </div>
 
+    <main id="main">
     <!-- Hero -->
     <section class="page-hero">
         <div class="page-hero-bg">
@@ -86,7 +89,7 @@
     <!-- Mission -->
     <section class="section bg-cream">
         <div class="container container-lg">
-            <p class="text-xl leading-loose text-center max-w-900 mx-auto" style="color: var(--color-gray-700);">
+            <p class="text-xl leading-loose text-center max-w-900 mx-auto text-gray-700">
                 At the Mattis Foundation, we believe real change happens when purpose meets action. The Community Fund was created to respond to moments of need and opportunity—investing in people, places, and resilience. Whether we're stepping in after a natural disaster, supporting essential institutions, or investing in the revitalization of overlooked towns, our Community Fund exists to create <strong>meaningful, measurable impact</strong> where it matters most.
             </p>
         </div>
@@ -185,9 +188,13 @@
             <h2 class="cta-title">Partner With Us</h2>
             <p class="cta-text">We believe that community is not something you inherit—it's something you build. Whether you're part of a nonprofit, a local government, a neighborhood coalition, or a cause-driven organization, we want to hear from you.</p>
             <div class="cta-buttons">
-                <a href="index.html#contact" class="btn btn-white btn-lg">Request Support</a>
+                <a href="mailto:info@mattisfoundation.org?subject=Community%20Fund%20Support%20Request" class="btn btn-white btn-lg">Request Support</a>
                 <a href="index.html#contact" class="btn btn-outline-white btn-lg">Make a Donation</a>
             </div>
+            <p class="cta-direct-contact">
+                Urgent relief need? Email
+                <a href="mailto:info@mattisfoundation.org">info@mattisfoundation.org</a> directly.
+            </p>
         </div>
     </section>
 
@@ -199,6 +206,7 @@
             </p>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

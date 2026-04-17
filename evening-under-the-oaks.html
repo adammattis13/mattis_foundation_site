@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="nav scrolled">
         <div class="container nav-container">
@@ -47,7 +49,7 @@
                 </ul>
                 <a href="scholarship.html" class="nav-cta">Apply Now</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
+            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -67,6 +69,7 @@
         </ul>
     </div>
 
+    <main id="main">
     <!-- Hero -->
     <section class="page-hero">
         <div class="page-hero-bg">
@@ -183,9 +186,14 @@
                 If you'd like to learn more about this special evening or request an invitation, we'd love to hear from you.
             </p>
 
-            <a href="index.html#contact" class="btn btn-primary btn-lg">Request Information</a>
+            <a href="mailto:info@mattisfoundation.org?subject=Evening%20Under%20the%20Oaks%20-%20Invitation%20Inquiry" class="btn btn-primary btn-lg">Request an Invitation</a>
+            <p class="cta-direct-contact">
+                Or email us directly at
+                <a href="mailto:info@mattisfoundation.org">info@mattisfoundation.org</a>
+            </p>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

@@ -3,108 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Page Not Found | The Mattis Foundation</title>
     <meta name="description" content="Page not found - Return to The Mattis Foundation homepage.">
-    
+    <meta name="robots" content="noindex">
+
     <link rel="icon" type="image/png" href="assets/Mattis_Foundation_Favicon.png">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <!-- Header (loaded dynamically) -->
-    <div id="header"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- 404 Content -->
-    <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--color-navy-900) 0%, var(--color-navy-600) 100%); text-align: center; padding: var(--space-20) var(--space-6);">
-        <div style="max-width: 600px;">
-            <div style="font-family: var(--font-display); font-size: 8rem; font-weight: 700; color: var(--color-gold-500); line-height: 1; margin-bottom: var(--space-4);">404</div>
-            <h1 style="font-size: var(--text-3xl); color: var(--color-white); margin-bottom: var(--space-6);">Page Not Found</h1>
-            <p style="font-size: var(--text-lg); color: rgba(255,255,255,0.8); margin-bottom: var(--space-10); line-height: var(--leading-relaxed);">
-                We're sorry, but the page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the wrong URL.
-            </p>
-            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-                <a href="index.html" class="btn btn-primary btn-lg">Return Home</a>
-                <a href="index.html#programs" class="btn btn-outline btn-lg">View Programs</a>
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation">
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+                    <li><a href="index.html#story" class="nav-link">Our Story</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="scholarship.html" class="nav-cta">Apply Now</a>
             </div>
+            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-    </section>
+    </nav>
 
-    <!-- Helpful Links -->
-    <section class="section bg-cream">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mobile-menu-link">Home</a></li>
+            <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
+            <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
+            <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
+            <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
+            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Apply Now</a></li>
+        </ul>
+    </div>
+
+    <main id="main">
+        <!-- 404 Content -->
+        <section class="error-hero">
+            <div class="error-hero-inner">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Page Not Found</h1>
+                <p class="error-text">
+                    We're sorry, but the page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the wrong URL.
+                </p>
+                <div class="error-actions">
+                    <a href="index.html" class="btn btn-primary btn-lg">Return Home</a>
+                    <a href="index.html#programs" class="btn btn-outline btn-lg">View Programs</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Helpful Links -->
+        <section class="section bg-cream">
+            <div class="container">
+                <h2 class="text-center mb-12">What You're Looking For Might Be Here</h2>
+                <div class="programs-grid">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3 class="card-title">KJ Smith Scholarship</h3>
+                            <p class="card-text">Apply for our scholarship program supporting students who embody resilience and service.</p>
+                            <a href="scholarship.html" class="card-link">Apply Now →</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3 class="card-title">Our Programs</h3>
+                            <p class="card-text">Learn about our Community Fund, scholarship program, and Evening Under the Oaks benefit dinner.</p>
+                            <a href="index.html#programs" class="card-link">View Programs →</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3 class="card-title">Get Involved</h3>
+                            <p class="card-text">Connect with us to volunteer, donate, or learn more about supporting our mission.</p>
+                            <a href="index.html#contact" class="card-link">Contact Us →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: var(--space-12);">What You're Looking For Might Be Here</h2>
-            <div class="programs-grid">
-                <div class="card">
-                    <div class="card-content">
-                        <h3 class="card-title">KJ Smith Scholarship</h3>
-                        <p class="card-text">Apply for our scholarship program supporting students who embody resilience and service.</p>
-                        <a href="scholarship.html" class="card-link">Apply Now →</a>
-                    </div>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/Mattis_Foundation_Logo_White.png" alt="The Mattis Foundation" class="footer-logo">
+                    <p class="footer-tagline">Honor. Resilience. Service.</p>
+                    <p class="footer-description">Creating meaningful opportunities for students, communities in need, and those who embody resilience.</p>
                 </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3 class="card-title">Our Programs</h3>
-                        <p class="card-text">Learn about our Community Fund, scholarship program, and Evening Under the Oaks benefit dinner.</p>
-                        <a href="index.html#programs" class="card-link">View Programs →</a>
-                    </div>
+                <div class="footer-links-group">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="scholarship.html">KJ Smith Scholarship</a></li>
+                        <li><a href="community-fund.html">Community Fund</a></li>
+                        <li><a href="evening-under-the-oaks.html">Evening Under the Oaks</a></li>
+                    </ul>
                 </div>
-                <div class="card">
-                    <div class="card-content">
-                        <h3 class="card-title">Get Involved</h3>
-                        <p class="card-text">Connect with us to volunteer, donate, or learn more about supporting our mission.</p>
-                        <a href="index.html#contact" class="card-link">Contact Us →</a>
-                    </div>
+                <div class="footer-links-group">
+                    <h4>Foundation</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#story">Our Story</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Get Involved</h4>
+                    <ul>
+                        <li><a href="scholarship.html">Apply for Scholarship</a></li>
+                        <li><a href="index.html#contact">Donate</a></li>
+                        <li><a href="index.html#contact">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Mattis Foundation. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/themattisfoundation/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <img src="assets/logo_instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-mattis-foundation/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="assets/logo_linkedin.png" alt="LinkedIn">
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Footer (loaded dynamically) -->
-    <div id="footer"></div>
+    </footer>
 
     <script src="js/main.js"></script>
-    <script>
-        function loadComponent(id, file) {
-            fetch('components/' + file)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById(id).innerHTML = html;
-                    if (id === 'header') initNav();
-                })
-                .catch(err => console.error('Error loading ' + file + ':', err));
-        }
-
-        function initNav() {
-            const nav = document.querySelector('.nav');
-            const navToggle = document.querySelector('.nav-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-            nav?.classList.add('scrolled');
-
-            if (navToggle && mobileMenu) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-                });
-
-                mobileMenuLinks.forEach(link => link.addEventListener('click', function() {
-                    navToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                }));
-            }
-        }
-
-        loadComponent('header', 'header.html');
-        loadComponent('footer', 'footer.html');
-    </script>
 </body>
 </html>

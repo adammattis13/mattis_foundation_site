@@ -438,6 +438,59 @@
     margin-top: var(--space-4);
 }
 
+.warning-box a {
+    color: #856404;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.warning-box a:hover {
+    color: #5a4302;
+}
+
+/* Prominent two-step notice shown ABOVE the form */
+.essay-email-notice {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    background-color: #e8f4f8;
+    border-left: 4px solid #3498db;
+    padding: var(--space-5) var(--space-6);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-8);
+    color: var(--color-navy-800);
+    line-height: var(--leading-relaxed);
+}
+
+.essay-email-notice-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.essay-email-notice strong {
+    color: var(--color-navy-900);
+    display: block;
+    margin-bottom: var(--space-1);
+    font-size: var(--text-base);
+}
+
+.essay-email-notice a {
+    color: #1f6fa8;
+    text-decoration: underline;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.essay-email-notice a:hover {
+    color: var(--color-navy-900);
+}
+
+/* Replaces inline style="margin-top: var(--space-6)" */
+.form-group-spaced {
+    margin-top: var(--space-6);
+}
+
 /* Submit */
 .form-submit {
     text-align: center;
@@ -480,6 +533,33 @@
     color: var(--color-gray-600);
     max-width: 500px;
     margin: 0 auto var(--space-8);
+}
+
+/* Yellow reminder box inside the success state (replaces inline style) */
+.form-success-reminder {
+    background-color: #fff3cd;
+    color: #856404;
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin: 0 auto var(--space-8);
+    max-width: 500px;
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    text-align: left;
+}
+
+.form-success-reminder strong {
+    color: #5a4302;
+}
+
+.form-success-reminder a {
+    color: #856404;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.form-success-reminder a:hover {
+    color: #5a4302;
 }
 
 /* Responsive */

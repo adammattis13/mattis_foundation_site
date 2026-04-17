@@ -1,6 +1,7 @@
 /**
  * MATTIS FOUNDATION - Main JavaScript
- * Clean, simple version for redesigned site
+ * Shared behavior: nav, smooth scroll, contact form, stats counter,
+ * university autocomplete. Loaded on all pages.
  */
 
 (function() {
@@ -9,29 +10,33 @@
     // ============================================
     // DOM Elements
     // ============================================
-    const nav = document.querySelector('.nav');
-    const navToggle = document.querySelector('.nav-toggle');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    var nav = document.querySelector('.nav');
+    var navToggle = document.querySelector('.nav-toggle');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    // Shared support email (keep in one place so error copy stays in sync)
+    var SUPPORT_EMAIL = 'info@mattisfoundation.org';
 
     // ============================================
-    // Notification System
+    // Notification System (toast)
     // ============================================
     function showNotification(message, type) {
         type = type || 'info';
-        
+
         // Remove any existing notifications
         var existing = document.querySelectorAll('.notification');
         existing.forEach(function(n) { n.remove(); });
-        
+
         var notification = document.createElement('div');
         notification.className = 'notification notification-' + type;
+        notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
         notification.textContent = message;
-        
+
         var bgColor = '#152238';
         if (type === 'error') bgColor = '#c1292e';
         if (type === 'success') bgColor = '#2d6a4f';
-        
+
         notification.style.position = 'fixed';
         notification.style.top = '20px';
         notification.style.right = '20px';
@@ -46,35 +51,35 @@
         notification.style.transform = 'translateY(-20px)';
         notification.style.transition = 'all 0.3s ease';
         notification.style.fontSize = '0.95rem';
-        
+
         document.body.appendChild(notification);
-        
-        // Animate in
+
         setTimeout(function() {
             notification.style.opacity = '1';
             notification.style.transform = 'translateY(0)';
         }, 10);
-        
-        // Remove after delay
+
         setTimeout(function() {
             notification.style.opacity = '0';
             notification.style.transform = 'translateY(-20px)';
-            setTimeout(function() { 
-                if (notification.parentNode) {
-                    notification.remove(); 
-                }
+            setTimeout(function() {
+                if (notification.parentNode) notification.remove();
             }, 300);
         }, 5000);
     }
+
+    // Exposed for per-page scripts (e.g. scholarship form)
+    window.showNotification = showNotification;
 
     // ============================================
     // Navigation Scroll Effect
     // ============================================
     function handleNavScroll() {
+        if (!nav) return;
         if (window.scrollY > 100) {
-            if (nav) nav.classList.add('scrolled');
+            nav.classList.add('scrolled');
         } else {
-            if (nav) nav.classList.remove('scrolled');
+            nav.classList.remove('scrolled');
         }
     }
 
@@ -86,25 +91,27 @@
     // ============================================
     if (navToggle && mobileMenu) {
         navToggle.addEventListener('click', function() {
+            var willOpen = !mobileMenu.classList.contains('active');
             navToggle.classList.toggle('active');
             mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            navToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+            document.body.style.overflow = willOpen ? 'hidden' : '';
         });
 
-        // Close menu when clicking a link
         mobileMenuLinks.forEach(function(link) {
             link.addEventListener('click', function() {
                 navToggle.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
 
-        // Close menu on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 navToggle.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
@@ -116,14 +123,14 @@
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
             var targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
+            if (targetId === '#' || targetId === '#main') return;
+
             var target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
                 var navHeight = nav ? nav.offsetHeight : 80;
                 var targetPosition = target.offsetTop - navHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -133,18 +140,35 @@
     });
 
     // ============================================
+    // Form validation helpers
+    // ============================================
+    // Clears the red invalid-border once a user starts fixing a field.
+    function wireLiveClearOnInput(form) {
+        form.querySelectorAll('[required]').forEach(function(field) {
+            field.addEventListener('input', function() {
+                if (field.value.trim()) field.style.borderColor = '';
+            });
+            field.addEventListener('change', function() {
+                if (field.value.trim()) field.style.borderColor = '';
+            });
+        });
+    }
+    window.wireLiveClearOnInput = wireLiveClearOnInput;
+
+    // ============================================
     // Contact Form Handling
     // ============================================
     var contactForm = document.querySelector('.contact-form');
     if (contactForm) {
+        wireLiveClearOnInput(contactForm);
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             var form = this;
             var submitBtn = form.querySelector('button[type="submit"], .btn-submit');
             var originalText = submitBtn ? submitBtn.textContent : 'Send Message';
-            
-            // Basic validation
+
             var isValid = true;
             form.querySelectorAll('[required]').forEach(function(field) {
                 if (!field.value.trim()) {
@@ -154,27 +178,23 @@
                     field.style.borderColor = '';
                 }
             });
-            
+
             if (!isValid) {
                 showNotification('Please fill in all required fields.', 'error');
                 return;
             }
-            
-            // Show loading state
+
             if (submitBtn) {
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
             }
-            
-            // Submit to Formspree
+
             var formData = new FormData(form);
-            
+
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             })
             .then(function(response) {
                 if (response.ok) {
@@ -188,7 +208,7 @@
             })
             .catch(function(error) {
                 console.error('Form error:', error);
-                showNotification('Sorry, there was a problem. Please email us directly at amm@mattisfoundation.org', 'error');
+                showNotification('Sorry, there was a problem. Please email us directly at ' + SUPPORT_EMAIL, 'error');
             })
             .finally(function() {
                 if (submitBtn) {
@@ -202,8 +222,8 @@
     // ============================================
     // Stats Counter Animation
     // ============================================
-    var statNumbers = document.querySelectorAll('.stat-number');
-    
+    var statNumbers = document.querySelectorAll('.impact-stat-number');
+
     if (statNumbers.length > 0 && 'IntersectionObserver' in window) {
         var statsObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
@@ -214,8 +234,8 @@
             });
         }, { threshold: 0.5 });
 
-        statNumbers.forEach(function(stat) { 
-            statsObserver.observe(stat); 
+        statNumbers.forEach(function(stat) {
+            statsObserver.observe(stat);
         });
     }
 
@@ -224,7 +244,7 @@
         var hasPlus = text.indexOf('+') > -1;
         var hasDollar = text.indexOf('$') > -1;
         var hasK = text.indexOf('K') > -1;
-        var number = parseInt(text.replace(/[^0-9]/g, ''));
+        var number = parseInt(text.replace(/[^0-9]/g, ''), 10);
 
         if (isNaN(number)) return;
 
@@ -240,87 +260,17 @@
             var easeProgress = 1 - Math.pow(1 - progress, 3);
             var current = Math.floor(easeProgress * number);
 
-            var display = current;
+            var display = String(current);
             if (hasDollar) display = '$' + display;
             if (hasK) display += 'K';
             if (hasPlus) display += '+';
 
             element.textContent = display;
 
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
+            if (progress < 1) requestAnimationFrame(animate);
         }
 
         requestAnimationFrame(animate);
-    }
-
-    // ============================================
-    // File Upload Handling (Scholarship Page)
-    // ============================================
-    var fileUpload = document.querySelector('.file-upload');
-    var fileInput = document.getElementById('essayFile');
-    var fileNameDisplay = document.getElementById('fileName');
-
-    if (fileUpload && fileInput) {
-        fileUpload.addEventListener('click', function(e) {
-            if (e.target !== fileInput) {
-                fileInput.click();
-            }
-        });
-
-        fileUpload.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            this.classList.add('dragover');
-        });
-
-        fileUpload.addEventListener('dragleave', function() {
-            this.classList.remove('dragover');
-        });
-
-        fileUpload.addEventListener('drop', function(e) {
-            e.preventDefault();
-            this.classList.remove('dragover');
-            
-            var files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files;
-                handleFileSelect(files[0]);
-            }
-        });
-
-        fileInput.addEventListener('change', function() {
-            if (this.files.length > 0) {
-                handleFileSelect(this.files[0]);
-            }
-        });
-
-        function handleFileSelect(file) {
-            if (file.type !== 'application/pdf') {
-                showNotification('Please upload a PDF file only.', 'error');
-                fileInput.value = '';
-                if (fileNameDisplay) {
-                    fileNameDisplay.textContent = '';
-                    fileNameDisplay.classList.remove('visible');
-                }
-                return;
-            }
-            
-            if (file.size > 10 * 1024 * 1024) {
-                showNotification('File size must be less than 10MB.', 'error');
-                fileInput.value = '';
-                if (fileNameDisplay) {
-                    fileNameDisplay.textContent = '';
-                    fileNameDisplay.classList.remove('visible');
-                }
-                return;
-            }
-            
-            if (fileNameDisplay) {
-                fileNameDisplay.textContent = '✓ ' + file.name;
-                fileNameDisplay.classList.add('visible');
-            }
-        }
     }
 
     // ============================================
@@ -350,7 +300,7 @@
 
         universityInput.addEventListener('input', function() {
             var query = this.value.toLowerCase();
-            
+
             if (query.length < 2) {
                 universitySuggestions.style.display = 'none';
                 return;
@@ -362,7 +312,7 @@
 
             if (matches.length > 0) {
                 universitySuggestions.innerHTML = matches.map(function(uni) {
-                    return '<div class="university-suggestion">' + uni + '</div>';
+                    return '<div class="university-suggestion" role="option">' + uni + '</div>';
                 }).join('');
                 universitySuggestions.style.display = 'block';
             } else {
@@ -383,7 +333,5 @@
             }
         });
     }
-
-    console.log('Mattis Foundation JS loaded');
 
 })();
