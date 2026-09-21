@@ -33,7 +33,7 @@
     position: relative;
     z-index: 3;
     max-width: 900px;
-    padding: var(--space-20) var(--space-6);
+    padding: 160px var(--space-6) var(--space-20);
 }
 
 .page-hero h1 {

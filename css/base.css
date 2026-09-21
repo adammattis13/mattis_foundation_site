@@ -34,7 +34,7 @@
     --color-gray-200: #e5e5e5;
     --color-gray-300: #d4d4d4;
     --color-gray-400: #a3a3a3;
-    --color-gray-500: #737373;
+    --color-gray-500: #686868;
     --color-gray-600: #525252;
     --color-gray-700: #404040;
     --color-gray-800: #262626;
@@ -131,7 +131,7 @@
     --container-md: 768px;
     --container-lg: 1024px;
     --container-xl: 1280px;
-    --container-2xl: 1400px;
+    --container-2xl: 1240px;
 }
 
 /* ============================================
@@ -145,6 +145,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 110px;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
@@ -312,7 +313,9 @@ ul, ol {
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
     cursor: pointer;
-    white-space: nowrap;
+    white-space: normal;
+    min-height: 48px;
+    text-align: center;
 }
 
 .btn-lg {
@@ -413,7 +416,7 @@ ul, ol {
     font-weight: 600;
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
-    color: var(--color-gold-500);
+    color: var(--color-gold-600);
     margin-bottom: var(--space-4);
 }
 
@@ -441,6 +444,9 @@ ul, ol {
    COMPONENT: CARDS
    ============================================ */
 .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-cream-300);
     background-color: var(--color-white);
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -448,7 +454,7 @@ ul, ol {
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
 }
 
@@ -484,11 +490,14 @@ ul, ol {
 }
 
 .card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     padding: var(--space-8);
 }
 
 .card-title {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
     margin-bottom: var(--space-3);
 }
 
@@ -498,6 +507,7 @@ ul, ol {
 }
 
 .card-link {
+    margin-top: auto;
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
@@ -849,3 +859,21 @@ ul, ol {
 @media (max-width: 480px) {
     .error-code { font-size: 6rem; }
 }
+
+/* Intrinsic sizing keeps text, pictures, and form controls inside narrow layouts. */
+[hidden] { display: none !important; }
+main:focus { outline: none; }
+h1, h2, h3 { text-wrap: balance; }
+.hero-bg picture, .page-hero-bg picture, .scholarship-hero-bg picture,
+.card-image picture { display: block; width: 100%; height: 100%; }
+.form-group { min-width: 0; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; min-width: 0; }
+.form-group textarea { resize: vertical; }
+.form-status:empty { display: none; }
+.form-status { padding: var(--space-4); border-radius: var(--radius-md); margin: 0; }
+.form-status-success { color: var(--color-success); background: #edf6f0; }
+.form-status-error { color: #922024; background: #fff0f0; }
+.form-status a, .info-box a { text-decoration: underline; overflow-wrap: anywhere; }
+.form-success { scroll-margin-top: 110px; }
+.value-icon svg { width: 32px; height: 32px; color: var(--color-gold-400); }
+.contact-detail-icon svg { width: 20px; height: 20px; }

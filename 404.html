@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,9 +34,9 @@
                     <li><a href="index.html#story" class="nav-link">Our Story</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 </ul>
-                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+                <a href="scholarship.html" class="nav-cta">Scholarship Details</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -45,14 +45,14 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" inert>
         <ul class="mobile-menu-links">
             <li><a href="index.html" class="mobile-menu-link">Home</a></li>
             <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
             <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
             <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
             <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
-            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Apply Now</a></li>
+            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Scholarship Details</a></li>
         </ul>
     </div>
 
@@ -131,7 +131,7 @@
                 <div class="footer-links-group">
                     <h4>Get Involved</h4>
                     <ul>
-                        <li><a href="scholarship.html">Apply for Scholarship</a></li>
+                        <li><a href="scholarship.html">Explore the Scholarship</a></li>
                         <li><a href="index.html#contact">Donate</a></li>
                         <li><a href="index.html#contact">Volunteer</a></li>
                     </ul>
@@ -151,6 +151,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

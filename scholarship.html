@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,9 +47,9 @@
                     <li><a href="index.html#story" class="nav-link">Our Story</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 </ul>
-                <a href="scholarship.html" class="nav-cta">Apply Now</a>
+                <a href="scholarship.html" class="nav-cta">Scholarship Details</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -58,14 +58,14 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" inert>
         <ul class="mobile-menu-links">
             <li><a href="index.html" class="mobile-menu-link">Home</a></li>
             <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
             <li><a href="index.html#programs" class="mobile-menu-link">Programs</a></li>
             <li><a href="index.html#story" class="mobile-menu-link">Our Story</a></li>
             <li><a href="index.html#contact" class="mobile-menu-link">Contact</a></li>
-            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Apply Now</a></li>
+            <li><a href="scholarship.html" class="mobile-menu-link mobile-menu-cta">Scholarship Details</a></li>
         </ul>
     </div>
 
@@ -74,13 +74,13 @@
     <section class="scholarship-hero">
         <div class="scholarship-hero-bg">
             <picture>
-                <source srcset="assets/union3.webp" type="image/webp">
-                <img src="assets/union3.jpg" alt="Scholarship">
+                <source srcset="assets/Union3.webp" type="image/webp">
+                <img src="assets/Union3.jpg" alt="Scholarship">
             </picture>
         </div>
         <div class="scholarship-hero-overlay"></div>
         <div class="container scholarship-hero-content">
-            <div class="hero-badge">Applications Open • Deadline March 31</div>
+            <div class="hero-badge">KJ Smith Memorial Scholarship</div>
             <h1>KJ Smith Memorial <span>Scholarship</span></h1>
             <p>Honoring the legacy of CPT Kevin "KJ" Smith by investing in the next generation of leaders who embody service, resilience, and a commitment to others.</p>
         </div>
@@ -116,13 +116,14 @@
                     </div>
 
                     <div class="story-card-sidebar">
-                        <p class="story-quote">"KJ didn't just save my life—he gave me a purpose. Every scholarship we award honors his memory."</p>
-                        <p class="story-author">— Adam Mattis, Founder</p>
+                        <p class="story-quote">"KJ didn't just save my life. He gave me a purpose. Every scholarship we award honors his memory."</p>
+                        <p class="story-author">Adam Mattis, Founder</p>
                     </div>
                 </aside>
 
                 <!-- Application Form -->
                 <div class="scholarship-form-area">
+                    <div class="info-box mb-6"><p>The listed application deadline was March 31, 2026. Please <a href="mailto:info@mattisfoundation.org">contact the foundation</a> to confirm availability before submitting.</p></div>
                     <div class="form-header">
                         <h2>Apply for the Scholarship</h2>
                         <p>Complete all sections below. Fields marked with <span class="required">*</span> are required.</p>
@@ -139,7 +140,7 @@
                         </div>
                     </div>
 
-                    <form id="scholarshipForm" class="scholarship-form" action="https://formspree.io/f/xreegpav" method="POST" novalidate>
+                    <form id="scholarshipForm" class="scholarship-form" action="https://formspree.io/f/xreegpav" method="POST">
                         <!-- Formspree hidden fields -->
                         <input type="hidden" name="_subject" value="New Scholarship Application">
                         <input type="hidden" name="_form" value="KJ Smith Scholarship Application">
@@ -151,28 +152,28 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="firstName">First Name <span class="required">*</span></label>
-                                    <input type="text" id="firstName" name="firstName" required>
+                                    <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastName">Last Name <span class="required">*</span></label>
-                                    <input type="text" id="lastName" name="lastName" required>
+                                    <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="email">Email Address <span class="required">*</span></label>
-                                    <input type="email" id="email" name="email" required>
+                                    <input type="email" id="email" name="email" autocomplete="email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number <span class="required">*</span></label>
-                                    <input type="tel" id="phone" name="phone" required>
+                                    <input type="tel" id="phone" name="phone" autocomplete="tel" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="address">Home Address <span class="required">*</span></label>
-                                <textarea id="address" name="address" rows="2" placeholder="Street Address, City, State, ZIP" required></textarea>
+                                <textarea id="address" name="address" autocomplete="street-address" rows="2" placeholder="Street Address, City, State, ZIP" required></textarea>
                             </div>
                         </div>
 
@@ -183,8 +184,65 @@
                             <div class="form-row">
                                 <div class="form-group university-input-wrapper">
                                     <label for="university">College/University <span class="required">*</span></label>
-                                    <input type="text" id="university" name="university" placeholder="Start typing..." required autocomplete="off">
-                                    <div class="university-suggestions" id="universitySuggestions" role="listbox"></div>
+                                    <input type="text" id="university" name="university" placeholder="Start typing..." required list="universities">
+                                    <datalist id="universities">
+                                        <option value="Harvard University"></option>
+                                        <option value="Stanford University"></option>
+                                        <option value="MIT"></option>
+                                        <option value="Yale University"></option>
+                                        <option value="Princeton University"></option>
+                                        <option value="Columbia University"></option>
+                                        <option value="University of Pennsylvania"></option>
+                                        <option value="Duke University"></option>
+                                        <option value="Northwestern University"></option>
+                                        <option value="Johns Hopkins University"></option>
+                                        <option value="Cornell University"></option>
+                                        <option value="Brown University"></option>
+                                        <option value="Vanderbilt University"></option>
+                                        <option value="Rice University"></option>
+                                        <option value="University of Notre Dame"></option>
+                                        <option value="Georgetown University"></option>
+                                        <option value="Emory University"></option>
+                                        <option value="Carnegie Mellon University"></option>
+                                        <option value="University of Virginia"></option>
+                                        <option value="University of Michigan"></option>
+                                        <option value="University of North Carolina at Chapel Hill"></option>
+                                        <option value="Wake Forest University"></option>
+                                        <option value="Tufts University"></option>
+                                        <option value="Boston College"></option>
+                                        <option value="New York University"></option>
+                                        <option value="University of Rochester"></option>
+                                        <option value="Georgia Tech"></option>
+                                        <option value="University of California, Berkeley"></option>
+                                        <option value="UCLA"></option>
+                                        <option value="USC"></option>
+                                        <option value="University of Florida"></option>
+                                        <option value="University of Texas at Austin"></option>
+                                        <option value="Texas A&M University"></option>
+                                        <option value="Penn State"></option>
+                                        <option value="Ohio State University"></option>
+                                        <option value="University of Wisconsin-Madison"></option>
+                                        <option value="University of Illinois"></option>
+                                        <option value="Purdue University"></option>
+                                        <option value="North Carolina State University"></option>
+                                        <option value="Clemson University"></option>
+                                        <option value="Virginia Tech"></option>
+                                        <option value="Auburn University"></option>
+                                        <option value="University of Georgia"></option>
+                                        <option value="University of Alabama"></option>
+                                        <option value="University of Tennessee"></option>
+                                        <option value="Appalachian State University"></option>
+                                        <option value="East Carolina University"></option>
+                                        <option value="UNC Charlotte"></option>
+                                        <option value="UNC Greensboro"></option>
+                                        <option value="Davidson College"></option>
+                                        <option value="Elon University"></option>
+                                        <option value="High Point University"></option>
+                                        <option value="Campbell University"></option>
+                                        <option value="United States Military Academy"></option>
+                                        <option value="United States Naval Academy"></option>
+                                        <option value="United States Air Force Academy"></option>
+                                    </datalist>
                                 </div>
                                 <div class="form-group">
                                     <label for="major">Intended Major</label>
@@ -204,7 +262,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="gpa">Current GPA <span class="required">*</span></label>
-                                    <input type="number" id="gpa" name="gpa" min="0" max="4.0" step="0.01" placeholder="3.5 minimum" required>
+                                    <input type="number" id="gpa" name="gpa" min="3.5" max="4.0" step="0.01" placeholder="3.5 minimum" required>
                                     <span class="form-hint">Minimum 3.5 GPA required</span>
                                 </div>
                             </div>
@@ -257,7 +315,7 @@
                         <div class="form-submit">
                             <button type="submit" class="btn btn-primary btn-lg">
                                 Submit Application
-                                <svg class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg aria-hidden="true" class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 10h12M12 4l6 6-6 6"/>
                                 </svg>
                             </button>
@@ -312,7 +370,7 @@
                 <div class="footer-links-group">
                     <h4>Get Involved</h4>
                     <ul>
-                        <li><a href="scholarship.html">Apply for Scholarship</a></li>
+                        <li><a href="scholarship.html">Explore the Scholarship</a></li>
                         <li><a href="index.html#contact">Donate</a></li>
                         <li><a href="index.html#contact">Volunteer</a></li>
                     </ul>
@@ -332,93 +390,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script>
-        (function() {
-            var form = document.getElementById('scholarshipForm');
-            if (!form) return;
-
-            var gpaField = document.getElementById('gpa');
-            var submitBtn = form.querySelector('button[type="submit"]');
-            var originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Submit Application';
-
-            // Clear red border as user edits invalid fields
-            if (typeof window.wireLiveClearOnInput === 'function') {
-                window.wireLiveClearOnInput(form);
-            }
-
-            function setFieldInvalid(field) {
-                if (field) field.style.borderColor = '#c1292e';
-            }
-
-            function clearInvalid(field) {
-                if (field) field.style.borderColor = '';
-            }
-
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-
-                // Required-field check (mirrors contact form UX)
-                var missingField = null;
-                form.querySelectorAll('[required]').forEach(function(field) {
-                    if (!field.value.trim()) {
-                        setFieldInvalid(field);
-                        if (!missingField) missingField = field;
-                    } else {
-                        clearInvalid(field);
-                    }
-                });
-
-                if (missingField) {
-                    window.showNotification('Please fill in all required fields.', 'error');
-                    missingField.focus();
-                    return;
-                }
-
-                // GPA range check (toast instead of alert)
-                var gpa = parseFloat(gpaField.value);
-                if (isNaN(gpa) || gpa < 3.5 || gpa > 4.0) {
-                    setFieldInvalid(gpaField);
-                    window.showNotification('GPA must be between 3.5 and 4.0 to be eligible.', 'error');
-                    gpaField.focus();
-                    return;
-                }
-
-                if (submitBtn) {
-                    submitBtn.innerHTML = 'Submitting...';
-                    submitBtn.disabled = true;
-                }
-
-                try {
-                    var formData = new FormData(form);
-                    var response = await fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: { 'Accept': 'application/json' }
-                    });
-
-                    if (response.ok) {
-                        form.style.display = 'none';
-                        var successEl = document.getElementById('formSuccess');
-                        successEl.classList.add('visible');
-                        successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else {
-                        var data = await response.json();
-                        throw new Error(data.error || 'Form submission failed');
-                    }
-                } catch (error) {
-                    console.error('Form error:', error);
-                    window.showNotification(
-                        'Sorry, there was a problem submitting your application. Please email us directly at info@mattisfoundation.org',
-                        'error'
-                    );
-                    if (submitBtn) {
-                        submitBtn.innerHTML = originalBtnHtml;
-                        submitBtn.disabled = false;
-                    }
-                }
-            });
-        })();
-    </script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

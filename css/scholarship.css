@@ -286,32 +286,6 @@
     position: relative;
 }
 
-.university-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--color-white);
-    border: 2px solid var(--color-cream-300);
-    border-top: none;
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 100;
-    display: none;
-}
-
-.university-suggestion {
-    padding: var(--space-3) var(--space-4);
-    cursor: pointer;
-    border-bottom: 1px solid var(--color-cream-200);
-    transition: background-color var(--transition-fast);
-}
-
-.university-suggestion:hover {
-    background-color: var(--color-cream-100);
-}
-
 /* Checkbox Group */
 .checkbox-group {
     display: flex;
