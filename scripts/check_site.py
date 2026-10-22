@@ -50,7 +50,7 @@ for name, page in pages.items():
         url = urlsplit(href)
         if url.scheme or url.netloc:
             continue
-        path = unquote(url.path).lstrip('/') or name
+        path = unquote(url.path).lstrip('/') or ('index.html' if url.path == '/' else name)
         check((ROOT / path).is_file(), f'{name}: missing file {path}')
         if url.fragment and path in pages:
             check(unquote(url.fragment) in pages[path].ids, f'{name}: missing anchor {href}')
@@ -88,6 +88,67 @@ locations = [e.text for e in ET.parse(ROOT / 'sitemap.xml').findall('.//{*}loc')
 check(len(locations) == len(pages) - 1, 'Sitemap should include all public pages except 404')
 for location in locations:
     check(urlsplit(location).hostname == 'www.mattisfoundation.org', 'Sitemap must use canonical www host')
+# SEO: one consistent canonical graph per public page and no unsupported promises.
+titles, descriptions, entity_ids = set(), set(), set()
+graphs = {}
+for name, page in pages.items():
+    source = page.path.read_text()
+    title = re.search(r'<title>(.*?)</title>', source, re.S).group(1)
+    metas = {a.get('name') or a.get('property'): a.get('content') for t, a in page.tags if t == 'meta'}
+    canonical = next(a['href'] for t, a in page.tags if t == 'link' and a.get('rel') == 'canonical')
+    expected = 'https://www.mattisfoundation.org/' + ('' if name == 'index.html' else name)
+    check(canonical == expected, f'{name}: incorrect canonical')
+    check(title not in titles, f'{name}: duplicate title'); titles.add(title)
+    description = metas.get('description')
+    check(description and description not in descriptions, f'{name}: missing/duplicate description'); descriptions.add(description)
+    check(metas.get('og:title') == title.replace('&amp;', '&'), f'{name}: OG title mismatch')
+    check(metas.get('og:description') == description, f'{name}: OG description mismatch')
+    check(metas.get('og:url') == canonical, f'{name}: OG URL mismatch')
+    check(metas.get('og:image') == metas.get('twitter:image'), f'{name}: social image mismatch')
+    check(bool(metas.get('og:image:alt')), f'{name}: missing social image description')
+    check('noindex' in metas.get('robots', '') if name == '404.html' else 'noindex' not in metas.get('robots', ''), f'{name}: incorrect indexing directive')
+    check(not any(href.startswith('/index.html') for href in page.links), f'{name}: links must use canonical homepage path')
+    if name == '404.html':
+        continue
+    scripts = re.findall(r'<script type="application/ld\+json">(.*?)</script>', source, re.S)
+    check(len(scripts) == 1, f'{name}: expected one entity graph')
+    graph = json.loads(scripts[0])['@graph']
+    graphs[name] = graph
+    entity_ids.update(n['@id'] for n in graph if '@id' in n)
+    web = next(n for n in graph if n.get('@id') == canonical + '#webpage')
+    check(web['url'] == canonical and web['description'] == description, f'{name}: page schema mismatch')
+    org = next(n for n in graph if n.get('@type') == 'Organization')
+    check(not any(k in org for k in ['nonprofitStatus','taxID','foundingDate']), f'{name}: unverified organization claims')
+    if name != 'index.html':
+        breadcrumb = next(n for n in graph if n.get('@type') == 'BreadcrumbList')
+        check(breadcrumb['itemListElement'][-1]['item'] == canonical, f'{name}: breadcrumb schema mismatch')
+        check('aria-label="Breadcrumb"' in source, f'{name}: missing visible breadcrumb')
+    for question in web.get('mainEntity', []):
+        def plain(value):
+            from html import unescape
+            return ' '.join(unescape(re.sub('<[^>]+>', ' ', value)).split())
+        details = re.findall(r'<details\b[^>]*>(.*?)</details>', source, re.S)
+        pairs = []
+        for detail in details:
+            summary = re.search(r'<summary>(.*?)</summary>', detail, re.S)
+            pairs.append((plain(summary.group(1)), plain(detail[summary.end():])))
+        check((question['name'], question['acceptedAnswer']['text']) in pairs, f'{name}: schema FAQ not visible/matching')
+
+for name, graph in graphs.items():
+    def references(value):
+        if isinstance(value, dict):
+            if list(value) == ['@id']:
+                check(value['@id'] in entity_ids, f'{name}: unresolved schema reference {value["@id"]}')
+            for child in value.values(): references(child)
+        elif isinstance(value, list):
+            for child in value: references(child)
+    references(graph)
+    for node in graph:
+        check(node.get('@type') != 'Event', f'{name}: event dates not confirmed')
+        if node.get('@type') == 'MonetaryGrant':
+            check('amount' not in node and 'applicationDeadline' not in node, f'{name}: unconfirmed 2027 grant terms')
+check(any(r.get('source') == '/index.html' and r.get('destination') == '/' and r.get('permanent') for r in config.get('redirects', [])), 'Homepage needs permanent canonical redirect')
+
 if errors:
     raise SystemExit('\n'.join(errors))
-print(f'PASS: {len(pages)} pages; local links/anchors/assets; inquiry-only forms; 2027 scholarship state; metadata; sitemap; CSP.')
+print(f'PASS: {len(pages)} pages; local links/anchors/assets; inquiry-only forms; 2027 scholarship state; metadata; sitemap; CSP; SEO entity graphs; visible FAQs; canonical redirect.')

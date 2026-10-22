@@ -85,3 +85,10 @@
  .support-records { gap: 0; }
  .cta-inner .btn { justify-self: start; }
 }
+
+/* Visible trails and matching schema keep program destinations easy to orient and cite. */
+.breadcrumbs { padding-block: 12px; font-size: .78rem; color: var(--muted); }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; column-gap: 14px; row-gap: 4px; list-style: none; padding: 0; margin: 0; }
+.breadcrumbs li { display: flex; align-items: center; gap: 14px; }
+.breadcrumbs li + li::before { content: '/'; color: var(--muted); }
+.breadcrumbs a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }

@@ -5,10 +5,32 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import json
 import argparse
+from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
-HEADERS = json.loads((ROOT / 'vercel.json').read_text())['headers'][0]['headers']
+CONFIG = json.loads((ROOT / 'vercel.json').read_text())
+HEADERS = CONFIG['headers'][0]['headers']
 
 class Handler(SimpleHTTPRequestHandler):
+    def redirect_if_needed(self):
+        parsed = urlsplit(self.path)
+        for redirect in CONFIG.get('redirects', []):
+            if parsed.path == redirect['source']:
+                location = redirect['destination'] + ('?' + parsed.query if parsed.query else '')
+                self.send_response(308 if redirect.get('permanent') else 307)
+                self.send_header('Location', location)
+                self.send_header('Content-Length', '0')
+                self.end_headers()
+                return True
+        return False
+
+    def do_GET(self):
+        if not self.redirect_if_needed():
+            super().do_GET()
+
+    def do_HEAD(self):
+        if not self.redirect_if_needed():
+            super().do_HEAD()
+
     def end_headers(self):
         for header in HEADERS:
             self.send_header(header['key'], header['value'])

@@ -40,7 +40,7 @@ For the benefit dinner: confirm the next date, general location, invitation avai
 
 The static site has no PHP runtime or application package dependencies. Restrict Vercel, GitHub, registrar, and Formspree account access and use MFA where available.
 
-The CSP permits local scripts/images, Google Fonts, and Formspree requests/submissions. Its SHA-256 hash permits the homepage JSON-LD block. If that block changes, update the hash in `vercel.json`; `check_site.py` verifies it. Avoid inline event handlers, inline styles, `unsafe-inline`, and `unsafe-eval`.
+The CSP permits local scripts/images, Google Fonts, and Formspree requests/submissions. SHA-256 hashes permit the seven public pages’ JSON-LD graphs. After changing any structured data, run `python3 scripts/update_csp.py` to synchronize the hashes in `vercel.json`; `check_site.py` verifies them. Avoid inline event handlers, inline styles, `unsafe-inline`, and `unsafe-eval`.
 
 All three inquiry forms use the existing Formspree endpoint and `_gotcha` honeypots, also available without JavaScript. In Formspree, verify spam filtering, production-domain restrictions (including www as supported), recipient/access permissions, and retention/deletion. Those account settings have not been verified or changed from this repository. Align the privacy page with confirmed practices before making new privacy promises.
 
@@ -49,3 +49,17 @@ All three inquiry forms use the existing Formspree endpoint and `_gotcha` honeyp
 ## Publishing
 
 Review the changes, commit, and push through Visual Studio Code as requested by the owner. Vercel handles deployment from GitHub. Check final www destination headers and representative pages after deployment. No separate hosting migration or Sites registration is needed for this existing site.
+
+## Search and AI-search discoverability
+
+Every public page has a unique descriptive title/description, canonical URL, Open Graph and Twitter metadata, and a connected JSON-LD graph. Shared Organization and WebSite IDs use the canonical `https://www.mattisfoundation.org/` host. The scholarship is described as a MonetaryGrant without an unconfirmed amount/deadline for 2027; the Community Fund is a Project. Impact is a CollectionPage. No Event schema is published without a confirmed event date, and no tax status, founding date, or fabricated business details are asserted.
+
+Visible breadcrumb trails match BreadcrumbList markup. Homepage and scholarship FAQ answers are readable in HTML and reproduced exactly in their FAQPage graphs. FAQ markup does not guarantee search features or rich results. Answer-focused content is for real visitors, with no hidden text or instructions to AI crawlers.
+
+All homepage links use `/` and Vercel permanently redirects `/index.html` to `/` while preserving query parameters. Existing `.html` program URLs remain stable. The sitemap contains the seven canonical indexable pages; the custom 404 is noindex and returns HTTP 404 for missing paths. `robots.txt` permits crawling, including search crawlers, as it did before this change. Robots rules do not override CDN/firewall access controls.
+
+When maintaining: change visible content and matching structured data together, keep dates and claims grounded, update social image dimensions if an image changes, run `python3 scripts/update_csp.py`, then `python3 scripts/check_site.py` and `node scripts/test_forms.cjs`. Image width/height attributes reserve intrinsic space; CSS still determines displayed cropping.
+
+After deployment, verify Google Search Console and Bing Webmaster Tools ownership with the account owner, submit the canonical sitemap, inspect index coverage and canonical selection, and monitor impressions/clicks and any available AI citation reports. These external account actions have not been performed here, and no analytics/tracking scripts were installed. Rankings, indexing, and AI citations are not guaranteed.
+
+This follows Google Search Central’s [AI features guidance](https://developers.google.com/search/docs/appearance/ai-features) and [generative AI optimization guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide): crawlable, helpful content, clear internal links, and structured data matching visible content. No special AI text file is required for Google’s AI search features.
