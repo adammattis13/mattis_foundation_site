@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mattisfoundation.org/sitemap.xml
+Sitemap: https://www.mattisfoundation.org/sitemap.xml

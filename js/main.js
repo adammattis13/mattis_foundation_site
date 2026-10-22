@@ -3,16 +3,10 @@
     'use strict';
     document.documentElement.classList.remove('no-js');
 
-    const nav = document.querySelector('.nav');
     const toggle = document.querySelector('.nav-toggle');
     const menu = document.querySelector('.mobile-menu');
     const desktop = window.matchMedia('(min-width: 1025px)');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const supportEmail = 'info@mattisfoundation.org';
-
-    const updateNav = () => nav?.classList.toggle('scrolled', window.scrollY > 40);
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
 
     if (toggle && menu) {
         const background = document.querySelectorAll('main, footer, .nav-logo');
@@ -50,9 +44,14 @@
     // Native anchor navigation preserves the URL, browser history, and keyboard focus.
     // CSS supplies the fixed-header offset and respects reduced-motion preferences.
 
-    document.querySelectorAll('.contact-form, #scholarshipForm').forEach(form => {
+    document.querySelectorAll('.contact-form').forEach(form => {
         const button = form.querySelector('[type="submit"]');
-        const buttonLabel = button.innerHTML;
+        const buttonContent = [...button.childNodes].map(node => node.cloneNode(true));
+        const interest = form.querySelector('[name="interest"]');
+        const requestedInterest = new URLSearchParams(window.location.search).get('interest');
+        if (interest && [...interest.options].some(option => option.value === requestedInterest)) {
+            interest.value = requestedInterest;
+        }
         const status = document.createElement('p');
         status.className = 'form-status';
         status.setAttribute('role', 'status');
@@ -88,18 +87,12 @@
                     signal: controller.signal
                 });
                 if (!response.ok) throw new Error('Submission failed');
-                if (form.id === 'scholarshipForm') {
-                    form.hidden = true;
-                    const success = document.getElementById('formSuccess');
-                    success.classList.add('visible');
-                    success.tabIndex = -1;
-                    success.focus({ preventScroll: true });
-                    success.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' });
-                } else {
-                    form.reset();
-                    status.classList.add('form-status-success');
-                    status.textContent = "Thank you for your message! We'll be in touch soon.";
+                form.reset();
+                if (requestedInterest && interest && [...interest.options].some(option => option.value === requestedInterest)) {
+                    interest.value = requestedInterest;
                 }
+                status.classList.add('form-status-success');
+                status.textContent = form.dataset.success || 'Thank you. Your inquiry has been sent to the foundation.';
             } catch (error) {
                 status.classList.add('form-status-error');
                 status.textContent = error.name === 'AbortError'
@@ -113,7 +106,7 @@
                 clearTimeout(timeout);
                 submitting = false;
                 button.disabled = false;
-                button.innerHTML = buttonLabel;
+                button.replaceChildren(...buttonContent.map(node => node.cloneNode(true)));
                 form.removeAttribute('aria-busy');
             }
         });
