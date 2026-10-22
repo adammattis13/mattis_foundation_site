@@ -31,3 +31,13 @@ Both forms use the existing Formspree endpoint. Test with intercepted requests, 
 Form enhancement validates fields, prevents duplicate requests, keeps entries on failure, and shows persistent feedback. The scholarship success state reminds applicants that their essay must be emailed separately. Native form submission remains available without JavaScript.
 
 Review staged changes in Visual Studio, create a commit, and push when ready. No deployment command is required for local review.
+
+## Security maintenance
+
+The site is static and has no PHP runtime or application package dependencies. Keep hosting, GitHub, domain registrar, and Formspree account access restricted to maintainers and enable multi-factor authentication where available.
+
+`vercel.json` enforces a Content Security Policy allowing local scripts and images, Google Fonts styles/fonts, and Formspree submissions. The script hash permits the homepage's JSON-LD only. If that inline block changes, update its SHA-256 CSP hash. Avoid inline scripts, event handlers, styles, or broad `unsafe-inline` / `unsafe-eval` exceptions. Verify the deployed policy in the browser after publishing.
+
+Both forms include Formspree's `_gotcha` honeypot, which also works without JavaScript. It reduces automated spam but does not replace provider-side abuse protection. In the Formspree dashboard for `xreegpav`, verify spam filtering, restrict submissions to the production domain (including its www variant as supported), review submission access and notification recipients, and set an appropriate retention/deletion process for scholarship personal information. These account settings have not been verified or changed from this repository. Do not enable automated replies or send test submissions during maintenance.
+
+After deployment, verify all five pages, Google Fonts, navigation, and form feedback with intercepted requests. Confirm CSP, HSTS, `X-Frame-Options`, and `X-Content-Type-Options` on the final www destination. The obsolete `X-XSS-Protection` header is intentionally omitted; CSP provides modern injection restrictions.

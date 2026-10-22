@@ -367,6 +367,10 @@
                 
                 <div class="contact-form-wrapper">
                     <form class="contact-form" action="https://formspree.io/f/xreegpav" method="POST">
+                        <!-- Formspree rejects submissions with a filled honeypot. -->
+                        <div hidden aria-hidden="true">
+                            <label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+                        </div>
                         <!-- Formspree hidden fields -->
                         <input type="hidden" name="_subject" value="New Contact Form Submission">
                         <input type="hidden" name="_form" value="Contact Form">

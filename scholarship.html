@@ -141,6 +141,10 @@
                     </div>
 
                     <form id="scholarshipForm" class="scholarship-form" action="https://formspree.io/f/xreegpav" method="POST">
+                        <!-- Formspree rejects submissions with a filled honeypot. -->
+                        <div hidden aria-hidden="true">
+                            <label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+                        </div>
                         <!-- Formspree hidden fields -->
                         <input type="hidden" name="_subject" value="New Scholarship Application">
                         <input type="hidden" name="_form" value="KJ Smith Scholarship Application">
